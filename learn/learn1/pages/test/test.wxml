@@ -1,2 +1,5 @@
+<include src="../common/header.wxml"/>
 <view> Hello {{name}}! </view>
 <button bindtap="changeName"> Click me! </button>
+<checkbox checked="{{false}}"> </checkbox>
+<include src="../common/wxs.wxml"/>

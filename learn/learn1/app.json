@@ -16,10 +16,14 @@
     "onReachBottomDistance": 50
   },
   "tabBar": {
+    "color": "#356",
+    "selectedColor": "#268",
+    "backgroundColor": "#123",
+    "position": "bottom",
     "list": [
       {
-        "pagePath": "pages/index/index",
-        "text": "首页"
+        "pagePath": "pages/test/test",
+        "text": "测试"
       },
       {
         "pagePath": "pages/logs/logs",
@@ -32,5 +36,4 @@
     "downloadFile": 10000
   },
   "debug": true
-  }
 }
