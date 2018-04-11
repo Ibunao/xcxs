@@ -5,7 +5,20 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
+    // 请求
+    wx.request({
+      url: 'http://api.zbshop.com/test/index', //仅为示例，并非真实的接口地址
+      data: {
+        x: 'a',
+        y: 'b'
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(res.data)
+      }
+    })
     // 登录
     wx.login({
       success: res => {
