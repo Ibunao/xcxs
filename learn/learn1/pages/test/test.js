@@ -11,6 +11,18 @@ Page({
   },
   onLoad: function () {
 
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#ff0000',
+      animation: {
+        duration: 400,
+        timingFunc: 'easeIn'
+      }
+    })
+    wx.setTabBarBadge({
+      index: 0,
+      text: '1'
+    })
   },
 
 })

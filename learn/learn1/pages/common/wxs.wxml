@@ -5,3 +5,4 @@ module.exports.message = msg;
 </wxs>
 
 <view> {{m1.message}} </view>
+<image ></image>
