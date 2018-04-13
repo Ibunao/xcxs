@@ -15,7 +15,7 @@ App({
         if (res.code) {
           //发起网络请求
           wx.request({
-            url: 'http://api.shop.com/xcx/index',
+            url: 'http://api.zbshop.com/xcx/index',
             data: {
               code: res.code
             }
