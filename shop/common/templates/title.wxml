@@ -1,0 +1,12 @@
+<template name="title">
+<view class="element free-vessel" style="width:320px;height:48px;margin-bottom:auto;margin-right:auto;opacity:1;margin-left:auto;">
+  <view class="ele-container">
+    <text class="element text" style="background-color:rgba(0, 0, 0, 0);border-color:rgb(34, 34, 34);border-style:none;border-width:2px;color:rgb(53, 53, 53);font-size:14px;font-weight:bold;height:19px;width:113px;line-height:19px;margin-left:0;margin-top:0;opacity:1;text-align:left;position:absolute;left:9px;top:9px;margin-right:0;">{{data.title}}
+    </text>
+  </view>
+  <view class="ele-container">
+    <text class="element text" style="background-color:rgba(0, 0, 0, 0);border-color:rgb(34, 34, 34);border-style:none;border-width:2px;color:rgb(153, 153, 153);font-size:12px;height:19px;width:139px;line-height:19px;margin-left:0;margin-top:0;opacity:1;text-align:left;position:absolute;left:8px;top:25px;margin-right:0;">{{data.content}}
+    </text>
+  </view>
+</view>
+</template>

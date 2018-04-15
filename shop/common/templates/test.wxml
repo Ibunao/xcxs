@@ -1,0 +1,26 @@
+<template name="zcFreeVessel6">
+  <view class="element free-vessel" style="{{data.style}}" >
+    <template name="zcPicture">
+      <view data-compdata="{{data}}" class="element picture" style="{{data.style}}" data-event-params="{{data.group}}" data-imgArr="{{data.content}}" catchtap="{{data.eventHandler}}">
+        <image src="{{data.content}}" mode="scaleToFill"></image>
+      </view>
+      <text class="element text" style="{{data.textStyle}}" data-event-params="{{data.group}}"
+            catchtap="{{data.eventHandler}}">{{data.textContent}}</text>
+    </template>
+    <block wx:for="{{data.content}}" wx:key="{{this}}">
+      <view class="ele-container">
+        <template is="zcPicture" data="{{data:item}}"></template>
+      </view>
+    </block>
+    <!-- <view class="ele-container">
+      <template is="zcPicture" data="{{data:data.content[1]}}"></template>
+    </view>
+    <view class="ele-container">
+      <template is="zcPicture" data="{{data:data.content[2]}}"></template>
+    </view>
+    <view class="ele-container">
+      <template is="zcPicture" data="{{data:data.content[3]}}"></template>
+    </view> -->
+  </view>
+  
+</template>

@@ -1,13 +1,25 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+<view class='app'>
+<import src="/common/templates/search.wxml"/>
+<view class="ele-container">
+<!--冒号前面的为模版引用数据的变量  -->
+  <template is="search" data="{{test:search}}"></template>
+</view>
+<import src="/common/templates/carousel.wxml"/>
+<view class="ele-container">
+<!--冒号前面的为模版引用数据的变量  -->
+  <template is="carousel" data="{{data:carousel}}"></template>
+</view>
+<import src="/common/templates/title.wxml"/>
+<view class="ele-container">
+<template is="title" data="{{data:titles}}"></template>
+</view> 
+<import src="/common/templates/test.wxml"/>
+<view class="ele-container">
+  <template is="zcFreeVessel6" data="{{data:groups}}"></template>
+</view>
+
+
+
+
+
 </view>
