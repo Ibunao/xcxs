@@ -85,21 +85,21 @@ Page({
     },
     "goods": [
       {
-        "url": "/detail/index",
+        "url": "../goodsDetail/goodsDetail",
         "image": "http://imgcdn.guoku.com/images/310/15d1670caa233632626f4e4d5c6c33b2.jpg",
         "about": "玲珑",
         "name": "独处盒子 体验装",
         "price": "118.00"
       },
       {
-        "url": "/detail/index",
+        "url": "../goodsDetail/goodsDetail",
         "image": "http://imgcdn.guoku.com/images/310/15d1670caa233632626f4e4d5c6c33b2.jpg",
         "about": "玲珑",
         "name": "独处盒子 体验装",
         "price": "118.00"
       },
       {
-        "url": "/detail/index",
+        "url": "../goodsDetail/goodsDetail",
         "image": "http://imgcdn.guoku.com/images/310/15d1670caa233632626f4e4d5c6c33b2.jpg",
         "about": "玲珑",
         "name": "独处盒子 体验装",

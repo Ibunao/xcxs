@@ -1,6 +1,12 @@
 
 App({
-  onLaunch: function () {},
+  onLaunch: function () {
+    // 给购物车增加小红标志
+    wx.setTabBarBadge({
+      index: 1,
+      text: '6'
+    })
+  },
   onShow: function (options) {},
   // 首页搜索框search事件
   searchList: function (event) {

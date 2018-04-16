@@ -11,42 +11,42 @@ Page({
     },
     "goods": [
       {
-        "url": "../index/index?id=1",
+        "url": "../goodsDetail/goodsDetail?id=1",
         "image": "http://imgcdn.guoku.com/images/310/15d1670caa233632626f4e4d5c6c33b2.jpg",
         "about": "玲珑",
         "name": "独处盒子 体验装",
         "price": "118.00"
       },
       {
-        "url": "../index/index?id=2",
+        "url": "../goodsDetail/goodsDetail?id=2",
         "image": "http://imgcdn.guoku.com/images/310/15d1670caa233632626f4e4d5c6c33b2.jpg",
         "about": "玲珑",
         "name": "独处盒子 体验装",
         "price": "118.00"
       },
       {
-        "url": "../index/index?id=3",
+        "url": "../goodsDetail/goodsDetail?id=3",
         "image": "http://imgcdn.guoku.com/images/310/15d1670caa233632626f4e4d5c6c33b2.jpg",
         "about": "玲珑",
         "name": "独处盒子 体验装",
         "price": "118.00"
       },
       {
-        "url": "../index/index?id=4",
+        "url": "../goodsDetail/goodsDetail?id=4",
         "image": "http://imgcdn.guoku.com/images/310/15d1670caa233632626f4e4d5c6c33b2.jpg",
         "about": "玲珑",
         "name": "独处盒子 体验装",
         "price": "118.00"
       },
       {
-        "url": "../index/index?id=5",
+        "url": "../goodsDetail/goodsDetail?id=5",
         "image": "http://imgcdn.guoku.com/images/310/15d1670caa233632626f4e4d5c6c33b2.jpg",
         "about": "玲珑",
         "name": "独处盒子 体验装",
         "price": "118.00"
       },
       {
-        "url": "../index/index?id=6",
+        "url": "../goodsDetail/goodsDetail?id=6",
         "image": "http://imgcdn.guoku.com/images/310/15d1670caa233632626f4e4d5c6c33b2.jpg",
         "about": "玲珑",
         "name": "独处盒子 体验装",
@@ -55,8 +55,10 @@ Page({
     ]
   },
   onLoad: function () {
-    // 进入购物车页面，取消红点
-    wx.removeTabBarBadge({index:1});
+    // 根据进来传递的参数来设置页面标题
+    wx.setNavigationBarTitle({
+      title: '所有商品列表'
+    })
   },
   // 自带 下拉事件 刷新
   onPullDownRefresh: function () {
@@ -75,21 +77,21 @@ Page({
     // 更新数据
     var newArr = [
       {
-        "url": "../index/index?id="+(this.data.goods.length+1),
+        "url": "../goodsDetail/goodsDetail?id="+(this.data.goods.length+1),
         "image": "http://imgcdn.guoku.com/images/310/15d1670caa233632626f4e4d5c6c33b2.jpg",
         "about": "玲珑",
         "name": "独处盒子 体验装",
         "price": "118.00"
       },
       {
-        "url": "../index/index?id="+(this.data.goods.length + 2),
+        "url": "../goodsDetail/goodsDetail?id="+(this.data.goods.length + 2),
         "image": "http://imgcdn.guoku.com/images/310/15d1670caa233632626f4e4d5c6c33b2.jpg",
         "about": "玲珑",
         "name": "独处盒子 体验装",
         "price": "118.00"
       },
       {
-        "url": "../index/index?id=" + (this.data.goods.length + 3),
+        "url": "../goodsDetail/goodsDetail?id=" + (this.data.goods.length + 3),
         "image": "http://imgcdn.guoku.com/images/310/15d1670caa233632626f4e4d5c6c33b2.jpg",
         "about": "玲珑",
         "name": "独处盒子 体验装",

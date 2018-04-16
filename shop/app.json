@@ -2,6 +2,8 @@
   "pages":[
     "pages/index/index",
     "pages/cart/index",
+    "pages/goods/index",
+    "pages/goodsDetail/goodsDetail",
     "pages/my/index",
     "pages/logs/logs"
   ],
@@ -9,7 +11,8 @@
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle":"black",
+    "onReachBottomDistance":50
   },
   "tabBar": {
     "color": "#7A7E83",
@@ -30,10 +33,10 @@
         "text": "购物车"
       },
       {
-        "pagePath": "pages/my/index",
+        "pagePath": "pages/my/index", 
         "iconPath": "images/my.png",
         "selectedIconPath": "images/my1.png",
-        "text": "购物车"
+        "text": "个人中心"
       }
     ]
   },
@@ -43,5 +46,5 @@
     "uploadFile": 10000,
     "downloadFile": 10000
   },
-  "debug": false
+  "debug": true
 }
