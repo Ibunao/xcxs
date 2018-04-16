@@ -5,7 +5,7 @@
     </text>
   </view>
   <view class="ele-container">
-    <text class="element text" style="background-color:rgba(0, 0, 0, 0);border-color:rgb(34, 34, 34);border-style:none;border-width:2px;color:rgb(153, 153, 153);font-size:12px;height:19px;width:139px;line-height:19px;margin-left:0;margin-top:0;opacity:1;text-align:left;position:absolute;left:8px;top:25px;margin-right:0;">{{data.content}}
+    <text class="element text" style="background-color:rgba(0, 0, 0, 0);border-color:rgb(34, 34, 34);border-style:none;border-width:2px;color:rgb(153, 153, 153);font-size:15px;height:24px;width:179px;line-height:24px;margin-left:0;margin-top:0;opacity:1;text-align:left;position:absolute;left:10px;top:32px;margin-right:0;">{{data.content}}
     </text>
   </view>
 </view>

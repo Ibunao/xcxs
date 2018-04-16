@@ -1,82 +1,97 @@
 @import "utils/font_icon.wxss";
+
 .app {
-	font-size: 14px;
+  font-size: 14px;
 }
+
 /*搜索框  */
+
 .app .ele-container {
   position: relative;
   width: 100%;
   max-width: 100%;
   clear: both;
 }
+
 .app .ele-container > .element {
   position: relative;
 }
-.app .search{
-  background:#efeff4;
-  height:50px;
-  padding-top:10px;
+
+.app .search {
+  background: #efeff4;
+  height: 50px;
+  padding-top: 10px;
 }
-.app .search .search-input{
-  position:relative;
-  height:30px;
-  width:90%;
-  padding-left:10px;
+
+.app .search .search-input {
+  position: relative;
+  height: 30px;
+  width: 90%;
+  padding-left: 10px;
   margin: 0 5%;
-  line-height:30px;
-  background:#fff;
-  border-radius:5px;
-  color:#888;
-  overflow:hidden;
+  line-height: 30px;
+  background: #fff;
+  border-radius: 5px;
+  color: #888;
+  overflow: hidden;
   box-sizing: border-box;
   display: inline-block;
 }
+
 .app .search .search-input icon {
-  height:14px;
-  vertical-align:top;
-  width:14px;
-  margin-right:5px;
-  margin-top:7px;
+  height: 14px;
+  vertical-align: top;
+  width: 14px;
+  margin-right: 5px;
+  margin-top: 7px;
 }
-.app .search .search-input input{
-  width:70%;
-  display:inline-block;
-  height:30px;
-  line-height:30px;
+
+.app .search .search-input input {
+  width: 70%;
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
 }
-.app .search .search-input .search-btn{
-  position:absolute;
-  top:0;
-  right:0;
-  width:20%;
-  text-align:center;
-  background-color:#dfdfdf;
-  color:#999;
+
+.app .search .search-input .search-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  text-align: center;
+  background-color: #dfdfdf;
+  color: #999;
 }
+
 /*轮播  */
+
 .swiper-item {
   display: inline-block;
   height: 100%;
   width: 100%;
 }
+
 /*groups  */
+
 .app .free-vessel {
-	width: 100%;
-	height: 150px;
-  overflow:hidden;
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
 }
+
 .app .element {
   display: block;
-	width: auto;
+  width: auto;
   max-width: 100%;
   box-sizing: border-box;
-  -moz-box-sizing:border-box;
-  -webkit-box-sizing:border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  border-color: #222222;
+  border-color: #222;
   border-width: 0;
 }
+
 .app .text {
   max-width: 100%;
   min-height: 10px;
@@ -85,6 +100,7 @@
   word-break: break-all;
   height: auto !important;
 }
+
 .app .picture {
   width: 234.375rpx;
   height: 187.5rpx;
@@ -92,8 +108,79 @@
   margin-right: auto;
   overflow: hidden;
 }
+
 .app .picture image {
   width: 100%;
   height: 100%;
   border-radius: inherit;
+}
+
+/*goods  */
+
+.goods-minheight {
+  min-height: 60px;
+}
+/*基础样式  .goods-minheight */
+view,scroll-view,swiper,swiper-item,icon,text,progress,button,checkbox-group,checkbox,form,input,label,picker,radio-group,radio,slider,switch,action-sheet,action-sheet-item,action-sheet-cancel,modal,toast,loading,navigator,audio,image,video,map,canvas {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.wx-view_tdlUCs {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.wx-navigator_n3vQYd {
+  width: 375rpx;
+  min-height: 375rpx;
+  text-align: center;
+  padding: 10px 37.5rpx 5px;
+  color: rgb(33, 33, 33);
+  text-decoration: none;
+  border-bottom-color: rgb(237, 237, 237);
+  border-right: 1px solid rgb(237, 237, 237);
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+
+.wx-navigator_n3vQYd:active {
+  transform: rotate(0deg) scale(0.98) translate(0%, 0%);
+  transition: all 0s ease;
+}
+
+.c-block {
+  display: block;
+}
+
+.wx-image_HsAX8s {
+  width: 300rpx;
+  height: 300rpx;
+  background-color: transparent;
+}
+
+.wx-text_cjhm6S {
+  text-align: left;
+  font-size: 12px;
+  color: rgb(153, 153, 153);
+  line-height: 1.5em;
+}
+
+.wx-text_JkhshF2 {
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  margin-bottom: 5px;
+  min-height: 15px;
+  text-align: left;
+}
+
+.wx-text_WEMSkk {
+  color: rgb(0, 132, 207);
+  font-size: 13px;
+  text-align: left;
 }

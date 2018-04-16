@@ -19,3 +19,22 @@
 .usermotto {
   margin-top: 200px;
 }
+
+.home-floor-nav{
+  margin: 30rpx;
+  border: gray solid 1px;
+  min-height: 100rpx;
+  text-align: center;
+  line-height: 60rpx;
+  padding: 10px 37.5rpx 5px;
+  color: rgb(33, 33, 33);
+  text-decoration: none;
+}
+.home-floor-nav:active {
+  transform: rotate(0deg) scale(0.98) translate(0%, 0%);
+  transition: all 0s ease;
+}
+.home-floor-nav{
+  font-size: 30rpx;
+  font-weight: 500;
+}

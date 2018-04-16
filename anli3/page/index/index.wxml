@@ -1,7 +1,4 @@
-<view class="c-minheight wx-view_TQ4nqD" data-c_e_id="wx_view878d6007">
-    <view class="_other_text_LxtT2c2" data-c_e_id="_other_text1d60a2a3">
-        热门商品
-    </view>
+
     <view class="c-minheight wx-view_tdlUCs" data-c_e_id="wx_view_f0c1777a">
         <navigator class="wx-navigator_n3vQYd" data-c_e_id="wx_navigator_2a68306e" hover-class="navigator-hover" url="../detail/detail">
             <image class="wx-image_HsAX8s" data-c_e_id="wx_image_ebc70630" mode="aspectFit" src="http://imgcdn.guoku.com/images/310/15d1670caa233632626f4e4d5c6c33b2.jpg" style="background-image: url(http://imgcdn.guoku.com/images/310/15d1670caa233632626f4e4d5c6c33b2.jpg); background-size: contain; background-position: center center; background-repeat: no-repeat; "/>
@@ -52,4 +49,3 @@
             </view>
         </navigator>
     </view>
-</view>

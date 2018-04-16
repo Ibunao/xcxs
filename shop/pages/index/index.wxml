@@ -11,15 +11,23 @@
 </view>
 <import src="/common/templates/title.wxml"/>
 <view class="ele-container">
-<template is="title" data="{{data:titles}}"></template>
+<template is="title" data="{{data:titles[0]}}"></template>
 </view> 
-<import src="/common/templates/test.wxml"/>
+<import src="/common/templates/groups.wxml"/>
 <view class="ele-container">
-  <template is="zcFreeVessel6" data="{{data:groups}}"></template>
+  <template is="groups" data="{{data:groups}}"></template>
+</view>
+<view class="ele-container">
+<template is="title" data="{{data:titles[1]}}"></template>
+</view> 
+<import src="/common/templates/goods.wxml"/>
+<view class="ele-container">
+  <template is="goods" data="{{data:goods}}"></template>
 </view>
 
-
-
-
-
+<view class="ele-container">
+  <navigator class="home-floor-nav" url="/goods/list">
+    <text class='home-floor-text'>店铺全部商品</text>
+  </navigator>
+</view>
 </view>

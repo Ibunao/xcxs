@@ -1,4 +1,4 @@
-<template name="zcFreeVessel6">
+<template name="groups">
   <view class="element free-vessel" style="{{data.style}}" >
     <template name="zcPicture">
       <view data-compdata="{{data}}" class="element picture" style="{{data.style}}" data-event-params="{{data.group}}" data-imgArr="{{data.content}}" catchtap="{{data.eventHandler}}">
