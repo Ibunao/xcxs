@@ -1,0 +1,9 @@
+<template name="search">
+    <view class="element search" style="margin-top:0;margin-left:auto;">
+      <view class="search-input">
+        <icon size="14" type="search"></icon>
+        <input bindconfirm="searchList" name="input" placeholder="请输入搜索内容" />
+        <view class="search-btn" bindtap="searchList">搜索</view>
+      </view>
+    </view>
+</template>
