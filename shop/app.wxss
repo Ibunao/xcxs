@@ -1,4 +1,7 @@
 @import "utils/font_icon.wxss";
+.app {
+	font-size: 14px;
+}
 /*搜索框  */
 .app .ele-container {
   position: relative;
