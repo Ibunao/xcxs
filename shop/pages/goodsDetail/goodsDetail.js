@@ -111,6 +111,35 @@ Page({
       addToShoppingCartHidden: true
     })
   },
+  // 增加数量
+  clickPlusButton: function (e) {
+    var selectModelInfo = this.data.selectModelInfo,
+      goodsInfo = this.data.goodsInfo,
+      count = selectModelInfo.buyCount,
+      stock = selectModelInfo.stock;
+
+    if (count >= stock) {
+      wx.showModal({
+        title: '提示',
+        content: '购买数量不能大于库存',
+      })
+      return;
+    }
+    this.setData({
+      'selectModelInfo.buyCount': count + 1
+    });
+  },
+  // 减数量
+  clickMinusButton: function (e) {
+    var count = this.data.selectModelInfo.buyCount;
+
+    if (count <= 1) {
+      return;
+    }
+    this.setData({
+      'selectModelInfo.buyCount': count - 1
+    });
+  },
   // 加入购物车
   sureAddToShoppingCart: function () {
     var that = this,
@@ -129,11 +158,15 @@ Page({
     //       icon: 'success'
     //     });
 
-      setTimeout(function () {
-        that.hiddeAddToShoppingCart();
-      }, 1000);
-    },
-
+    setTimeout(function () {
+      that.hiddeAddToShoppingCart();
+    }, 1000);
+  },
+  // 立即购买下一步
+  buyDirectlyNextStep: function (e) {
+    // 发送请求，跳转结算页面
+    
+  },
   
 
 
@@ -520,80 +553,7 @@ Page({
     }
     this.setData(data);
   },
-  clickMinusButton: function(e){
-    var count = this.data.selectModelInfo.buyCount;
-
-    if(count <= 1){
-      return;
-    }
-    this.setData({
-      'selectModelInfo.buyCount': count - 1
-    });
-  },
-  clickPlusButton: function(e){
-    var selectModelInfo = this.data.selectModelInfo,
-        goodsInfo = this.data.goodsInfo,
-        count = selectModelInfo.buyCount,
-        stock = selectModelInfo.stock;
-
-    if(count >= stock) {
-      app.showModal({content: '购买数量不能大于库存'});
-      return;
-    }
-    if(this.data.isSeckill && count >= goodsInfo.seckill_buy_limit){
-      app.showModal({content: '购买数量不能大于秒杀限购数量'});
-      return ;
-    }
-    this.setData({
-      'selectModelInfo.buyCount': count + 1
-    });
-  },
-
-  buyDirectlyNextStep: function(e){
-    // var that = this,
-    //     param = {
-    //               goods_id: this.data.goodsId,
-    //               model_id: this.data.selectModelInfo.modelId,
-    //               num: this.data.selectModelInfo.buyCount,
-    //               formId: e.detail.formId,
-    //               sub_shop_app_id: this.data.franchiseeId,
-    //               is_seckill : this.data.isSeckill ? 1 : ''
-    //             };
-
-    // app.sendRequest({
-    //   url: '/index.php?r=AppShop/addOrder',
-    //   data: param,
-    //   success: function(res){
-    //     var franchiseeId = that.data.franchiseeId,
-    //         pagePath = '/eCommerce/pages/orderDetail/orderDetail?detail='+res.data+(franchiseeId ? '&franchisee='+franchiseeId : '');
-
-    //     that.hiddeAddToShoppingCart();
-    //     app.turnToPage(pagePath);
-    //   }
-    // })
-    var franchiseeId = this.data.franchiseeId,
-        that = this,
-        param = {
-                  goods_id: this.data.goodsId,
-                  model_id: this.data.selectModelInfo.modelId || '',
-                  num: this.data.selectModelInfo.buyCount,
-                  sub_shop_app_id: franchiseeId || '',
-                  is_seckill : this.data.isSeckill ? 1 : ''
-                };
-
-    app.sendRequest({
-      url: '/index.php?r=AppShop/addCart',
-      data: param,
-      success: function(res){
-        var cart_arr = [res.data],
-          pagePath = '/eCommerce/pages/previewGoodsOrder/previewGoodsOrder?cart_arr='+ encodeURIComponent(cart_arr);
-
-        franchiseeId && (pagePath += '&franchisee='+franchiseeId);
-        that.hiddeAddToShoppingCart();
-        app.turnToPage(pagePath);
-      }
-    })
-  },
+  
   makeAppointment: function(){
     var franchiseeId = this.data.franchiseeId,
         unitTime = this.data.modelStrs[0] && this.data.modelStrs[0].substring(this.data.modelStrs[0].length-1),
