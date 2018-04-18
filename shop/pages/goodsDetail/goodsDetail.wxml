@@ -1,7 +1,7 @@
 <view class="goods-detail-wrap">
   <!--分享按钮  -->
   <view class="goods-detail-nav"> 
-    <view class="pull-right ico-moon icon-share" bindtap="showQRCodeComponent"></view>
+    <button class="pull-right ico-moon icon-share" open-type="share"></button>
   </view>
   <!--商品总  -->
   <view class="goods-detail-content">
@@ -114,7 +114,8 @@
         <view class="goods-opt-item flex-sub-box-2">
         <!--客服按钮  -->
           <view class="ico-moon icon-service2">
-            <contact-button type="default-dark" size="20" session-from="goodsDetail"></contact-button>
+            <button open-type="contact" size="20" session-from="goodsDetail" />
+            <!-- <contact-button type="default-dark" size="20" session-from="goodsDetail"></contact-button> -->
           </view>
           <view>客服</view>
         </view>

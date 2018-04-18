@@ -1,6 +1,9 @@
 page {
   background-color: #eee;
 }
+button{
+  padding-left:16rpx;
+}
 .page-dialog-wrap {
   position: fixed;
   left: 0;

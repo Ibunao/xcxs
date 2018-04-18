@@ -7,7 +7,20 @@ Page({
     goodsCount: 0,
     goodsCountToPay: 0,
     priceToPay: 0.00,
-    goodsList: [],
+    // 商品列表
+    goodsList: [
+      {
+        // 商品id
+        id: 1,
+        selected: true,
+        editSelected: true,
+        cover: "https://image.octmami.com/public/images/7e/ee/65/9293f477b8edac2b6958b5ee9401184bd09bc555.jpg",
+        title: "测试商品",
+        model_value_str: "测试",
+        price: 198,
+        num: 5,
+      },
+    ],
     selectAll: false,
     editSelectAll: false,
     timeout: null,
@@ -17,21 +30,21 @@ Page({
   franchiseeId: '',
   isFromUserCenterEle: '',
   onLoad: function(options){
-    this.franchiseeId = options.franchisee || '';
-    this.isFromUserCenterEle = options.from || '';
-    this.getShoppingCartData();
+    // this.franchiseeId = options.franchisee || '';
+    // this.isFromUserCenterEle = options.from || '';
+    // this.getShoppingCartData();
   },
   onShow: function(){
-    if(this.data.isFromBack){
-      this.getShoppingCartData();
-      this.setData({
-        selectAll: false
-      });
-    } else {
-      this.setData({
-        isFromBack: true
-      });
-    }
+    // if(this.data.isFromBack){
+    //   this.getShoppingCartData();
+    //   this.setData({
+    //     selectAll: false
+    //   });
+    // } else {
+    //   this.setData({
+    //     isFromBack: true
+    //   });
+    // }
 
     // app.checkIfBindPhone();
   },
