@@ -7,6 +7,13 @@ App({
       text: '6'
     })
   },
+  // 返回上一页
+  turnBack: function (options) {
+    options = options || {};
+    wx.navigateBack({
+      delta: options.delta || 1
+    });
+  },
   onShow: function (options) { },
   // 首页搜索框search事件
   searchList: function (event) {

@@ -4,6 +4,11 @@
     "pages/cart/index",
     "pages/goods/index",
     "pages/goodsDetail/goodsDetail",
+    "pages/previewGoodsOrder/previewGoodsOrder",
+    "pages/goodsOrderPaySuccess/goodsOrderPaySuccess",
+    "pages/goodsOrderDetail/goodsOrderDetail",
+    "pages/addAddress/addAddress",
+    "pages/myAddress/myAddress",
     "pages/my/index",
     "pages/logs/logs"
   ],

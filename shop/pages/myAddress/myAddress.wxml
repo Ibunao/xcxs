@@ -1,0 +1,28 @@
+<scroll-view scroll-y="true" style="height: calc(100% - 55px);">
+  <view class="myAddress-wrap page" id="myAddress" style="height: 100%;">
+    <view class="myAddress-content-container">
+      <view class="address-list-title">收货地址</view>
+      <block wx:if="{{ !addressList.length }}">
+        <view style="color:#a8a8a8; padding:20px;">暂无收货地址</view>
+      </block>
+      <block wx:else>
+        <block wx:for="{{ addressList }}" wx:key="">
+          <view class="myAddress-address">
+            <view class="myAddress-address-top" data-info="{{item}}" bindtap="{{ from == 'userCenterEle' ? 'editAddress' :  'selectAddress' }}" data-id="{{ item.id }}">
+              <view>
+                <label class="home address-label">{{ item.name}}</label>
+                <text class="address-detail">{{ item.detailAddress }}</text>
+              </view>
+              <text class="address-person">{{ item.username }} {{ item.contact }}</text>
+            </view>
+            <text class="myAddress-delete ico-moon icon-delete" bindtap="deleteAddress" data-id="{{ item.id }}"></text>
+          </view>
+        </block>
+      </block>
+    </view>
+  </view>
+</scroll-view>
+<view class="myAddress-bottom-nav" bindtap="addNewAddress">
+  <text class="add-btn"></text>
+  <text>新增地址</text>
+</view>

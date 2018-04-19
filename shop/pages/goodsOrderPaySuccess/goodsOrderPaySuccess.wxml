@@ -1,0 +1,20 @@
+
+<view>
+  <view class="normal-area">
+    <view>
+      <image mode="widthFix" src="http://img.weiye.me/zcimgdir/album/file_5940abcba6241.jpg"></image>
+    </view>
+    <view class="paySuccess-tip">支付成功</view>
+  </view>
+  <view class="collect-benefit-area">
+    <view class="tip-item">
+      <view>
+        恭喜获得积分: {{integral}}
+      </view>
+    </view>
+  </view>
+  <view class="btn-area">
+    <view class="finish-btn" bindtap="goToHomepage">完成</view>
+    <view class="check-order-btn" bindtap="goToOrderDetail">查看订单</view>
+  </view>
+</view>

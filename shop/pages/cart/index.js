@@ -282,7 +282,7 @@ Page({
         list = this.data.goodsList,
         selectGoodsType = '',
         cartIdArray = [],
-        that = this,
+        that = this;
 
     for (var i = list.length - 1; i >= 0; i--) {
       var li = list[i];
@@ -304,8 +304,7 @@ Page({
 
     // 跳转到结算页
     that.getTostoreNotBusinessTime(payIdArr , function() {
-        var pagePath = '/eCommerce/pages/previewGoodsOrder/previewGoodsOrder?cart_arr='+encodeURIComponent(cartIdArray);
-        franchiseeId && (pagePath += '&franchisee=' + franchiseeId);
+        var pagePath = '/pages/previewGoodsOrder/previewGoodsOrder?cart_arr='+encodeURIComponent(cartIdArray);
         app.turnToPage(pagePath);
     });
 

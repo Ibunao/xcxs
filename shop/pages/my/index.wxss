@@ -1,21 +1,194 @@
-/**index.wxss**/
-.userinfo {
+.app .ele-container {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  clear: both;
+}
+.app .user-center {
+	width: 100% !important;
+	height: auto !important;
+	color: #fff;
+	font-size: 16px;
+  background-color:rgb(243, 243, 243);
+}
+.app .user-center .show-view {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  /*background-position: center;*/
+}
+.app .user-center.with-horizontal-view .show-view {
+  height: 234.375rpx;
+}
+.app .user-center .horizontal-view {
+  border-bottom: 1px solid #eee;
+}
+.app .user-center.with-horizontal-view .horizontal-view {
+  display: block;
+}
+.app .user-center .horizontal-router-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  background-color: #fff;
+  font-size: 14px;
 }
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.app .user-center .horizontal-router-container view {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  text-align: center;
+  color: #666;
+  padding: 16.40625rpx 0;
+  border-right: 2.34375rpx solid #eee;
 }
-
-.userinfo-nickname {
+.app .user-center .horizontal-router-container view:last-child {
+  border: none;
+}
+.app .user-center .horizontal-router-container label {
+  display: block;
+  height: 70.3125rpx;
+  width: 70.3125rpx;
+  line-height: 70.3125rpx;
+  font-size: 56.25rpx;
+  margin: 0 auto 7.5rpx;
+}
+.app .user-center .horizontal-router-container .icon-rightarrow {
+  display: none;
+}
+.app .user-center .show-view .cover-thumb {
+  width: 117.1875rpx;
+  height: 117.1875rpx;
+  margin-right: 58.59375rpx;
+	border-radius: 50%;
+	vertical-align: middle;
+}
+.app .user-center .show-view .empty-span {
+	display: inline-block;
+	width: 58.59375rpx;
+	height: 100%;
+	vertical-align: middle;
+}
+.app .user-center .show-view .nickname {
+	vertical-align: middle;
+}
+.app .user-center .show-view .icon-rightarrow {
+	position: absolute;
+  top: 50%;
+  right: 23.4375rpx;
+  margin-top: -35.15625rpx;
+  width: 70.3125rpx;
+  height: 70.3125rpx;
+  line-height: 70.3125rpx;
+  font-size: 46.875rpx;
+}
+.app .user-center .user-center-content .block-item.mode-one{
+  vertical-align: middle;
+}
+.app .user-center .user-center-content .block-item.mode-one::before
+.app .user-center .user-center-content .block-item.mode-one::after {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: 100%;
+  background-color: #000;
+  vertical-align: middle;
+}
+.app .user-center .user-center-content .block-item.mode-one text{
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.app .user-center .usercenter-block{
+  color: rgb(89, 96, 123);
+}
+.app .user-center .block-name {
+  text-indent: 40rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-bottom: 1px solid #F3F3F3;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.app .user-center .block-detail .mode-two {
+  border-bottom: 1px solid #F3F3F3
+}
+.app .user-center .block-detail .mode-two:last-child{
+  border:none;
+}
+.app .usercenter-mode1 .horizontal-router-container1 {
+  overflow: hidden;
+  /*background: #fff;*/
+  font-size: 14px;
+}
+.app .usercenter-mode1 .horizontal-router-container1 > view {
+  line-height: 30px;
+  height: 50px;
+  padding: 7px 10px;
+  color:#666;
+  border-bottom:1px solid #eee;
+  background: #FFF;
+  border-top:1px solid #eee;
+}
+.app .usercenter-mode1 .horizontal-router-container1 view:last-child {
+  /*border: none;*/
+  margin-bottom: -1px;
+}
+.app .usercenter-mode1 .horizontal-router-container1 label {
+  float: left;
+  font-size:20px;
+  line-height: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+.app .usercenter-mode1 .horizontal-router-container1 .icon-rightarrow {
+  position: relative;
+  width: 20px;
+  height: 30px;
+  line-height: 20px;
+  font-size: 16px;
+  float: right;
   color: #aaa;
+  margin-top: 6px;
+  margin-right: 0;
 }
-
-.usermotto {
-  margin-top: 200px;
+.app .usercenter-mode1 .horizontal-router-container1 .orderSubmenu > view {
+  display: inline-block;
+  width: 25%;
+  text-align: center;
+  font-size: 12px;
+  line-height: 20px;
+  position: relative;
+}
+.app .usercenter-mode1 .horizontal-router-container1 .orderSubmenu text {
+  display: block;
+  font-size: 22px;
+}
+.app .usercenter-mode1 .horizontal-router-container1 .myorderSubmenu {
+  height: 37px;
+  line-height: 37px;
+  padding: 0 0 7px 6px;
+}
+.app .usercenter-mode1 .horizontal-router-container1 .orderTypeStyle {
+  height: auto;
+}
+.app .usercenter-mode1 .countStatusOrder {
+  position:absolute;
+  background:#ff7100;
+  color:#fff;
+  right:27px;
+  top:-6px;
+  width:16px;
+  height:16px;
+  font-size:12px;
+  border-radius:50%;
+  line-height:16px;
 }
