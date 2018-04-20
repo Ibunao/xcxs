@@ -38,8 +38,30 @@ Page({
         "content": "Recommend to you"
       },
       {
+        "title": "分类",
+        "content": "Classified Catalogue"
+      },
+      {
         "title": "精选",
         "content": "choiceness to you"
+      }
+    ],
+    "classify":[
+      {
+        name:"徒步露营",
+        url:""
+      },
+      {
+        name:"测试测试",
+        url:""
+      },
+      {
+        name: "测试测试",
+        url: ""
+      },
+      {
+        name: "测试测试",
+        url: ""
       }
     ],
     "groups": {

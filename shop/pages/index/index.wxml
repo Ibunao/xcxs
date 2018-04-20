@@ -20,6 +20,13 @@
 <view class="ele-container">
 <template is="title" data="{{data:titles[1]}}"></template>
 </view> 
+<import src="/common/templates/classify.wxml"/>
+<view class="ele-container">
+  <template is="classify" data="{{data:classify}}"></template>
+</view>
+<view class="ele-container">
+<template is="title" data="{{data:titles[2]}}"></template>
+</view> 
 <import src="/common/templates/goods.wxml"/>
 <view class="ele-container">
   <template is="goods" data="{{data:goods}}"></template>

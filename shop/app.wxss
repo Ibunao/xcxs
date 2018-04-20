@@ -149,7 +149,18 @@ view,scroll-view,swiper,swiper-item,icon,text,progress,button,checkbox-group,che
   transform: rotate(0deg) scale(0.98) translate(0%, 0%);
   transition: all 0s ease;
 }
-
+.wx-navigator_n3vQYd2 {
+  width:335rpx;
+  min-height:100rpx;
+  text-align:center;
+  padding:10px 37.5rpx 5px;
+  color:rgb(33, 33, 33);
+  text-decoration:none;
+  background-color:#e3a037;
+  margin:20rpx;
+  border-radius:10rpx;
+  line-height:100rpx;
+}
 .c-block {
   display: block;
 }
