@@ -1,6 +1,43 @@
 
 App({
   onLaunch: function () {
+    // wx.openSetting({
+    //   success: (res) => {
+    //     console.log(res);
+    //   }
+    // })
+    // 如果没登陆过进行登陆
+    if (!wx.getStorageSync('xcx_openid')){
+      // 登录
+      wx.login({
+        success: res => {
+          // 发送 res.code 到后台换取 openId, sessionKey, unionId
+          console.log(res);
+          if (res.code) {
+            //发起网络请求, 获取openid、unionid
+            wx.request({
+              url: this.globalData.host + '/xcx/index',
+              data: {
+                code: res.code
+              },
+              success: function (res) {
+                console.log(res);
+                // 存储openid
+                if(res.data.code == 200){
+                  getApp().globalData.openid = res.data.openid
+                  wx.setStorageSync('xcx_openid', res.data.openid)
+                }
+              }
+            })
+          } else {
+            console.log('登录失败！' + res.errMsg)
+          }
+        }
+      })
+    }else{
+      this.globalData.openid = wx.getStorageSync('xcx_openid')
+    }
+    
     // 给购物车增加小红标志
     wx.setTabBarBadge({
       index: 1,
@@ -41,10 +78,10 @@ App({
       }
     })
   },
-  getAppCurrentPage: function () {
-    let pages = getCurrentPages();
-    return pages[pages.length - 1];
-  },
+  // getAppCurrentPage: function () {
+  //   let pages = getCurrentPages();
+  //   return pages[pages.length - 1];
+  // },
   // 跳转页面
   turnToPage: function (url, isRedirect) {
     // 如果是底部导航页
@@ -68,14 +105,7 @@ App({
       });
     }
   },
-  // 全局数据
-  globalData: {
-    tabBarPagePathArr: [
-      "/pages/my/index",
-      "/pages/index/index",
-      "/pages/cart/index",
-    ],
-  },
+  
   // 显示弹窗
   showModal: function (param) {
     wx.showModal({
@@ -101,4 +131,79 @@ App({
       }
     })
   },
+  // 获取用户数据
+  getUserInfo: function(func){
+    wx.getSetting({
+      success: res => {
+        // 如果已经授权，可以直接获取使用相应的权限获取数据，而不用弹窗
+        if (res.authSetting['scope.userInfo']) {
+          wx.getUserInfo({
+            success: function (res) {
+              var userInfo = res.userInfo
+              var nickName = userInfo.nickName
+              var avatarUrl = userInfo.avatarUrl
+              var gender = userInfo.gender //性别 0：未知、1：男、2：女
+              var province = userInfo.province
+              var city = userInfo.city
+              var country = userInfo.country
+              func(res.userInfo)
+            },
+          })
+        }else{
+          wx.authorize({
+            scope: 'scope.userInfo',
+            success() {
+              console.log('here')
+              // 用户已经同意小程序使用 接口不会弹窗询问
+              wx.getUserInfo({
+                success: function (res) {
+                  var userInfo = res.userInfo
+                  var nickName = userInfo.nickName
+                  var avatarUrl = userInfo.avatarUrl
+                  var gender = userInfo.gender //性别 0：未知、1：男、2：女
+                  var province = userInfo.province
+                  var city = userInfo.city
+                  var country = userInfo.country
+                  func(res.userInfo)
+                },
+                
+              })
+            },
+            fail: function (res) {
+              wx.openSetting({
+                success: (res) => {
+                  wx.getUserInfo({
+                    success: function (res) {
+                      var userInfo = res.userInfo
+                      var nickName = userInfo.nickName
+                      var avatarUrl = userInfo.avatarUrl
+                      var gender = userInfo.gender //性别 0：未知、1：男、2：女
+                      var province = userInfo.province
+                      var city = userInfo.city
+                      var country = userInfo.country
+                      func(res.userInfo)
+                    },
+                  })
+                }
+              })
+            }
+          })
+        }
+      }
+    })
+  },
+  
+  // 全局数据
+  globalData: {
+    tabBarPagePathArr: [
+      "/pages/my/index",
+      "/pages/index/index",
+      "/pages/cart/index",
+    ],
+    userInfo: null,
+    host: 'http://api.zbshop.com',
+    openid:null,
+    unionid:null,
+  },
+  
 })

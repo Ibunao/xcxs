@@ -79,10 +79,19 @@ var pageData = {
       // 用户头像
       cover_thumb:"",
       // 用户名
-      nickname:"ibunao",
+      nickname:"点击登陆",
     }
   },
   onLoad: function (e) {
+    if (wx.getStorageSync('xcx_user_info')){
+      app.globalData.userInfo = wx.getStorageSync('xcx_user_info');
+      // this.data.userInfo.cover_thumb = app.globalData.userInfo.avatarUrl;
+      // this.data.userInfo.nickname = app.globalData.userInfo.nickName;
+      this.setData({
+        'userInfo.cover_thumb': app.globalData.userInfo.avatarUrl,
+        'userInfo.nickname': app.globalData.userInfo.nickName
+      })
+    }
   },
 
   onShow: function () {
@@ -92,18 +101,93 @@ var pageData = {
   onUnload: function () {
     
   },
-  // 检查登陆、登陆、调转到相应的页面
-  userCenterTurnToPage: function (event) {
-    // let that = this;
-    // if (this.isLogin()) {
-    //   this._userCenterToPage(event);
-    // } else {
-    //   this.goLogin({
-    //     success: function () {
-    //       that._userCenterToPage(event);
-    //     }
-    //   });
+  // 检查登陆、登陆
+  userCenterUserInfo: function (event) {
+    if (!wx.getStorageSync('xcx_user_info')){
+      var that = this;
+      app.getUserInfo(function (resp) {
+        console.log(resp)
+        // 传递给后台
+        wx.request({
+          url: app.globalData.host + '/xcx/save-user-info',
+          data: {
+            nickName: resp.nickName,
+            avatarUrl: resp.avatarUrl,
+            city: resp.city,
+            country: resp.country,
+            gender: resp.gender,
+            language: resp.language,
+            province: resp.province,
+            openid: app.globalData.openid,
+            unionid: app.globalData.unionid
+          },
+          method: "POST",
+          header: {
+            'content-type': 'application/x-www-form-urlencoded' // 默认值
+          },
+          success: function (res) {
+            console.log(res);
+            // 存储openid
+            if (res.data.code == 200) {
+              app.globalData.userInfo = resp
+              wx.setStorageSync('xcx_user_info', resp)
+              that.setData({
+                'userInfo.cover_thumb': app.globalData.userInfo.avatarUrl,
+                'userInfo.nickname': app.globalData.userInfo.nickName
+              })
+            }
+          }
+        })
+
+      });
+    }
+    // else{
+    //   app.globalData.userInfo = wx.getStorageSync('xcx_user_info');
     // }
+    
   },
+  // 收货地址管理
+  userCenterLocation: function(event) {
+    // 使用微信的地址
+    wx.chooseAddress({
+      success: function (res) {
+        console.log(res.userName)
+        console.log(res.postalCode)
+        console.log(res.provinceName)
+        console.log(res.cityName)
+        console.log(res.countyName)
+        console.log(res.detailInfo)
+        console.log(res.nationalCode)
+        console.log(res.telNumber)
+
+        // 上传地址
+
+      }
+    })
+  },
+  userCenterIntegral:function(){
+    wx.request({
+      url: app.globalData.host + '/xcx/get-integral',
+      // 需要更改为动态的memberid
+      data: {
+        openid: app.globalData.openid,
+        memberId: 1,
+      },
+      success: function (res) {
+        console.log(res);
+        // 存储openid
+        if (res.data.code == 200) {
+          app.showModal({
+            title: '积分提示',
+            content: '您的积分为 ' + res.data.other.integral
+          })
+        }
+      }
+    })
+  },
+  // 跳转
+  userCenterTurnToPage:function(event) {
+
+  }
 };
 Page(pageData);

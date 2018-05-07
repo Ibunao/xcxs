@@ -348,6 +348,7 @@ Page({
   // 去付款
   confirmPayment: function(e){
     // 模拟支付结果
+    wx.requestPayment();return;
     //成功
     var pagePath = '/pages/goodsOrderPaySuccess/goodsOrderPaySuccess';
     app.turnToPage(pagePath, 1);

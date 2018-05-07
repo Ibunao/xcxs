@@ -1,7 +1,7 @@
 <view class="app">
   <template name="zcUserCenter">
     <view class="user-center usercenter-mode1 background-ele with-horizontal-view" style="opacity:1;color:rgb(255, 255, 255);margin-top:0;font-size:37.5rpx;height:auto;margin-left:auto;">
-      <view class="show-view" catchtap="userCenterTurnToPage" data-router="/pages/my/index" style="{{ (data.customFeature.topSectionStyle['background-image'] ? ('background-image:' + data.customFeature.topSectionStyle['background-image']) : ('background-color:' + data.customFeature.topSectionStyle['background-color']) ) + ';opacity:' + (data.customFeature.topSectionStyle.opacity || 1) }}">
+      <view class="show-view" catchtap="userCenterUserInfo" data-router="/pages/my/index" style="{{ (data.customFeature.topSectionStyle['background-image'] ? ('background-image:' + data.customFeature.topSectionStyle['background-image']) : ('background-color:' + data.customFeature.topSectionStyle['background-color']) ) + ';opacity:' + (data.customFeature.topSectionStyle.opacity || 1) }}">
         <label class="empty-span"></label>
         <image class="cover-thumb" src="{{ userInfo.cover_thumb || 'http://img.zhichiwangluo.com/zc_app_default_photo.png'}}"></image>
         <label class="nickname" >{{ userInfo.nickname || '用户名' }}</label>
@@ -32,7 +32,7 @@
           </view>
           <!--列表  -->
           <block wx:for="{{ data.customFeature.appendComponent }}" wx:key="">
-            <view wx:if="{{ item == 'myAddress' }}" catchtap="userCenterTurnToPage" data-router="/pages/myAddress/myAddress" style="margin-top: {{ data.customFeature.appendComponentAttr['myAddress']['margin-top'] }}">
+            <view wx:if="{{ item == 'myAddress' }}" catchtap="userCenterLocation" data-router="/pages/myAddress/myAddress" style="margin-top: {{ data.customFeature.appendComponentAttr['myAddress']['margin-top'] }}">
               <label class="ico-moon icon-location"></label>
               <text>地址管理</text>
               <label class="ico-moon icon-rightarrow"></label>
@@ -57,7 +57,7 @@
               <text>优惠券</text>
               <label class="ico-moon icon-rightarrow"></label>
             </view>
-            <view wx:elif="{{ item == 'myIntegral' }}" catchtap="userCenterTurnToPage" data-router="/userCenter/pages/myIntegral/myIntegral" data-open-verify-phone="{{ data.customFeature.appendComponentAttr['myIntegral']['openVerifyPhone'] }}" style="margin-top: {{ data.customFeature.appendComponentAttr['myIntegral']['margin-top'] }}">
+            <view wx:elif="{{ item == 'myIntegral' }}" catchtap="userCenterIntegral" data-router="/userCenter/pages/myIntegral/myIntegral" data-open-verify-phone="{{ data.customFeature.appendComponentAttr['myIntegral']['openVerifyPhone'] }}" style="margin-top: {{ data.customFeature.appendComponentAttr['myIntegral']['margin-top'] }}">
               <label class="ico-moon icon-integral"></label>
               <text>积分</text>
               <label class="ico-moon icon-rightarrow"></label>
