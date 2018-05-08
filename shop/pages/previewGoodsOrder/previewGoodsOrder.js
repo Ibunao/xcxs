@@ -348,7 +348,44 @@ Page({
   // 去付款
   confirmPayment: function(e){
     // 模拟支付结果
-    wx.requestPayment();return;
+    wx.request({
+      url: 'https://api.quutuu.com/order/pay',  
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        openid: app.globalData.openid
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res.data);
+        console.log('调起支付');
+        wx.requestPayment({
+          'timeStamp': res.data.timeStamp,
+          'nonceStr': res.data.nonceStr,
+          'package': res.data.package,
+          'signType': 'MD5',
+          'paySign': res.data.paySign,
+          'success': function (res) {
+            console.log('success');
+            wx.showToast({
+              title: '支付成功',
+              icon: 'success',
+              duration: 3000
+            });
+          },
+          'fail': function (res) {
+            console.log('fail');
+          },
+          'complete': function (res) {
+            console.log('complete');
+          }
+        });
+      },
+      fail: function (res) {
+        console.log(res.data)
+      }
+    }); return;
     //成功
     var pagePath = '/pages/goodsOrderPaySuccess/goodsOrderPaySuccess';
     app.turnToPage(pagePath, 1);
