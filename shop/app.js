@@ -201,7 +201,7 @@ App({
       "/pages/cart/index",
     ],
     userInfo: null,
-    host: 'http://api.zbshop.com',
+    host: 'https://api.quutuu.com',
     openid:null,
     unionid:null,
   },
