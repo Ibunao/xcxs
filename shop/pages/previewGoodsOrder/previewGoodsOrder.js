@@ -357,15 +357,16 @@ Page({
         openid: app.globalData.openid
       },
       method: 'POST',
+      dataType: 'json',
       success: function (res) {
-        console.log(res.data);
+        console.log(res.data.other);
         console.log('调起支付');
         wx.requestPayment({
-          'timeStamp': res.data.timeStamp,
-          'nonceStr': res.data.nonceStr,
-          'package': res.data.package,
+          'timeStamp': res.data.other.timeStamp,
+          'nonceStr': res.data.other.nonceStr,
+          'package': res.data.other.package,
           'signType': 'MD5',
-          'paySign': res.data.paySign,
+          'paySign': res.data.other.paySign,
           'success': function (res) {
             console.log('success');
             wx.showToast({
