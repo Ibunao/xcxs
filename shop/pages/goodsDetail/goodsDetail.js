@@ -161,22 +161,33 @@ Page({
 
   // 加入购物车
   sureAddToShoppingCart: function () {
+    // 选择的规格
+    var  selectModels = this.data.selectModelInfo.models
+    // 规格选择完整才能提交购物车
+    if (Object.getOwnPropertyNames(selectModels).length != this.data.goodsInfo.model.length) {
+      app.showModal({
+        title: '请选择规格',
+        content: '请选择规格'
+      });
+      return;
+    }
     var that = this,
       param = {
-        goods_id: this.data.goodsId,
+        goodsId: this.data.goodsId,
         num: this.data.selectModelInfo.buyCount,
+        specId: this.data.selectModelInfo.modelId
       };
     // 发送添加到购物车的请求
-    // app.sendRequest({
-    //   hideLoading: true,
-    //   url: '/index.php?r=AppShop/addCart',
-    //   data: param,
-    //   success: function (res) {
-    //     app.showToast({
-    //       title: '添加成功',
-    //       icon: 'success'
-    //     });
-
+    wx.request({
+      url: app.globalData.host+'/goods/set-cart',
+      data: param,
+      success: function (res) {
+        app.showModal({
+          title: '添加成功',
+          content: '添加成功'
+        });
+      }
+    });
     setTimeout(function () {
       that.hiddeAddToShoppingCart();
     }, 1000);
@@ -191,7 +202,17 @@ Page({
   // 立即购买下一步
   buyDirectlyNextStep: function (e) {
     // 发送请求，跳转结算页面 previewGoodsOrder
-    
+    // 选择的规格
+    var selectModels = this.data.selectModelInfo.models
+    // 规格选择完整才能提交购物车
+    if (Object.getOwnPropertyNames(selectModels).length != this.data.goodsInfo.model.length) {
+      app.showModal({
+        title: '请选择规格',
+        content: '请选择规格'
+      });
+      return;
+    }
+    app.turnToPage('/pages/previewGoodsOrder/previewGoodsOrder')
   },
   // 分享
   // showQRCodeComponent: function () {
@@ -232,6 +253,7 @@ Page({
     // options 获取打开当前页面所调用的 query 参数。
     console.log(options);
     var goodsId = options.id;
+    this.setData({ goodsId: goodsId})
     this.dataInitial(goodsId);
   },
   // 初始化数据, 获取初始数据
