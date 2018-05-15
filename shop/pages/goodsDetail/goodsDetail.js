@@ -1,10 +1,12 @@
 var app = getApp()
 Page({
   data: {
+    // 请求到的商品信息
+    goodsData:'',
     // 商品id
-    goodsId: '2',
+    goodsId: '',
+    shareShow: true,
     goodsInfo: {
-      goods_type:0,//no
       // 图片数组 false表示没有
       img_urls:[
         "https://image.octmami.com/public/images/7e/ee/65/9293f477b8edac2b6958b5ee9401184bd09bc555.jpg",
@@ -25,13 +27,32 @@ Page({
       express_fee:5,
       // 库存
       stock: 10,
+      // 规格
+      model: [
+        {
+          name : 'S',
+          value : 17,
+          subModelName : {
+            55 : '墨绿',
+            56 : '湖蓝'
+          }
+        },
+        {
+          name: 'M',
+          value: 18,
+          subModelName: {
+          57: '墨绿',
+          58: '湖蓝'
+        }
+        }
+      ],
     },
     // 商品参数
     goodsParams:[
-      {name:"重量", value:"10kg"},
-      { name: "重量", value: "10kg" },
-      { name: "重量", value: "10kg" },
-      { name: "重量", value: "10kg" },
+      // {name:"重量", value:"10kg"},
+      // { name: "重量", value: "10kg" },
+      // { name: "重量", value: "10kg" },
+      // { name: "重量", value: "10kg" },
     ],
     // 是否隐藏库存
     hidestock:false,
@@ -68,22 +89,23 @@ Page({
       detailTxt:"详情内容",
       // 图片详情
       detailImgs:[
-        "http://image.octmami.com/public/images/7b/c8/3b/b7052d99fdd90a87a25b1411ec80e6aa92edacc8.png?1458724526#w",
-        "http://image.octmami.com/public/images/d7/27/da/0ebf90856b3864f27e4640edf5f39138ef349251.png?1458724540#w",
-        "http://image.octmami.com/public/images/09/49/7e/1873d54fb478cb58c2fb53254ff2e8bbacdf0d8d.png?1458724572#w",
+        // "http://image.octmami.com/public/images/7b/c8/3b/b7052d99fdd90a87a25b1411ec80e6aa92edacc8.png?1458724526#w",
+        // "http://image.octmami.com/public/images/d7/27/da/0ebf90856b3864f27e4640edf5f39138ef349251.png?1458724540#w",
+        // "http://image.octmami.com/public/images/09/49/7e/1873d54fb478cb58c2fb53254ff2e8bbacdf0d8d.png?1458724572#w",
       ]
     },
     // 选择商品的详情，加入购物车或者立即购买使用
     selectModelInfo: {
+      modelId:'',
       // 图片地址
       imgurl: "https://image.octmami.com/public/images/7e/ee/65/9293f477b8edac2b6958b5ee9401184bd09bc555.jpg",
-      title: '商品名',
       price: '10',
       buyCount: 1,
       // 库存
       stock: 10,
       // 已选
-      models_text : '测试'
+      models_text : '测试',
+      models:{},
     },
     // 分享相关数据
     pageQRCodeData:{
@@ -209,44 +231,59 @@ Page({
   onLoad: function(options){
     // options 获取打开当前页面所调用的 query 参数。
     console.log(options);
-    var goodsId = options.detail,
-        contact = options.contact || '',
-        franchiseeId = options.franchisee || '',
-        cartGoodsNum = options.cart_num || 0,
-        defaultPhoto = "",
-        goodsType = options.goodsType || 0,
-        userToken = options.user_token || '',
-        hidestock = options.hidestock || '',
-        isShowVirtualPrice = options.isShowVirtualPrice || '';
-    // this.setData({
-    //   goodsId: goodsId,
-    //   contact: contact,
-    //   defaultPhoto: defaultPhoto,
-    //   franchiseeId: franchiseeId,
-    //   cartGoodsNum: cartGoodsNum,
-    //   goodsType : goodsType,
-    //   isSeckill : goodsType == 'seckill' ? true : false,
-    //   hidestock : hidestock == 'true' ? true : false,
-    //   isShowVirtualPrice: isShowVirtualPrice == 'true' ? true : false,
-    // })
-    // this.dataInitial();
-
+    var goodsId = options.id;
+    this.dataInitial(goodsId);
   },
-  // 初始化数据
-  dataInitial: function () {
+  // 初始化数据, 获取初始数据
+  dataInitial: function (gid) {
     var that = this;
-    app.sendRequest({
-      url: '/index.php?r=AppShop/getGoods',
-      data: {
-        data_id: this.data.goodsId,
-        sub_shop_app_id: this.data.franchiseeId ,
-        is_seckill: this.data.isSeckill ? 1 : ''
-      },
-      success: function(){},
-      complete: function(){
-        that.setData({
-          page_hidden: false
-        })
+    wx.request({
+      url: app.globalData.host + '/goods/get-goods-info',
+      data: {gid : gid},
+      success: function (res) {
+        console.log(res);
+        if (res.data) {
+          that.data.goodsData = res.data;
+          var img_urls = [];
+          // 主图添加到轮播
+          img_urls.push(app.globalData.imgHost+res.data.info['image']);
+          // 把规格图片添加到轮播
+          for (var item of res.data.info['specImg']){
+            img_urls.push(app.globalData.imgHost + item);
+          }
+          // 把其他的图片也添加进来
+          // for (var item of res.data['otherImg']) {
+          //   img_urls.push(app.globalData.imgHost + item);
+          // }
+          var goodsInfo = {
+            img_urls : img_urls,
+            cover: '/images/goodsDefault.png',
+            title: res.data.info.name,
+            lowPrice: res.data.info.wx_price,
+            price: res.data.info.wx_price,
+            express_fee: '满80包邮',
+            stock: res.data.info.stores,
+          }
+          var goodsParams = [];
+          for(var key in res.data.attri){
+            goodsParams.push({ name: key, value: res.data.attri[key]})
+          }
+          var goodsDetail = {};
+          goodsDetail.isImg = res.data.info.desc == 1 ? false : true;
+          if (goodsDetail.isImg){
+            goodsDetail.detailImgs = [];
+            for (var item of res.data.detailImg){
+              goodsDetail.detailImgs.push(app.globalData.imgHost + item)
+            }
+          }else{
+            goodsDetail.detailTxt = res.data.detailImg
+          }
+          that.setData({ 'goodsDetail': goodsDetail })
+          that.setData({ 'goodsParams': goodsParams })
+          // that.setData({ 'goodsInfo': goodsInfo })
+        } else {
+          app.showModal({ content: '没有此商品' })
+        }
       }
     })
   },
@@ -259,58 +296,70 @@ Page({
   // 勾选不同规格的商品
   selectSubModel: function(e){
     var dataset = e.target.dataset,
+        // 规格id
         modelIndex = dataset.modelIndex,
+        // 规格值id
         submodelIndex = dataset.submodelIndex,
         data = {},
+        // 选择的规格
         selectModels = this.data.selectModelInfo.models,
+        // 所有的规格
         model = this.data.goodsInfo.model,
         text = '';
 
-    selectModels[modelIndex] = model[modelIndex].subModelId[submodelIndex];
-
-    // 拼已选中规格文字
-    for (let i = 0; i < selectModels.length; i++) {
-      let selectSubModelId = model[i].subModelId;
-      for (let j = 0; j < selectSubModelId.length; j++) {
-        if( selectModels[i] == selectSubModelId[j] ){
-          text += '“' + model[i].subModelName[j] + '” ';
+    for(var item of model){
+      if(item.value == modelIndex){
+        for (var i in item.subModelName){
+          if (i == submodelIndex){
+            selectModels[modelIndex] = { value :i, name: item.subModelName[i]}
+          }
         }
       }
     }
+    console.log(selectModels);
+    // 拼已选中规格文字
+    for (var i in selectModels) {
+      // console.log(i)
+      text += selectModels[i].name + ' + '
+    }
+    text = text.substr(0, text.length - 3);  
     data['selectModelInfo.models'] = selectModels;
     data['selectModelInfo.models_text'] = text;
 
     this.setData(data);
-    this.resetSelectCountPrice();
+    // 如果规格都选上了，更新价格可库存
+    // console.log(Object.getOwnPropertyNames(selectModels).length)
+    if (Object.getOwnPropertyNames(selectModels).length == this.data.goodsInfo.model.length){
+      // console.log('jisuanjiage')
+      this.resetSelectCountPrice();
+    }
+    
   },
-  // 更新价格
+  // 更新价格和库存
   resetSelectCountPrice: function(){
-    var _this = this,
-        selectModelIds = this.data.selectModelInfo.models.join(','),
-        modelItems = this.data.goodsInfo.model_items,
+    var selectModelIds = [],
+      selectModels = this.data.selectModelInfo.models,
+      modelItems = this.data.goodsData.spec,
         data = {};
-
-    for (var i = modelItems.length - 1; i >= 0; i--) {
-      if(modelItems[i].model == selectModelIds){
-        if(_this.data.isSeckill){  //假如是秒杀
-          data['selectModelInfo.stock'] = modelItems[i].seckill_stock;
-          data['selectModelInfo.price'] = modelItems[i].seckill_price;
-          data['selectModelInfo.modelId'] = modelItems[i].id;
-          data['selectModelInfo.imgurl'] = modelItems[i].img_url;
-        }else{
-          data['selectModelInfo.stock'] = modelItems[i].stock;
-          data['selectModelInfo.price'] = modelItems[i].price;
-          data['selectModelInfo.modelId'] = modelItems[i].id;
-          data['selectModelInfo.imgurl'] = modelItems[i].img_url;
-          data['selectModelInfo.virtualPrice'] = modelItems[i].virtual_price;
-        }
-        break;
+    // 多规格的将数组排序后再生成字符串进行比较就可以了
+    for (var i in selectModels){
+      selectModelIds.push(Number(selectModels[i]['value']))
+    }
+    selectModelIds = (selectModelIds.sort()).join(',')
+    console.log(selectModelIds)
+    for (var i in modelItems){
+      console.log((modelItems[i].s_v_ids.split(',').sort()).join(','))
+      if ((modelItems[i].s_v_ids.split(',').sort()).join(',') == selectModelIds){
+        data['selectModelInfo.stock'] = modelItems[i].store;
+        data['selectModelInfo.price'] = modelItems[i].price;
+        data['selectModelInfo.modelId'] = modelItems[i].id;
+        data['selectModelInfo.imgurl'] = app.globalData.imgHost + modelItems[i].image;
       }
     }
     this.setData(data);
   },
 
-  // 数量的input框 暂时没用
+  // 数量的input框
   inputBuyCount: function(e){
     var count = +e.detail.value,
         selectModelInfo = this.data.selectModelInfo,
@@ -320,10 +369,6 @@ Page({
     if(count >= stock) {
       count = stock;
       app.showModal({content: '购买数量不能大于库存'});
-    }
-    if(this.data.isSeckill && count >= +goodsInfo.seckill_buy_limit){
-      count = goodsInfo.seckill_buy_limit;
-      app.showModal({content: '购买数量不能大于秒杀限购数量'});
     }
     this.setData({
       'selectModelInfo.buyCount': +count
@@ -338,18 +383,18 @@ Page({
   },
   // 分享
   onShareAppMessage: function (res) {
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      console.log(res.target)
-    }
+    var that = this;
+    that.setData({shareShow: false})
     return {
-      title: '自定义转发标题',
-      path: '/page/user?id=123',//路径
+      title: that.data.goodsInfo.title,
+      path: '/pages/goodsDetail?id=' + that.data.goodsId,//路径
       success: function (res) {
         // 转发成功
+        that.setData({ shareShow: true })
       },
       fail: function (res) {
         // 转发失败
+        that.setData({ shareShow: true })
       }
     }
   }

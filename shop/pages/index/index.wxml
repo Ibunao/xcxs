@@ -33,7 +33,7 @@
 </view>
 
 <view class="ele-container">
-  <navigator class="home-floor-nav" url="../goods/index">
+  <navigator class="home-floor-nav" url="../goods/index?type=all">
     <text class='home-floor-text'>店铺全部商品</text>
   </navigator>
 </view>

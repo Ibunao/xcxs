@@ -466,6 +466,11 @@ contact-button {
 .pay-goods-models .pills-list {
   display: inline-block;
   vertical-align: middle;
+  font-size:30rpx;
+}
+.subModel {
+  padding: 0 10px;
+  margin-right: 2px;
 }
 .model-title{
   display: block;
