@@ -192,7 +192,71 @@ App({
       }
     })
   },
-  
+  // 获取用户收货地址数据
+  getUserAddress: function (func) {
+    wx.getSetting({
+      success: res => {
+        // 如果已经授权，可以直接获取使用相应的权限获取数据，而不用弹窗
+        if (res.authSetting['scope.address']) {
+          // 使用微信的地址
+          wx.chooseAddress({
+            success: function (res) {
+              console.log(res.userName)
+              console.log(res.postalCode)
+              console.log(res.provinceName)
+              console.log(res.cityName)
+              console.log(res.countyName)
+              console.log(res.detailInfo)
+              console.log(res.nationalCode)
+              console.log(res.telNumber)
+              func(res)
+            },
+          })
+        } else {
+          wx.authorize({
+            scope: 'scope.address',
+            success() {
+              console.log('here')
+              // 用户已经同意小程序使用 接口不会弹窗询问
+              wx.chooseAddress({
+                success: function (res) {
+                  console.log(res.userName)
+                  console.log(res.postalCode)
+                  console.log(res.provinceName)
+                  console.log(res.cityName)
+                  console.log(res.countyName)
+                  console.log(res.detailInfo)
+                  console.log(res.nationalCode)
+                  console.log(res.telNumber)
+                  func(res)
+                },
+
+              })
+            },
+            fail: function (res) {
+              wx.openSetting({
+                success: (res) => {
+                  wx.chooseAddress({
+                    success: function (res) {
+                      console.log(res.userName)
+                      console.log(res.postalCode)
+                      console.log(res.provinceName)
+                      console.log(res.cityName)
+                      console.log(res.countyName)
+                      console.log(res.detailInfo)
+                      console.log(res.nationalCode)
+                      console.log(res.telNumber)
+                      func(res)
+                    },
+                  })
+                }
+              })
+            }
+          })
+        }
+      }
+    })
+  },
   // 全局数据
   globalData: {
     tabBarPagePathArr: [
@@ -202,12 +266,13 @@ App({
     ],
     userInfo: null,
     // host: 'https://api.quutuu.com',
-    // host: 'http://api.zbshop.com',
+    host: 'http://api.zbshop.com',
     // home
-    host: 'http://api.shop.com',
+    // host: 'http://api.shop.com',
     imgHost: 'http://admin.quutuu.com',
     openid:null,
     unionid:null,
   },
-  
+  // 供确认订单使用
+  goodsList: [],
 })

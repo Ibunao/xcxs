@@ -147,23 +147,45 @@ var pageData = {
     
   },
   // 收货地址管理
-  userCenterLocation: function(event) {
-    // 使用微信的地址
-    wx.chooseAddress({
-      success: function (res) {
-        console.log(res.userName)
-        console.log(res.postalCode)
-        console.log(res.provinceName)
-        console.log(res.cityName)
-        console.log(res.countyName)
-        console.log(res.detailInfo)
-        console.log(res.nationalCode)
-        console.log(res.telNumber)
-
-        // 上传地址
-
-      }
-    })
+  userCenterAddress: function(event) {
+    if (!wx.getStorageSync('xcx_user_address')) {
+      // 使用微信的地址
+      app.getUserAddress(function(res){
+        // 保存到本地
+        wx.setStorageSync('xcx_user_address', res)
+        // 传递给后台, 暂时不用传递
+        // wx.request({
+        //   url: app.globalData.host + '/xcx/save-user-info',
+        //   data: {
+        //     nickName: resp.nickName,
+        //     avatarUrl: resp.avatarUrl,
+        //     city: resp.city,
+        //     country: resp.country,
+        //     gender: resp.gender,
+        //     language: resp.language,
+        //     province: resp.province,
+        //     openid: app.globalData.openid,
+        //     unionid: app.globalData.unionid
+        //   },
+        //   method: "POST",
+        //   header: {
+        //     'content-type': 'application/x-www-form-urlencoded' // 默认值
+        //   },
+        //   success: function (res) {
+        //     console.log(res);
+        //     // 存储openid
+        //     if (res.data.code == 200) {
+        //       app.globalData.userInfo = resp
+        //       wx.setStorageSync('xcx_user_info', resp)
+        //       that.setData({
+        //         'userInfo.cover_thumb': app.globalData.userInfo.avatarUrl,
+        //         'userInfo.nickname': app.globalData.userInfo.nickName
+        //       })
+        //     }
+        //   }
+        // })
+      })
+    }
   },
   userCenterIntegral:function(){
     wx.request({

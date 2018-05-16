@@ -4,36 +4,26 @@ Page({
   data: {
     // 商品列表
     goodsList: [
-      {
-        id: 1,
-        selected: true,
-        editSelected: true,
-        cover: "https://image.octmami.com/public/images/7e/ee/65/9293f477b8edac2b6958b5ee9401184bd09bc555.jpg",
-        title: "测试商品",
-        model_value_str: "测试",
-        price: 198,
-        num: 5,
-      },
-      {
-        id: 2,
-        selected: true,
-        editSelected: true,
-        cover: "https://image.octmami.com/public/images/7e/ee/65/9293f477b8edac2b6958b5ee9401184bd09bc555.jpg",
-        title: "测试商品",
-        model_value_str: "测试",
-        price: 198,
-        num: 5,
-      }
+      // {
+      //   id: 1,
+      //   selected: true,
+      //   editSelected: true,
+      //   cover: "https://image.octmami.com/public/images/7e/ee/65/9293f477b8edac2b6958b5ee9401184bd09bc555.jpg",
+      //   title: "测试商品",
+      //   model_value_str: "测试",
+      //   price: 198,
+      //   num: 5,
+      // }
     ],
     // 留言
     orderRemark: '',
     // 选择的地址
     selectAddress: {
-      id:1,
+      id:'',
       address_info:{
-        name:"公司",
-        contact:"金沙江路",
-        detailAddress:"详细地址",
+        name:"",
+        contact:"",
+        detailAddress:"",
       }
     },
     // 运费
@@ -44,15 +34,15 @@ Page({
     
     is_self_delivery: 0,
     express_fee: '',
-    balance: '',
-    useBalance: true,
+    balance: '12',// 积分
+    useBalance: true,// 使用积分
     deduction: '',
     discount_cut_price: '',
+    // 商品价格
     original_price: '',
     totalPayment: '',
     shopAddress: '',
     noAdditionalInfo: true,
-    is_group:'',// no
     exchangeCouponData: {
       dialogHidden: true,
       goodsInfo: {},
@@ -62,19 +52,17 @@ Page({
     }
   },
   isFromSelectAddress: false,
-  franchisee_id: '',// 没用
   // 提交的商品id
   cart_id_arr: [],
   cart_data_arr: [],
   requesting: false,
   additional_info: {},
-  is_group:'',// 没用
   inputTimer: '',
   onLoad: function (options) {
-    // 提交的商品id
-    this.cart_id_arr = options.cart_arr ? decodeURIComponent(options.cart_arr).split(',') : [];
+    // 提交的商品信息
+    this.setData({goodsList: app.globalData.goodsList})
     // 初始化
-    // this.dataInitial();
+    this.dataInitial();
   },
   // 初始化
   dataInitial: function () {
@@ -82,147 +70,62 @@ Page({
     this.getCalculationInfo();
     // 获取地址
     this.getShopAddress();
-    // 商品
-    this.getCartList();
   },
   onShow: function(){
 
   },
-  // 获取购物车商品列表
-  getCartList: function () {
-    var that = this;
-    // 请求获取商品列表
-    // app.sendRequest({
-    //   url: '/index.php?r=AppShop/cartList',
-    //   data: {
-    //     page: 1,
-    //     page_size: 100,
-    //     sub_shop_app_id: franchisee_id,
-    //     parent_shop_app_id: franchisee_id ? app.globalData.appId : ''
-    //   },
-    //   success: function(res){
-    //     var data = [];
-    //     if(that.cart_id_arr.length){
-    //       for (var i = 0; i <= res.data.length - 1; i++) {
-    //         if(that.cart_id_arr.indexOf(res.data[i].id) >= 0){
-    //           data.push(res.data[i]);
-    //         }
-    //       }
-    //     } else {
-    //       data = res.data;
-    //     }
 
-    //     for (var i = 0; i <= data.length - 1; i++) {
-    //       var goods = data[i],
-    //           modelArr = goods.model_value;
-    //       goods.model_value_str = modelArr && modelArr.join ? '('+modelArr.join('|')+')' : '';
-    //       that.cart_data_arr.push({
-    //         cart_id: goods.id,
-    //         goods_id: goods.goods_id,
-    //         model_id: goods.model_id,
-    //         num: goods.num
-    //       });
-    //     }
-    //     that.setData({
-    //       goodsList: data
-    //     });
-    //   }
-    // })
-  },
-  // 支付页面的初始化信息
+  // 计算金额、运费
   getCalculationInfo: function(){
-    var _this = this;
-    // app.sendRequest({
-    //   url: '/index.php?r=AppShop/calculationPrice',
-    //   method: 'post',
-    //   data: {
-    //     sub_shop_app_id: this.franchisee_id,
-    //     address_id: this.data.selectAddress.id,
-    //     cart_id_arr: this.cart_id_arr,
-    //     is_balance: this.data.useBalance ? 1 : 0,
-    //     is_self_delivery: this.data.is_self_delivery,
-    //     selected_benefit: this.data.selectDiscountInfo,
-    //     voucher_coupon_goods_info: this.data.exchangeCouponData.voucher_coupon_goods_info
-    //   },
-    //   success: function(res){
-    //     var info = res.data,
-    //         benefits = info.can_use_benefit.data,
-    //         goods_info = info.goods_info,
-    //         additional_info_goods = [],
-    //         additional_goodsid_arr = [],
-    //         selectDiscountIndex = '',
-    //         selectDiscountInfo;
-
-    //     if(benefits.length){
-    //       benefits.unshift({
-    //         title: '不使用优惠',
-    //         name: '无',
-    //         no_use_benefit: 1
-    //       });
-    //     }
-
-    //     if(_this.data.selectDiscountInfo && _this.data.selectDiscountInfo.no_use_benefit == 1){
-    //       selectDiscountInfo = _this.data.selectDiscountInfo;
-    //       selectDiscountIndex = 0;
-    //     } else {
-    //       selectDiscountInfo = info.selected_benefit_info;
-    //       if(selectDiscountInfo && selectDiscountInfo.discount_type){
-    //         for (var i = 0; i <= benefits.length - 1; i++) {
-    //           if(selectDiscountInfo.discount_type === benefits[i].discount_type){
-    //             if(selectDiscountInfo.discount_type === 'coupon') {
-    //               if(selectDiscountInfo.coupon_id === benefits[i].coupon_id){
-    //                 selectDiscountIndex = i;
-    //                 break;
-    //               }
-    //             } else {
-    //               selectDiscountIndex = i;
-    //               break;
-    //             }
-    //           }
-    //         }
-    //         // 优惠券：兑换券操作
-    //         if(selectDiscountInfo.discount_type == 'coupon' && selectDiscountInfo.type == 3 && _this.data.exchangeCouponData.hasSelectGoods == false ){
-    //           _this.exchangeCouponInit(parseInt(selectDiscountInfo.value));
-    //         }
-    //       }
-    //     }
-
-    //     for (var i = 0; i <= goods_info.length - 1; i++) {
-    //       if(goods_info[i].delivery_id && goods_info[i].delivery_id != 0 && additional_goodsid_arr.indexOf(goods_info[i].id) == -1){
-    //         additional_goodsid_arr.push(goods_info[i].id);
-    //         additional_info_goods.push(goods_info[i]);
-    //       }
-    //     }
-    //     _this.setData({
-    //       selectAddress: info.address,
-    //       discountList: benefits,
-    //       selectDiscountIndex: selectDiscountIndex,
-    //       selectDiscountInfo: selectDiscountInfo,
-    //       express_fee: info.express_fee,
-    //       discount_cut_price: info.discount_cut_price,
-    //       balance: info.balance,
-    //       deduction: info.use_balance,
-    //       original_price: info.original_price,
-    //       totalPayment: info.price,
-    //       noAdditionalInfo: additional_info_goods.length ? false : true
-    //     })
-    //   }
-    // });
+    var that = this;
+    var goodsList = that.data.goodsList;
+    var price = 0;
+    for(var item of goodsList){
+      // console.log(item)
+      price += parseFloat(item.price)*parseInt(item.num)
+    }
+    // 满减邮费
+    if(price >= 80){
+      that.setData({ express_fee:0})
+    }else{
+      that.setData({ express_fee: 5 })
+    }
+    that.setData({ original_price:price})
   },
   // 获取用户邮寄地址
   getShopAddress:function(){
     var that = this;
-    // app.sendRequest({
-    //   url: '/index.php?r=AppShop/getAppShopLocationInfo',
-    //   data:{
-    //     sub_app_id: that.franchisee_id
-    //   },
-    //   success: function (res) {
-    //     that.setData({
-    //       shopAddress: res.data
-    //     });
-    //   }
-    // });
+    if (wx.getStorageSync('xcx_user_address')){
+      var res = wx.getStorageSync('xcx_user_address')
+      that.setData({selectAddress: {
+        id: '1',
+        address_info:{
+          name: res.userName,
+          contact: res.telNumber,
+          detailAddress: res.provinceName + res.cityName + res.countyName+res.detailInfo,
+        }
+      }})
+    }
+  },
+  // 收货地址管理
+  userCenterAddress: function (event) {
+    var that = this
+    // 使用微信的地址
+    app.getUserAddress(function (res) {
+      // 保存到本地
+      wx.setStorageSync('xcx_user_address', res)
+      that.setData({
+        selectAddress: {
+          id: '1',
+          address_info: {
+            name: res.userName,
+            contact: res.telNumber,
+            detailAddress: res.provinceName + res.cityName + res.countyName + res.detailInfo,
+          }
+        }
+      })
+      // 传递给后台, 暂时不用传递
+    })
   },
   remarkInput: function (e) {
     var value = e.detail.value;

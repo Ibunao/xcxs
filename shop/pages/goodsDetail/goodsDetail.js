@@ -167,7 +167,7 @@ Page({
     if (Object.getOwnPropertyNames(selectModels).length != this.data.goodsInfo.model.length) {
       app.showModal({
         title: '请选择规格',
-        content: '请选择规格'
+        content: '请选择完整的规格'
       });
       return;
     }
@@ -182,10 +182,9 @@ Page({
       url: app.globalData.host+'/goods/set-cart',
       data: param,
       success: function (res) {
-        app.showModal({
-          title: '添加成功',
-          content: '添加成功'
-        });
+        wx.showToast({
+          title: '添加成功'
+        })
       }
     });
     setTimeout(function () {
@@ -212,6 +211,17 @@ Page({
       });
       return;
     }
+    // 使用全局传递数据
+    app.globalData.goodsList = [{
+      id: this.data.goodsId,
+      cover: this.data.selectModelInfo.imgurl,
+      title: this.data.goodsInfo.title,
+      model_value_str: this.data.selectModelInfo.models_text,
+      price: this.data.selectModelInfo.price,
+      num: this.data.selectModelInfo.buyCount,
+      specId: this.data.selectModelInfo.modelId,
+      specs: this.data.selectModelInfo.models,
+    },];
     app.turnToPage('/pages/previewGoodsOrder/previewGoodsOrder')
   },
   // 分享

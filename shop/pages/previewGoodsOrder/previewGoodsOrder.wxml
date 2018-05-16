@@ -21,7 +21,7 @@
   </view>
   <view class="preview-goods-order-section" >
     <block wx:if="{{ selectAddress.id }}">
-      <view style="position:relative;" bindtap="goToMyAddress" data-address-id="{{ selectAddress.id }}">
+      <view style="position:relative;" bindtap="userCenterAddress" data-address-id="{{ selectAddress.id }}">
         <view style="margin-bottom:7px;">{{ selectAddress.address_info.name }} {{ selectAddress.address_info.contact }}</view>
         <view>{{ selectAddress.address_info.detailAddress }}</view>
         <view class="preview-address-options">
@@ -30,8 +30,10 @@
       </view>
     </block>
     <block wx:else>
-      <view class="pull-right ico-moon icon-rightarrow"></view>
-      <view bindtap="goToMyAddress">添加地址</view>
+      <view bindtap='userCenterAddress'>
+        <label class="ico-moon icon-location"></label>
+        <text>选择地址</text>
+      </view>
     </block>
   </view>
   <view class="preview-goods-order-section" style="margin-bottom:1px;">商品金额 <text class="pull-right price-count">¥ {{ original_price }}</text></view>
