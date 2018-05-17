@@ -34,6 +34,7 @@ Page({
     // 商品价格
     original_price: '',
     totalPayment: '',// 支付金额
+    orderid:'',// 订单id
   },
   onLoad: function (options) {
     // 提交的商品信息
@@ -255,14 +256,37 @@ Page({
   // },
   // 去付款
   confirmPayment: function(e){
+    var that = this
+    wx.request({
+      url: app.globalData.host + '/order/create',
+      data:{
+        openid: app.globalData.openid,
+        data: that.data
+      },
+      method: 'POST',
+      success: function (res) {
+        if(res.data.code == 400){
+          // 请求的参数不对
+          wx.showModal({
+            title: '信息不完整',
+            content: res.data.msg,
+          })
+          return;
+        }
+        that.setData({ orderid: res.data.other.orderid})
+      }
+    })
+    return;
     // 模拟支付结果
     wx.request({
+      // 支付还是用线上，测试环境回调不到
       url: 'https://api.quutuu.com/order/pay',  
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       data: {
-        openid: app.globalData.openid
+        openid: app.globalData.openid,
+        orderid: that.data.orderid
       },
       method: 'POST',
       dataType: 'json',
@@ -298,181 +322,33 @@ Page({
     //成功
     var pagePath = '/pages/goodsOrderPaySuccess/goodsOrderPaySuccess';
     app.turnToPage(pagePath, 1);
-    // 失败
-    // var pagePath = '/eCommerce/pages/groupOrderDetail/groupOrderDetail';
-    // app.turnToPage(pagePath, 1);
-    // var list = this.data.goodsList,
-    //     that = this,
-    //     selected_benefit = this.data.selectDiscountInfo,
-    //     hasWritedAdditionalInfo = false;
-
-    // if(this.data.is_self_delivery == 0 && !this.data.selectAddress.id){
-    //   app.showModal({
-    //     content: '请选择地址'
-    //   });
-    //   return;
-    // }
-
-    // for(var key in this.additional_info){
-    //   if(key !== undefined){
-    //     hasWritedAdditionalInfo = true;
-    //     break;
-    //   }
-    // }
-    // if(!this.data.noAdditionalInfo && !hasWritedAdditionalInfo){
-    //   app.showModal({
-    //     content: '请填写商品补充信息'
-    //   });
-    //   return;
-    // }
-
-    // if(this.requesting){
-    //   return;
-    // }
-    // this.requesting = true;
-
-    // app.sendRequest({
-    //   url : '/index.php?r=AppShop/addCartOrder',
-    //   method: 'post',
-    //   data: {
-    //     cart_arr: this.cart_data_arr,
-    //     formId: e.detail.formId,
-    //     sub_shop_app_id: this.franchisee_id,
-    //     selected_benefit: selected_benefit,
-    //     is_balance: this.data.useBalance ? 1 : 0,
-    //     is_self_delivery: this.data.is_self_delivery,
-    //     remark: this.data.orderRemark,
-    //     address_id: this.data.selectAddress.id,
-    //     additional_info: this.additional_info,
-    //     voucher_coupon_goods_info: this.data.exchangeCouponData.voucher_coupon_goods_info
-    //   },
-    //   success: function(res){
-    //     that.payOrder(res.data);
-    //   },
-    //   fail: function(){
-    //     that.requesting = false;
-    //   },
-    //   successStatusAbnormal: function(){
-    //     that.requesting = false;
-    //   }
-    // });
   },
-  // 支付
-  payOrder: function(orderId){
-    var that = this;
-
-    function paySuccess() {
-      var pagePath = '/eCommerce/pages/goodsOrderPaySuccess/goodsOrderPaySuccess?detail=' + orderId + (that.franchisee_id ? '&franchisee='+that.franchisee_id : '') + '&is_group=' + !!that.is_group;
-      if(!that.franchisee_id){
-        app.sendRequest({
-          url: '/index.php?r=AppMarketing/CheckAppCollectmeStatus',
-          data: {
-            'order_id': orderId
-          },
-          success: function(res){
-            if(res.valid == 0) {
-              pagePath += '&collectBenefit=1';
-            }
-            app.turnToPage(pagePath, 1);
-          }
-        });
-      } else {
-        app.turnToPage(pagePath, 1);
-      }
-    }
-
-    function payFail(){
-      if(that.is_group){
-        app.turnToPage('/eCommerce/pages/groupOrderDetail/groupOrderDetail?id=' + orderId, 1);
-      }else{
-        app.turnToPage('/eCommerce/pages/goodsOrderDetail/goodsOrderDetail?detail=' + orderId, 1);
-      }
-    }
-    // 如果是0不用请求微信支付
-    if(this.data.totalPayment == 0){
-      app.sendRequest({
-        url: '/index.php?r=AppShop/paygoods',
-        data: {
-          order_id: orderId,
-          total_price: 0
-        },
-        success: function(res){
-          paySuccess();
-        },
-        fail: function(){
-          payFail();
-        },
-        successStatusAbnormal: function () {
-          payFail();
-        }
-      });
-      return;
-    }
-    // 发送微信支付
-    app.sendRequest({
-      url: '/index.php?r=AppShop/GetWxWebappPaymentCode',
-      data: {
-        order_id: orderId
-      },
-      success: function (res) {
-        var param = res.data;
-        param.orderId = orderId;
-        param.success = paySuccess;
-        param.goodsType = 0;
-        param.fail = payFail;
-        that.wxPay(param);
-      },
-      fail: function(){
-        payFail();
-      },
-      successStatusAbnormal: function () {
-        payFail();
-      }
-    })
-  },
-  wxPay: function(param){
-    var that = this;
-    wx.requestPayment({
-      'timeStamp': param.timeStamp,
-      'nonceStr': param.nonceStr,
-      'package': param.package,
-      'signType': 'MD5',
-      'paySign': param.paySign,
-      success: function(res){
-        param.success();
-      },
-      fail: function(res){
-        if(res.errMsg === 'requestPayment:fail cancel'){
-          param.fail();
-          return;
-        }
-        app.showModal({
-          content: '支付失败',
-          complete: param.fail
-        })
-      }
-    })
-  },
+  // 使用积分
   useBalanceChange: function(e){
+    console.log(e)
     // 重新计算价格
-    this.getCalculationInfo()
-    var haveIntegrals = this.data.haveIntegrals,
-      totalPrice = this.data.totalPayment,
-      useIntegrals = 0, // 使用的积分
-      deduction = 0;// 积分折扣金额
-    if(haveIntegrals <= totalPrice){
-      useIntegrals = haveIntegrals;
-      deduction = useIntegrals;
-      totalPrice = totalPrice - deduction
+    if (!e.detail.value){
+      this.getCalculationInfo()
+      this.setData({ useIntegrals:0})
     }else{
-      useIntegrals = Math.ceil(totalPrice);
-      deduction = totalPrice;
-      totalPrice = totalPrice - deduction
+      var haveIntegrals = this.data.haveIntegrals,
+        totalPrice = this.data.totalPayment,
+        useIntegrals = 0, // 使用的积分
+        deduction = 0;// 积分折扣金额
+      if (haveIntegrals <= totalPrice) {
+        useIntegrals = haveIntegrals;
+        deduction = useIntegrals;
+        totalPrice = totalPrice - deduction
+      } else {
+        useIntegrals = Math.ceil(totalPrice);
+        deduction = totalPrice;
+        totalPrice = totalPrice - deduction
+      }
+      this.setData({
+        useIntegrals: useIntegrals,
+        deduction: deduction,
+        totalPayment: totalPrice
+      });
     }
-    this.setData({
-      useIntegrals: useIntegrals,
-      deduction: deduction,
-      totalPayment: totalPrice
-    });
   },
 })
