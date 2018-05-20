@@ -27,7 +27,7 @@
                 <view class="countStatusOrder">{{ 2 }}</view>待收货</view>
               <view data-index="4">
                 <text class="ico-moon icon-beEvaluated" data-index="4"></text>
-                <view class="countStatusOrder">{{ 0 }}</view>待评价</view>
+                <view class=""></view>待评价</view>
             </view>
           </view>
           <!--列表  -->

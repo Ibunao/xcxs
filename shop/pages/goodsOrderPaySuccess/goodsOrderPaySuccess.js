@@ -4,13 +4,13 @@ Page({
   data: {
     orderId: '',
     // 获得的积分
-    integral: 100
+    integral: 0
   },
   onLoad: function (options) {
     let that = this;
     that.setData({
-      'orderId': options.detail,
-      'integral':100
+      'orderId': options.orderid,
+      'integral': options.integral
     });
 
   },
@@ -22,7 +22,7 @@ Page({
   // 获取订单详情
   goToOrderDetail: function(){
     let that = this;
-    let pagePath = '/pages/goodsOrderDetail/goodsOrderDetail?detail=' + that.data.orderId; 
+    let pagePath = '/pages/goodsOrderDetail/goodsOrderDetail?orderid=' + that.data.orderId; 
     app.turnToPage(pagePath, true);
   }
 })

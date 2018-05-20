@@ -114,7 +114,7 @@ Page({
           }
           that.setData({ 'goods': that.data.goods.concat(resp)})
         }else{
-          app.showModal({content:'没有商品'})
+          app.showModal({content:'没有更多商品了'})
           if(that.page == 1){
             console.log(that.page)
             that.setData({ 'goods': [] })

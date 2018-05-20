@@ -9,9 +9,9 @@ Page({
     goodsInfo: {
       // 图片数组 false表示没有
       img_urls:[
-        "https://image.octmami.com/public/images/7e/ee/65/9293f477b8edac2b6958b5ee9401184bd09bc555.jpg",
-        "https://image.octmami.com/public/images/d2/98/42/3a589c8aaddbb509addb0ec2f4c048f3e7e8085c.jpg",
-        "https://image.octmami.com/public/images/7e/ee/65/9293f477b8edac2b6958b5ee9401184bd09bc555.jpg",
+        // "https://image.octmami.com/public/images/7e/ee/65/9293f477b8edac2b6958b5ee9401184bd09bc555.jpg",
+        // "https://image.octmami.com/public/images/d2/98/42/3a589c8aaddbb509addb0ec2f4c048f3e7e8085c.jpg",
+        // "https://image.octmami.com/public/images/7e/ee/65/9293f477b8edac2b6958b5ee9401184bd09bc555.jpg",
       ],
       //默认图片
       cover: "/images/my.png",
@@ -99,12 +99,12 @@ Page({
       modelId:'',
       // 图片地址
       imgurl: "https://image.octmami.com/public/images/7e/ee/65/9293f477b8edac2b6958b5ee9401184bd09bc555.jpg",
-      price: '10',
+      price: '',
       buyCount: 1,
       // 库存
-      stock: 10,
+      stock: 0,
       // 已选
-      models_text : '测试',
+      models_text : '',
       models:{},
     },
     // 分享相关数据
@@ -171,22 +171,48 @@ Page({
       });
       return;
     }
-    var that = this,
-      param = {
-        goodsId: this.data.goodsId,
-        num: this.data.selectModelInfo.buyCount,
-        specId: this.data.selectModelInfo.modelId
-      };
-    // 发送添加到购物车的请求
-    wx.request({
-      url: app.globalData.host+'/goods/set-cart',
-      data: param,
-      success: function (res) {
-        wx.showToast({
-          title: '添加成功'
-        })
+    var that = this;
+    var cartData = {
+      id: this.data.goodsId,
+      cover: this.data.selectModelInfo.imgurl,
+      title: this.data.goodsInfo.title,
+      model_value_str: this.data.selectModelInfo.models_text,
+      price: this.data.selectModelInfo.price,
+      num: this.data.selectModelInfo.buyCount,
+      specId: this.data.selectModelInfo.modelId,
+      specs: this.data.selectModelInfo.models,
+    };
+    // 发送数据存储购物车(暂时不存),存入本地
+    if (!wx.getStorageSync('xcx_cart_datas')){
+      wx.setStorageSync('xcx_cart_datas', [cartData]);
+    }else{
+      var haveCartData = wx.getStorageSync('xcx_cart_datas');
+      var isHave = false;
+      for(var item in haveCartData){
+        console.log(item);
+        if (haveCartData[item].id == cartData.id && haveCartData[item].specId == cartData.specId){
+          haveCartData[item].num += cartData.num;
+          isHave = true;
+        }
       }
-    });
+      if(!isHave){
+        haveCartData.push(cartData)
+      }
+      wx.setStorageSync('xcx_cart_datas', haveCartData);
+    }
+    // 发送添加到购物车的请求
+    // wx.request({
+    //   url: app.globalData.host+'/goods/set-cart',
+    //   data: cartData,
+    //   success: function (res) {
+    //     wx.showToast({
+    //       title: '添加成功'
+    //     })
+    //   }
+    // });
+    wx.showToast({
+      title: '添加成功'
+    })
     setTimeout(function () {
       that.hiddeAddToShoppingCart();
     }, 1000);
@@ -200,7 +226,7 @@ Page({
   },
   // 立即购买下一步
   buyDirectlyNextStep: function (e) {
-    // 发送请求，跳转结算页面 previewGoodsOrder
+    // 跳转结算页面 previewGoodsOrder
     // 选择的规格
     var selectModels = this.data.selectModelInfo.models
     // 规格选择完整才能提交购物车
@@ -279,6 +305,7 @@ Page({
           var img_urls = [];
           // 主图添加到轮播
           img_urls.push(app.globalData.imgHost+res.data.info['image']);
+          that.setData({ 'selectModelInfo.imgurl': app.globalData.imgHost + res.data.info['image']})
           // 把规格图片添加到轮播
           for (var item of res.data.info['specImg']){
             img_urls.push(app.globalData.imgHost + item);
@@ -295,6 +322,7 @@ Page({
             price: res.data.info.wx_price,
             express_fee: '满80包邮',
             stock: res.data.info.stores,
+            model: res.data.info.specCheck,
           }
           var goodsParams = [];
           for(var key in res.data.attri){
@@ -312,7 +340,7 @@ Page({
           }
           that.setData({ 'goodsDetail': goodsDetail })
           that.setData({ 'goodsParams': goodsParams })
-          // that.setData({ 'goodsInfo': goodsInfo })
+          that.setData({ 'goodsInfo': goodsInfo })
         } else {
           app.showModal({ content: '没有此商品' })
         }

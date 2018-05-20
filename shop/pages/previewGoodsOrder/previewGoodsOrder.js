@@ -35,10 +35,12 @@ Page({
     original_price: '',
     totalPayment: '',// 支付金额
     orderid:'',// 订单id
+    type:'',// 如果购物车过来则为cart
   },
   onLoad: function (options) {
     // 提交的商品信息
     this.setData({goodsList: app.globalData.goodsList})
+    this.setData({type:options.type})
     // 初始化
     this.dataInitial();
   },
@@ -257,6 +259,11 @@ Page({
   // 去付款
   confirmPayment: function(e){
     var that = this
+    if (that.data.selectAddress.address_info.name == ''){
+      app.showModel({title:'缺少信息', content:'请选择收获地址'});
+      return;
+    }
+    
     wx.request({
       url: app.globalData.host + '/order/create',
       data:{
@@ -274,54 +281,74 @@ Page({
           return;
         }
         that.setData({ orderid: res.data.other.orderid})
-      }
-    })
-    return;
-    // 模拟支付结果
-    wx.request({
-      // 支付还是用线上，测试环境回调不到
-      url: 'https://api.quutuu.com/order/pay',  
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      data: {
-        openid: app.globalData.openid,
-        orderid: that.data.orderid
-      },
-      method: 'POST',
-      dataType: 'json',
-      success: function (res) {
-        console.log(res.data.other);
-        console.log('调起支付');
-        wx.requestPayment({
-          'timeStamp': res.data.other.timeStamp,
-          'nonceStr': res.data.other.nonceStr,
-          'package': res.data.other.package,
-          'signType': 'MD5',
-          'paySign': res.data.other.paySign,
-          'success': function (res) {
-            console.log('success');
-            wx.showToast({
-              title: '支付成功',
-              icon: 'success',
-              duration: 3000
+        // 模拟支付结果
+        wx.request({
+          // 支付还是用线上，测试环境回调不到
+          url: 'https://api.quutuu.com/order/pay',
+          header: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          data: {
+            openid: app.globalData.openid,
+            orderid: that.data.orderid
+          },
+          method: 'POST',
+          dataType: 'json',
+          success: function (res) {
+            console.log(res.data.other);
+            console.log('调起支付');
+            wx.requestPayment({
+              'timeStamp': res.data.other.timeStamp,
+              'nonceStr': res.data.other.nonceStr,
+              'package': res.data.other.package,
+              'signType': 'MD5',
+              'paySign': res.data.other.paySign,
+              'success': function (res) {
+                console.log('success');
+                wx.showToast({
+                  title: '支付成功',
+                  icon: 'success',
+                  duration: 3000
+                });
+                if(that.data.type == 'cart'){
+                  // 删除购物车以提交的商品
+                  var cartGoods = wx.getStorageSync('xcx_cart_datas')
+                  if(cartGoods.length == that.data.goodsList.length){
+                    wx.setStorageSync('xcx_cart_datas', [])
+                  }else{
+                    for (var key in that.data.goodsList){
+                      for (var kk in cartGoods){
+                        if (that.data.goodsList[key].id == cartGoods[kk].id){
+                          cartGoods.splice(kk, 1);
+                        }
+                      }
+                    }
+                    wx.setStorageSync('xcx_cart_datas', cartGoods)
+                  }
+                }
+                
+                // 计算赠送的积分  
+                var integral = parseInt(that.data.totalPayment);
+                var orderid = that.data.orderid;
+                //成功
+                var pagePath = '/pages/goodsOrderPaySuccess/goodsOrderPaySuccess?integral=' + integral+'&orderid='+orderid;
+                app.turnToPage(pagePath, 1);
+              },
+              'fail': function (res) {
+                console.log(res);
+              },
+              'complete': function (res) {
+                console.log('complete');
+              }
             });
           },
-          'fail': function (res) {
-            console.log('fail');
-          },
-          'complete': function (res) {
-            console.log('complete');
+          fail: function (res) {
+            console.log(res.data)
           }
         });
-      },
-      fail: function (res) {
-        console.log(res.data)
       }
-    }); return;
-    //成功
-    var pagePath = '/pages/goodsOrderPaySuccess/goodsOrderPaySuccess';
-    app.turnToPage(pagePath, 1);
+    })
+    
   },
   // 使用积分
   useBalanceChange: function(e){

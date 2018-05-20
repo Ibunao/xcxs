@@ -37,12 +37,14 @@ App({
     }else{
       this.globalData.openid = wx.getStorageSync('xcx_openid')
     }
+    if (wx.getStorageSync('xcx_cart_datas')){
+      // 给购物车增加小红标志
+      wx.setTabBarBadge({
+        index: 1,
+        text: ''+wx.getStorageSync('xcx_cart_datas').length
+      })
+    }
     
-    // 给购物车增加小红标志
-    wx.setTabBarBadge({
-      index: 1,
-      text: '6'
-    })
   },
   // 返回上一页
   turnBack: function (options) {

@@ -67,7 +67,7 @@ var pageData = {
           } 
         }, 
         // 显示的列表 "myAddress", "myOrder", "shoppingCart", "myMessage", "vipCard", "coupon", "myIntegral", "balance", "myGroup", "winningRecord"
-        "appendComponent": ["myAddress", "myIntegral"] 
+        "appendComponent": ["myIntegral"] 
       }, 
       "animations": [], 
       "page_form": "", 

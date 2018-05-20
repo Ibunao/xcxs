@@ -12,20 +12,20 @@ Page({
     priceToPay: 0.00,
     // 商品列表
     goodsList: [
-      {
+      // {
         // 商品id
-        id:1,
-        selected:true,
-        editSelected:true,
-        cover:"https://image.octmami.com/public/images/7e/ee/65/9293f477b8edac2b6958b5ee9401184bd09bc555.jpg",
-        title:"测试商品",
-        model_value_str:"测试",
-        price:198,
-        num:5,
-      },
+        // id:1,
+        // selected:true,
+        // editSelected:true,
+        // cover:"https://image.octmami.com/public/images/7e/ee/65/9293f477b8edac2b6958b5ee9401184bd09bc555.jpg",
+        // title:"测试商品",
+        // model_value_str:"测试",
+        // price:198,
+        // num:5,
+      // },
     ],
     // 是否选中所有
-    selectAll: false,
+    selectAll: true,
     // 编辑状态下选中所有
     editSelectAll: false,
 
@@ -38,40 +38,30 @@ Page({
     this.getShoppingCartData();
   },
   onShow: function(){
+    // 进入购物车页面，取消红点
+    wx.removeTabBarBadge({ index: 1 });
+    // 获取购物车商品数据
+    this.getShoppingCartData();
   },
   // 获取购物车商品
   getShoppingCartData: function(){
     var that = this;
-
-    // 模拟数据
-
-    // 获取购物车商品列表
-    // app.sendRequest({
-    //   url: '/index.php?r=AppShop/cartList',
-    //   data: {
-    //     page: 1,
-    //     page_size: 1000,
-    //     sub_shop_app_id: fromUserCenterEle ? '' : franchiseeId,
-    //     parent_shop_app_id: franchiseeId ? app.getAppId() : ''
-    //   },
-    //   success: function(res){
-    //     for (var i = res.data.length - 1; i >= 0; i--) {
-    //       var modelArr = res.data[i].model_value;
-
-    //       if(modelArr && modelArr.join){
-    //         res.data[i].model_value_str = '('+modelArr.join('|')+')';
-    //       }
-    //     }
-    //     that.setData({
-    //       takeoutInfo: res.take_out_info,
-    //       goodsCount: res.data.length,
-    //       goodsList: res.data
-    //     });
-    //     that.clickSelectAll();
-    //     that.getTostoreNotBusinessTime();
-    //     that.recalculateCountPrice();
-    //   }
-    // })
+    var cartDatas = [];
+    if (wx.getStorageSync('xcx_cart_datas')){
+      cartDatas = wx.getStorageSync('xcx_cart_datas');
+    }
+    
+    for(var key in cartDatas){
+      cartDatas[key]['selected'] = true;
+      cartDatas[key]['editSelected'] = true;
+      if (cartDatas[key]['title'].length > 8){
+        cartDatas[key]['title'] = cartDatas[key]['title'].substr(0, 8)+'...';
+      }
+      
+    }
+    that.setData({ goodsList:cartDatas});
+    // 重新计算勾选价格
+    this.recalculateCountPrice();
   },
   // 编辑按钮
   switchToEdit: function(){
@@ -119,45 +109,6 @@ Page({
     var that = this;
     //模拟执行
     sucfn();
-
-    // 请求检查
-    // app.sendRequest({
-    //   url: '/index.php?r=AppShop/precheckShoppingCart',
-    //   method: 'post',
-    //   data: {
-    //     sub_shop_app_id: that.franchiseeId,
-    //     cart_arr: payIdArr || '',
-    //     parent_shop_app_id: that.franchiseeId ? app.getAppId() : ''
-    //   },
-    //   success: function (res) {
-    //     sucfn && sucfn();
-    //   },
-    //   successStatusAbnormal: function(res){
-    //     app.showModal({
-    //       content: res.data
-    //     });
-    //     if(res.status == 1){
-    //       var goodsId = res.expired_goods_arr || [],
-    //           list = that.data.goodsList;
-    //       if (goodsId && goodsId.length){
-    //         for (var i = 0; i < goodsId.length; i++) {
-    //           var id = goodsId[i].goods_id;
-    //           for (var j = list.length - 1; j >= 0; j--) {
-    //             if (id == list[j].goods_id) {
-    //               list[j].selected = false;
-    //             }
-    //           };
-    //         }
-    //         that.setData({
-    //           selectAll: false,
-    //           goodsList: list,
-    //           notBussinessTimeGoodId: goodsId
-    //         })
-    //         that.recalculateCountPrice();   
-    //       }
-    //     }
-    //   }
-    // })
   },
   // 编辑状态的全选
   clickEditSelectAll: function(){
@@ -206,8 +157,8 @@ Page({
     var index = e.currentTarget.dataset.index,
         list = this.data.goodsList,
         editSelectAll = true;
-
     for (var i = list.length - 1; i >= 0; i--) {
+      console.log(list[i].id,index)
       if (list[i].id == index) {
         list[i].editSelected = !list[i].editSelected;
       }
@@ -255,32 +206,18 @@ Page({
       }
     }
     if(!deleteIdArr.length) { return; }
-    // 模拟删除
+    // 本地存储删除  
+    wx.setStorageSync('xcx_cart_datas', listExcludeDelete);
+    
     that.setData({
       goodsList: listExcludeDelete,
       goodsCount: listExcludeDelete.length
     })
-    // 请求删除勾选的商品
-    // app.sendRequest({
-    //   url : '/index.php?r=AppShop/deleteCart',
-    //   method: 'post',
-    //   data: {
-    //     cart_id_arr: deleteIdArr,
-    //     sub_shop_app_id: fromUserCenterEle ? '' : franchiseeId
-    //   },
-    //   success: function(res){
-    //     that.setData({
-    //       goodsList: listExcludeDelete,
-    //       goodsCount: listExcludeDelete.length
-    //     })
-    //   }
-    // });
   },
   // 结算
   goToPay: function(e){
-    var payIdArr = [],
+    var payGoodsArr = [],
         list = this.data.goodsList,
-        selectGoodsType = '',
         cartIdArray = [],
         that = this;
 
@@ -288,23 +225,20 @@ Page({
       var li = list[i];
       if(li.selected){
         cartIdArray.push(li.id);
-        payIdArr.push({
-          goods_id: li.id,
-          num: li.num,
-        });
+        payGoodsArr.push(li);
       }
     }
 
-    if(!payIdArr.length) {
+    if (!payGoodsArr.length) {
       app.showModal({
         content: '请选择结算的商品'
       });
       return;
     }
-
+    app.globalData.goodsList = payGoodsArr;
     // 跳转到结算页
-    that.getTostoreNotBusinessTime(payIdArr , function() {
-        var pagePath = '/pages/previewGoodsOrder/previewGoodsOrder?cart_arr='+encodeURIComponent(cartIdArray);
+    that.getTostoreNotBusinessTime(payGoodsArr , function() {
+        var pagePath = '/pages/previewGoodsOrder/previewGoodsOrder?type='+'cart';
         app.turnToPage(pagePath);
     });
 
@@ -318,34 +252,27 @@ Page({
       deleteId = index,
       that = this;
     for (var i = list.length - 1; i >= 0; i--) {
+
       if (list[i].id == index) {
         num = list[i].num;
+        if (num - 1 <= 0) {
+          app.showModal({
+            content: '确定从购物车删除该商品？',
+            showCancel: true,
+            confirm: function () {
+              // 本地存储更新
+              list.splice(i,1)
+              console.log(list, 1, that)
+              wx.setStorageSync('xcx_cart_datas', list);
+              that.setData({goodsList: list})
+              that.recalculateCountPrice()
+            }
+          })
+          return;
+        }
       }
     }
-    if(num-1 <= 0){
-      app.showModal({
-        content: '确定从购物车删除该商品？',
-        showCancel: true,
-        confirm: function () {
-          // 请求
-          // app.sendRequest({
-          //   url: '/index.php?r=AppShop/deleteCart',
-          //   method: 'post',
-          //   data: {
-          //     cart_id_arr: [deleteId],
-          //     sub_shop_app_id: fromUserCenterEle ? '' : franchiseeId
-          //   },
-          //   success: function (res) {
-          //     that.setData({
-          //       selectAll:false
-          //     });
-          //     that.getShoppingCartData();
-          //   }
-          // });
-        }
-      })
-      return;
-    }
+    
     this.changeGoodsNum(index, 'minus');
   },
   // 增加按钮
@@ -355,49 +282,27 @@ Page({
   },
   // 改变数量
   changeGoodsNum: function(index, type){
-    var list = this.data.goodsList,
-      goods = null;
-    
+    var list = this.data.goodsList;
+    var goods = null;
     for (var i = list.length - 1; i >= 0; i--) {
       if (list[i].id == index) {
-        goods= list[i];
+        goods = list[i];
+        goods.num = type == 'plus' ? goods.num + 1 : goods.num - 1
       }
     }
-    var currentNum = +goods.num,
-        targetNum = type == 'plus' ? currentNum + 1 : currentNum - 1,
-        that = this,
-        data = {},
-        param;
-    if (targetNum > goods.stock ){
-      app.showModal({
-        content: '库存不足'
-      });
-      return;
-    }
+    console.log(goods, index)
 
-    param = {
-      goods_id: goods.goods_id,
-      model_id: goods.model_id || '',
-      num: targetNum,
-      sub_shop_app_id: this.franchiseeId,
-      is_seckill : goods.is_seckill == 1 ? 1 : ''
-    };
-    // 发送请求
-    // app.sendRequest({
-    //   url: '/index.php?r=AppShop/addCart',
-    //   data: param,
-    //   success: function (res) {
-    //     data = {};
-    //     data['goodsList[' + index + '].num'] = targetNum;
-    //     that.setData(data);
-    //     that.recalculateCountPrice();
-    //   },
-    //   successStatusAbnormal: function(res){
-    //     app.showModal({
-    //       content: res.data
-    //     })
-    //   }
-    // })
+    // 没传库存，先不用管，暂时不重要
+    // if (goods.num > goods.stock ){
+    //   app.showModal({
+    //     content: '库存不足'
+    //   });
+    //   return;
+    // }
+    this.setData({ goodsList: list});
+    // 本地存储更新
+    wx.setStorageSync('xcx_cart_datas', list);
+    this.recalculateCountPrice();
   },
   inputGoodsCount: function(e){
     let index = e.target.dataset.index,
