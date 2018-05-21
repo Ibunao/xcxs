@@ -305,7 +305,8 @@ Page({
           var img_urls = [];
           // 主图添加到轮播
           img_urls.push(app.globalData.imgHost+res.data.info['image']);
-          that.setData({ 'selectModelInfo.imgurl': app.globalData.imgHost + res.data.info['image']})
+          // 初始化立即后买/加入购物车的小弹窗数据
+          that.setData({ 'selectModelInfo.imgurl': app.globalData.imgHost + res.data.info['image'], 'selectModelInfo.stock': res.data.info.stores,'selectModelInfo.price': res.data.info.wx_price})
           // 把规格图片添加到轮播
           for (var item of res.data.info['specImg']){
             img_urls.push(app.globalData.imgHost + item);
