@@ -2,6 +2,10 @@ var app = getApp();
 
 var pageData = {
   data: { 
+    'daifu':'',
+    'daifa':8,
+    'daishou':'',
+    'daiping':'',
     "user_center":{ 
       "type": "user-center", 
       "content": "", 
@@ -83,6 +87,7 @@ var pageData = {
     }
   },
   onLoad: function (e) {
+    var that = this;
     if (wx.getStorageSync('xcx_user_info')){
       app.globalData.userInfo = wx.getStorageSync('xcx_user_info');
       // this.data.userInfo.cover_thumb = app.globalData.userInfo.avatarUrl;
@@ -90,6 +95,17 @@ var pageData = {
       this.setData({
         'userInfo.cover_thumb': app.globalData.userInfo.avatarUrl,
         'userInfo.nickname': app.globalData.userInfo.nickName
+      });
+      // 查询订单情况  
+      wx.request({
+        url: app.globalData.host +'/order/condition',
+        data: {
+          openid: wx.getStorageSync('xcx_openid')
+        },
+        success: function (res) {
+          var data = res.data.other;
+          that.setData({ daifa: data.daifa, daifu: data.daifu, daishou: data.daishou, daiping: data.daiping})
+        }
       })
     }
   },
@@ -210,6 +226,10 @@ var pageData = {
   // 跳转
   userCenterTurnToPage:function(event) {
 
+  },
+  orderInfo:function(event){
+    var type = event.target.dataset.index;
+    
   }
 };
 Page(pageData);

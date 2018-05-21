@@ -107,6 +107,7 @@ Page({
           for(var i of res.data) {
             resp.push({
               "url": "../goodsDetail/goodsDetail?id=" + i.id,
+              'id': i.id,
               "image": app.globalData.imgHost+i.image,
               "price": i.wx_price,
               "name": i.name,

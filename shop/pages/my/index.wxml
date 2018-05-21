@@ -9,23 +9,23 @@
       </view>
       <view class="horizontal-view">
         <view class="horizontal-router-container1">
-          <view catchtap="userCenterTurnToPage" data-router="/pages/myOrder/myOrder" style="margin-top: -1px"
+          <view data-router="/pages/myOrder/myOrder" style="margin-top: -1px"
             class="orderTypeStyle">
             <view class="myorderSubmenu" data-index="0">
               <text data-index="0">我的订单</text>
               <label class="ico-moon icon-rightarrow" data-index="0"></label>
             </view>
             <view class="orderSubmenu">
-              <view data-index="1">
+              <view data-index="1" bindtap='orderInfo'>
                 <text class="ico-moon icon-pendingPayment" data-index="1"></text>
-                <view class="countStatusOrder">{{ 1 }}</view>待付款</view>
-              <view data-index="2">
+                <view class="{{daifu?countStatusOrder:''}}">{{ daifu }}</view>待付款</view>
+              <view data-index="2" bindtap='orderInfo'>
                 <text class="ico-moon icon-beDelivered" data-index="2"></text>
-                <view class="countStatusOrder">{{ 0 }}</view>待发货</view>
-              <view data-index="3">
+                <view class="{{daifu?countStatusOrder:''}}">{{ daifu }}</view>待发货</view>
+              <view data-index="3" bindtap='orderInfo'>
                 <text class="ico-moon icon-beReceived" data-index="3"></text>
-                <view class="countStatusOrder">{{ 2 }}</view>待收货</view>
-              <view data-index="4">
+                <view class="countStatusOrder">{{ ''+daifa }}</view>待收货</view>
+              <view data-index="4" bindtap='orderInfo'>
                 <text class="ico-moon icon-beEvaluated" data-index="4"></text>
                 <view class=""></view>待评价</view>
             </view>
