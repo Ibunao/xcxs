@@ -24,7 +24,7 @@
                 <view class="{{daifu?countStatusOrder:''}}">{{ daifu }}</view>待发货</view>
               <view data-index="3" bindtap='orderInfo'>
                 <text class="ico-moon icon-beReceived" data-index="3"></text>
-                <view class="countStatusOrder">{{ ''+daifa }}</view>待收货</view>
+                <view data-index="{{daifa}}" class="countStatusOrder">{{ userInfo2.daifa }}</view>待收货</view>
               <view data-index="4" bindtap='orderInfo'>
                 <text class="ico-moon icon-beEvaluated" data-index="4"></text>
                 <view class=""></view>待评价</view>

@@ -8,32 +8,7 @@ App({
     // })
     // 如果没登陆过进行登陆
     if (!wx.getStorageSync('xcx_openid')){
-      // 登录
-      wx.login({
-        success: res => {
-          // 发送 res.code 到后台换取 openId, sessionKey, unionId
-          console.log(res);
-          if (res.code) {
-            //发起网络请求, 获取openid、unionid
-            wx.request({
-              url: this.globalData.host + '/xcx/index',
-              data: {
-                code: res.code
-              },
-              success: function (res) {
-                console.log(res);
-                // 存储openid
-                if(res.data.code == 200){
-                  getApp().globalData.openid = res.data.openid
-                  wx.setStorageSync('xcx_openid', res.data.openid)
-                }
-              }
-            })
-          } else {
-            console.log('登录失败！' + res.errMsg)
-          }
-        }
-      })
+      this.login();
     }else{
       this.globalData.openid = wx.getStorageSync('xcx_openid')
     }
@@ -45,6 +20,34 @@ App({
       })
     }
     
+  },
+  login:function(){
+    // 登录
+    wx.login({
+      success: res => {
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log(res);
+        if (res.code) {
+          //发起网络请求, 获取openid、unionid
+          wx.request({
+            url: this.globalData.host + '/xcx/index',
+            data: {
+              code: res.code
+            },
+            success: function (res) {
+              console.log(res);
+              // 存储openid
+              if (res.data.code == 200) {
+                getApp().globalData.openid = res.data.openid
+                wx.setStorageSync('xcx_openid', res.data.openid)
+              }
+            }
+          })
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    })
   },
   // 返回上一页
   turnBack: function (options) {
@@ -135,6 +138,17 @@ App({
   },
   // 获取用户数据
   getUserInfo: function(func){
+    var that = this
+    // 检查sessionkey是否失效  
+    wx.checkSession({
+      success: function () {
+        //session_key 未过期，并且在本生命周期一直有效
+      },
+      fail: function () {
+        // session_key 已经失效，需要重新执行登录流程
+        that.login() //重新登录
+      }
+    })
     wx.getSetting({
       success: res => {
         // 如果已经授权，可以直接获取使用相应的权限获取数据，而不用弹窗
@@ -148,7 +162,7 @@ App({
               var province = userInfo.province
               var city = userInfo.city
               var country = userInfo.country
-              func(res.userInfo)
+              func(res)
             },
           })
         }else{
@@ -166,7 +180,7 @@ App({
                   var province = userInfo.province
                   var city = userInfo.city
                   var country = userInfo.country
-                  func(res.userInfo)
+                  func(res)
                 },
                 
               })
@@ -183,7 +197,7 @@ App({
                       var province = userInfo.province
                       var city = userInfo.city
                       var country = userInfo.country
-                      func(res.userInfo)
+                      func(res)
                     },
                   })
                 }
