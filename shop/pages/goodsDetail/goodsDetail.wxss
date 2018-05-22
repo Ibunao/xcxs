@@ -4,6 +4,24 @@ page {
 button{
   padding-left:16rpx;
 }
+.ding{
+  display:inline-block;
+  margin-left:auto;
+  margin-right:auto;
+  padding-left:14px;
+  padding-right:14px;
+  box-sizing:border-box;
+  border: 0px solid white;
+  font-size:18px;
+  text-align:center;
+  text-decoration:none;
+  line-height:1;
+  border-radius:5px;
+  -webkit-tap-highlight-color:transparent;
+  overflow:hidden;
+  color:#000000;
+
+}
 .page-dialog-wrap {
   position: fixed;
   left: 0;

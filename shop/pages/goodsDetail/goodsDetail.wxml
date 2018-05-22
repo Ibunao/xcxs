@@ -113,11 +113,12 @@
       <view class="flex-sub-box-3">
         <view class="goods-opt-item flex-sub-box-2">
         <!--客服按钮  -->
-          <view class="ico-moon icon-service2">
-            <button open-type="contact" size="20" session-from="goodsDetail" />
+
+          <button  open-type="contact" class='ding' session-from="goodsDetail" >
+          <text class="ico-moon icon-service2"></text>
+            <view>客服</view>
             <!-- <contact-button type="default-dark" size="20" session-from="goodsDetail"></contact-button> -->
-          </view>
-          <view>客服</view>
+          </button>
         </view>
         <view class="goods-opt-item flex-sub-box-2" bindtap="goCartpage">
           <text class="ico-moon icon-shoppingcart"></text>
