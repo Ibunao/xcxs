@@ -267,10 +267,10 @@ App({
       "/pages/cart/index",
     ],
     userInfo: null,
-    // host: 'https://api.quutuu.com',
+    host: 'https://api.quutuu.com',
     // host: 'http://api.zbshop.com',
     // home
-    host: 'http://api.shop.com',
+    // host: 'http://api.shop.com',
     imgHost: 'http://admin.quutuu.com',
     openid:null,
     unionid:null,
