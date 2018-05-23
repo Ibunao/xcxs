@@ -82,8 +82,10 @@ var pageData = {
       // 用户名
       nickname:"点击登陆",
     },
-    "userInfo2":{
-      'daifa': '8',
+    "dai":{
+      // 代付款先不做
+      'daifu': '',
+      'daifa': '',
       'daishou': '',
       'daiping': '',
     }
@@ -99,18 +101,18 @@ var pageData = {
         'userInfo.cover_thumb': app.globalData.userInfo.avatarUrl,
         'userInfo.nickname': app.globalData.userInfo.nickName
       });
-      // 查询订单情况  
-      wx.request({
-        url: app.globalData.host +'/order/condition',
-        data: {
-          openid: wx.getStorageSync('xcx_openid')
-        },
-        success: function (res) {
-          var data = res.data.other;
-          // that.setData({ daifa: data.daifa, daifu: data.daifu, daishou: data.daishou, daiping: data.daiping})
-        }
-      })
     }
+    // 查询订单情况  
+    wx.request({
+      url: app.globalData.host + '/order/condition',
+      data: {
+        openid: wx.getStorageSync('xcx_openid')
+      },
+      success: function (res) {
+        var data = res.data.other;
+        that.setData({ 'dai.daifa': data.daifa, ' dai.daifu': data.daifu, 'dai.daishou': data.daishou, 'dai.daiping': data.daiping })
+      }
+    })
   },
 
   onShow: function () {
@@ -122,10 +124,19 @@ var pageData = {
   },
   // 检查登陆、登陆
   userCenterUserInfo: function (event) {
+    var that = this;
+    console.log(that)
     if (!wx.getStorageSync('xcx_user_info')){
-      var that = this;
+      
       app.getUserInfo(function (resp) {
         console.log(resp)
+        app.globalData.userInfo = resp
+        wx.setStorageSync('xcx_user_info', resp.userInfo)
+        console.log(that.userInfo)
+        that.setData({
+          'userInfo.cover_thumb': app.globalData.userInfo.avatarUrl,
+          'userInfo.nickname': app.globalData.userInfo.nickName
+        })
         resp.openid = wx.getStorageSync('xcx_openid')
         // 传递给后台
         wx.request({
@@ -146,12 +157,7 @@ var pageData = {
             console.log(res);
             // 存储openid
             if (res.data.code == 200) {
-              app.globalData.userInfo = resp
-              wx.setStorageSync('xcx_user_info', resp.userInfo)
-              that.setData({
-                'userInfo.cover_thumb': app.globalData.userInfo.avatarUrl,
-                'userInfo.nickname': app.globalData.userInfo.nickName
-              })
+              
             }
           }
         })
@@ -230,7 +236,8 @@ var pageData = {
   },
   orderInfo:function(event){
     var type = event.target.dataset.index;
-    
+    let pagePath = '/pages/goodsOrderDetail/goodsOrderDetail?type='+type;
+    app.turnToPage(pagePath, true);
   }
 };
 Page(pageData);

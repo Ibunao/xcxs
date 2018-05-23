@@ -22,7 +22,8 @@ Page({
   // 获取订单详情
   goToOrderDetail: function(){
     let that = this;
-    let pagePath = '/pages/goodsOrderDetail/goodsOrderDetail?orderid=' + that.data.orderId; 
+    // let pagePath = '/pages/goodsOrderDetail/goodsOrderDetail?orderid=' + that.data.orderId; 
+    let pagePath = '/pages/goodsOrderDetail/goodsOrderDetail?type=daifa'; 
     app.turnToPage(pagePath, true);
   }
 })

@@ -103,7 +103,7 @@
         <!--如果是图片，显示图片  -->
         <block wx:if="{{goodsDetail.isImg}}">
           <block wx:for="{{goodsDetail.detailImgs}}" wx:key>
-            <image src='{{item}}'></image>
+            <image mode="widthFix" src='{{item}}'></image>
           </block>
         </block>
       </view>
