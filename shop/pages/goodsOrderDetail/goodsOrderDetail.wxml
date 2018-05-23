@@ -1,2 +1,26 @@
-<!--pages/goodsOrderDetail/goodsOrderDetail.wxml-->
-<text>pages/goodsOrderDetail/goodsOrderDetail.wxml</text>
+<wxs module="m1">
+var msg = "hello world";
+var substr = function(str){
+  // wxs 没有substr 方法
+  return str.substr(0, 8)+'...'
+}
+module.exports.substr = substr;
+</wxs>
+<view class="shoppingCart-goods-list">
+  <view wx:for="{{ goodsList }}" wx:for-item="goodsItems" wx:key="" style="position:relative; overflow:hidden;" class='container'>
+  <view>
+  订单号： <text style='color: red;'>{{goodsItems.order_id}}</text>
+  </view>
+  <text style='font-size:24rpx;'>地址： {{goodsItems.address}}</text>
+    <view class="shoppingCart-goods-content" wx:for="{{goodsItems.items}}" wx:for-item="goods" wx:key="" >
+      <image class="shoppingCart-goods-cover" src="{{ 'http://admin.quutuu.com'+ goods.image }}"></image>
+      <view class="shoppingCart-goods-title">{{ goods.name }}</view>
+      <view class="shoppingCart-goods-model" >{{ goods.specvalue }}</view>
+
+      <view class="shoppingCart-goods-price">价格
+        <text>¥{{ goods.price }}</text>
+      </view>
+    </view>
+  <text style='font-size:30rpx; margin-top:25rpx;'>支付金额： {{goodsItems.pay_price}}</text>
+  </view>
+</view>

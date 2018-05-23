@@ -237,7 +237,7 @@ var pageData = {
   orderInfo:function(event){
     var type = event.target.dataset.index;
     let pagePath = '/pages/goodsOrderDetail/goodsOrderDetail?type='+type;
-    app.turnToPage(pagePath, true);
+    app.turnToPage(pagePath);
   }
 };
 Page(pageData);

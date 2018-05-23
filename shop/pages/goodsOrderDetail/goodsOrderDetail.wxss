@@ -1,1 +1,44 @@
-/* pages/goodsOrderDetail/goodsOrderDetail.wxss */
+
+.shoppingCart-goods-list {
+  background-color: #fff;
+  margin-bottom: 0.625rem;
+}
+.shoppingCart-goods-list:last-child {
+  margin-bottom: 0;
+}
+.shoppingCart-goods-list > view {
+  position: relative;
+  border-bottom:1px solid #e5e5e5;
+}
+.shoppingCart-goods-list > view:first-child{
+  border-top:1px solid #e5e5e5;
+}
+.shoppingCart-goods-content {
+  padding:20rpx 20rpx 20rpx 0;
+  height:190rpx;
+}
+.shoppingCart-goods-cover {
+  float:left;
+  width:150rpx;
+  height:150rpx;
+  margin-right:22rpx;
+}
+.shoppingCart-goods-price {
+  color: #ff7223;
+  font-size: 26rpx;
+  margin-top: 6rpx;
+  line-height: 1.3em;
+}
+.shoppingCart-goods-title{
+  font-size:35rpx;
+}
+.shoppingCart-goods-model {
+  margin-top: 6rpx;
+  color: #818181;
+  font-size: 24rpx;
+  line-height: 1.3em;
+}
+.container{
+  padding: 30rpx 20rpx 30rpx 20rpx;
+
+}

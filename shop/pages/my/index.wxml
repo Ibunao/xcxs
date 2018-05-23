@@ -17,16 +17,16 @@
             </view>
             <view class="orderSubmenu">
               <view data-index="daifu" bindtap='orderInfo'>
-                <text class="ico-moon icon-pendingPayment" data-index="1"></text>
+                <text class="ico-moon icon-pendingPayment" data-index="daifu"></text>
                 <view class="{{dai.daifu>0?'countStatusOrder':''}}">{{ dai.daifu?dai.daifu:'' }}</view>待付款</view>
               <view data-index="daifa" bindtap='orderInfo'>
-                <text class="ico-moon icon-beDelivered" data-index="2"></text>
+                <text class="ico-moon icon-beDelivered" data-index="daifa"></text>
                 <view class="{{dai.daifa ? 'countStatusOrder':''}}">{{ dai.daifa?dai.daifa:'' }}</view>待发货</view>
               <view data-index="daishou" bindtap='orderInfo'>
-                <text class="ico-moon icon-beReceived" data-index="3"></text>
+                <text class="ico-moon icon-beReceived" data-index="daishou"></text>
                 <view class="{{dai.daishou?'countStatusOrder':''}}">{{ dai.daishou?dai.daishou:'' }}</view>待收货</view>
               <view data-index="daiping" bindtap='orderInfo'>
-                <text class="ico-moon icon-beEvaluated" data-index="4"></text>
+                <text class="ico-moon icon-beEvaluated" data-index="daiping"></text>
                 <view class="{{dai.daiping?'countStatusOrder':''}}">{{ dai.daiping?dai.daiping:'' }}</view>待评价</view>
             </view>
           </view>
