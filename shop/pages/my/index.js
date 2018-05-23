@@ -2,10 +2,6 @@ var app = getApp();
 
 var pageData = {
   data: { 
-    'daifu':'',
-    'daifa':8,
-    'daishou':'',
-    'daiping':'',
     "user_center":{ 
       "type": "user-center", 
       "content": "", 
@@ -68,7 +64,7 @@ var pageData = {
           "myVideo": { 
             "margin-top": "-1px", 
             "openVerifyPhone": false 
-          } 
+          }
         }, 
         // 显示的列表 "myAddress", "myOrder", "shoppingCart", "myMessage", "vipCard", "coupon", "myIntegral", "balance", "myGroup", "winningRecord"
         "appendComponent": ["myIntegral"] 
@@ -76,7 +72,8 @@ var pageData = {
       "animations": [], 
       "page_form": "", 
       "compId": "user_center1", 
-      "parentCompid": "user_center1" 
+      "parentCompid": "user_center1",
+      
     }, 
     // 用户信息
     "userInfo":{
@@ -84,7 +81,13 @@ var pageData = {
       cover_thumb:"",
       // 用户名
       nickname:"点击登陆",
+    },
+    "userInfo2":{
+      'daifa': '8',
+      'daishou': '',
+      'daiping': '',
     }
+    
   },
   onLoad: function (e) {
     var that = this;
@@ -104,7 +107,7 @@ var pageData = {
         },
         success: function (res) {
           var data = res.data.other;
-          that.setData({ daifa: data.daifa, daifu: data.daifu, daishou: data.daishou, daiping: data.daiping})
+          // that.setData({ daifa: data.daifa, daifu: data.daifu, daishou: data.daishou, daiping: data.daiping})
         }
       })
     }
@@ -123,19 +126,17 @@ var pageData = {
       var that = this;
       app.getUserInfo(function (resp) {
         console.log(resp)
+        resp.openid = wx.getStorageSync('xcx_openid')
         // 传递给后台
         wx.request({
           url: app.globalData.host + '/xcx/save-user-info',
           data: {
-            nickName: resp.nickName,
-            avatarUrl: resp.avatarUrl,
-            city: resp.city,
-            country: resp.country,
-            gender: resp.gender,
-            language: resp.language,
-            province: resp.province,
-            openid: app.globalData.openid,
-            unionid: app.globalData.unionid
+            openid:resp.openid,
+            userInfo: resp.userInfo,
+            rawData: resp.rawData,
+            signature: resp.signature,
+            encryptedData: resp.encryptedData,
+            iv: resp.iv
           },
           method: "POST",
           header: {
@@ -146,7 +147,7 @@ var pageData = {
             // 存储openid
             if (res.data.code == 200) {
               app.globalData.userInfo = resp
-              wx.setStorageSync('xcx_user_info', resp)
+              wx.setStorageSync('xcx_user_info', resp.userInfo)
               that.setData({
                 'userInfo.cover_thumb': app.globalData.userInfo.avatarUrl,
                 'userInfo.nickname': app.globalData.userInfo.nickName
