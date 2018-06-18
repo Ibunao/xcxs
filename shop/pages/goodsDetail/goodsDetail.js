@@ -448,7 +448,7 @@ Page({
     that.setData({shareShow: false})
     return {
       title: that.data.goodsInfo.title,
-      path: '/pages/goodsDetail?id=' + that.data.goodsId,//路径
+      path: '/pages/goodsDetail/goodsDetail?id=' + that.data.goodsId,//路径
       success: function (res) {
         // 转发成功
         that.setData({ shareShow: true })

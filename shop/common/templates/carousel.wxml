@@ -1,7 +1,7 @@
 <template name="carousel">
   <swiper indicator-dots="true" circular="true" autoplay="{{data.customFeature.autoplay}}" vertical="{{data.customFeature.vertical}}" interval="{{data.customFeature.interval*1000}}" duration="750" style="{{data.style}}">
     <block wx:for="{{data.content}}" wx:key="{{this}}">
-      <swiper-item data-event-params="{{item.eventParams}}" catchtap="{{item.eventHandler}}">
+      <swiper-item data-event-params="{{item.eventParams}}" catchtap="carouselHandler">
         <image class="swiper-item" src="{{item.pic}}" />
       </swiper-item>
     </block>

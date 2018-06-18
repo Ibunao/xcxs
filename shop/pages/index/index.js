@@ -15,9 +15,13 @@ Page({
       content: [
         // {
         //   "pic": "http://img.weiye.me/zcimgdir/album/file_5966e5a206bec.png",
+        //   eventParams:1,
+        //   eventHandler: 'carouselHandler'
         // },
         // {
         //   "pic": "http://img.weiye.me/zcimgdir/album/file_5966e5a206bec.png",
+        //   eventParams:2,
+        //   eventHandler:'carouselHandler'
         // }
       ],
       "customFeature": {
@@ -138,6 +142,7 @@ Page({
         }
         that.setData({
           goods: res.data.other.goods, classify: res.data.other.classify, 'carousel.content': res.data.other.carousel, groups: that.data.groups})
+        // that.setData({goods: res.data.other.goods, classify: res.data.other.classify,groups: that.data.groups})
       }
     });
     
@@ -160,4 +165,9 @@ Page({
       url: "/pages/goods/index?type=groups&value="+param
     });
   },
+  // 轮播事件  
+  carouselHandler:function(e){
+    console.log(e.currentTarget.eventParams)
+    app.turnToPage('/pages/goodsDetail/goodsDetail?id=' + e.currentTarget.eventParams)
+  }
 })
