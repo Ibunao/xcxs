@@ -167,7 +167,6 @@ Page({
   },
   // 轮播事件  
   carouselHandler:function(e){
-    console.log(e.currentTarget.eventParams)
-    app.turnToPage('/pages/goodsDetail/goodsDetail?id=' + e.currentTarget.eventParams)
+    app.turnToPage('/pages/goodsDetail/goodsDetail?id=' + e.currentTarget.dataset.eventParams)
   }
 })

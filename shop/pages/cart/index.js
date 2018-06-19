@@ -135,7 +135,7 @@ Page({
     var index = e.currentTarget.dataset.index,
         list = this.data.goodsList,
         selectAll = true;
-
+    // console.log(index, list)
     for (var i = list.length - 1; i >= 0; i--) {
       if (list[i].id == index){
         list[i].selected = !list[i].selected;
@@ -143,7 +143,7 @@ Page({
       
       if(!list[i].selected){
         selectAll = false;
-        break;
+        // break;
       }
     }
     this.setData({
