@@ -125,6 +125,7 @@ var pageData = {
   // 检查登陆、登陆
   userCenterUserInfo: function (event) {
     var that = this;
+    console.log(1);
     console.log(that)
     if (!wx.getStorageSync('xcx_user_info')){
       

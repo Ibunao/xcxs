@@ -45,7 +45,8 @@ Page({
     wx.request({
       url: app.globalData.host +'/order/daiinfo',
       data: {
-        type:type
+        type:type,
+        openid: app.globalData.openid
       },
       method: "POST",
       header: {

@@ -260,7 +260,7 @@ Page({
   confirmPayment: function(e){
     var that = this
     if (that.data.selectAddress.address_info.name == ''){
-      app.showModel({title:'缺少信息', content:'请选择收获地址'});
+      app.showModal({title:'缺少信息', content:'请选择收获地址'});
       return;
     }
     

@@ -1,4 +1,6 @@
 <view class="app">
+<!--获取用户头像的权限  -->
+<!-- <button open-type="getUserInfo">zhle</button> -->
   <template name="zcUserCenter">
     <view class="user-center usercenter-mode1 background-ele with-horizontal-view" style="opacity:1;color:rgb(255, 255, 255);margin-top:0;font-size:37.5rpx;height:auto;margin-left:auto;">
       <view class="show-view" catchtap="userCenterUserInfo" data-router="/pages/my/index" style="{{ (data.customFeature.topSectionStyle['background-image'] ? ('background-image:' + data.customFeature.topSectionStyle['background-image']) : ('background-color:' + data.customFeature.topSectionStyle['background-color']) ) + ';opacity:' + (data.customFeature.topSectionStyle.opacity || 1) }}">

@@ -164,7 +164,7 @@ Page({
       }
       if(!list[i].editSelected){
         editSelectAll = false;
-        break;
+        // break;
       }
     }
     this.setData({
