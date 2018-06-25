@@ -131,9 +131,10 @@ var pageData = {
       
       app.getUserInfo(function (resp) {
         console.log(resp)
-        app.globalData.userInfo = resp
+        app.globalData.userInfo = resp.userInfo
         wx.setStorageSync('xcx_user_info', resp.userInfo)
         console.log(that.userInfo)
+        console.log(app.globalData.userInfo.rawData)
         that.setData({
           'userInfo.cover_thumb': app.globalData.userInfo.avatarUrl,
           'userInfo.nickname': app.globalData.userInfo.nickName
