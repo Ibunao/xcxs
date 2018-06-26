@@ -1,11 +1,12 @@
 {
-  "pages":[
-    "index/index"
+  "pages": [
+    "index/index",
+    "pages/pay/pay"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F8F8F8",
     "navigationBarTitleText": "web-view",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   }
 }

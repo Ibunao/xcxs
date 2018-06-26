@@ -55,7 +55,7 @@ Page({
       success: function (res) {
         console.log(res)
         that.setData({goodsList:res.data.other})
-        if(!that.goodsList){
+        if (!res.data.other){
           wx.showToast({
             title: '没有数据',
             icon: 'success',
