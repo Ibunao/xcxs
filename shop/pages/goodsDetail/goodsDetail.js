@@ -308,20 +308,20 @@ Page({
           // 初始化立即后买/加入购物车的小弹窗数据
           that.setData({ 'selectModelInfo.imgurl': app.globalData.imgHost + res.data.info['image'], 'selectModelInfo.stock': res.data.info.stores,'selectModelInfo.price': res.data.info.wx_price})
           // 把规格图片添加到轮播
-          for (var item of res.data.info['specImg']){
-            img_urls.push(app.globalData.imgHost + item);
-          }
-          // 把其他的图片也添加进来
-          // for (var item of res.data['otherImg']) {
+          // for (var item of res.data.info['specImg']){
           //   img_urls.push(app.globalData.imgHost + item);
           // }
+          // 把其他的图片也添加进来
+          for (var item of res.data['otherImg']) {
+            img_urls.push(app.globalData.imgHost + item);
+          }
           var goodsInfo = {
             img_urls : img_urls,
             cover: '/images/goodsDefault.png',
             title: res.data.info.name,
             lowPrice: res.data.info.wx_price,
             price: res.data.info.wx_price,
-            express_fee: '满80包邮',
+            express_fee: '0',
             stock: res.data.info.stores,
             model: res.data.info.specCheck,
           }

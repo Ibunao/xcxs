@@ -39,8 +39,8 @@
   <view class="preview-goods-order-section" style="margin-bottom:1px;">商品金额 <text class="pull-right price-count">¥ {{ original_price }}</text></view>
   <view class="preview-goods-order-section" style="margin-bottom:1px;">运费 <text class="pull-right">¥ {{ express_fee }}</text></view>
   <view class="preview-goods-order-section">
-    <view class="use-balance-option"><text>使用积分 </text> <text style='color:red'>可使用积分：{{haveIntegrals}}</text><switch class="pull-right"  bindchange="useBalanceChange"/></view>
-    <view hidden="{{useIntegrals==0}}" class="select-discount-title" style="margin-top:9px;margin-bottom:-12rpx;">积分抵现 已使用积分: {{useIntegrals}}<text class="pull-right">- ¥ {{ deduction }}</text></view>
+    <view class="use-balance-option"><text>使用QTC </text> <text style='color:red'>可使用QTC：{{haveIntegrals}}</text><switch class="pull-right"  bindchange="useBalanceChange"/></view>
+    <view hidden="{{useIntegrals==0}}" class="select-discount-title" style="margin-top:9px;margin-bottom:-12rpx;">QTC抵现 已使用QTC: {{useIntegrals}}<text class="pull-right">- ¥ {{ deduction }}</text></view>
   </view>
   <view class="bottom-nav">
     <view class="preview-goods-total-price">合计: <text class="price-count">¥ {{ totalPayment }}</text></view>

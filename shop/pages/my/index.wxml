@@ -29,7 +29,7 @@
                 <view class="{{dai.daishou?'countStatusOrder':''}}">{{ dai.daishou?dai.daishou:'' }}</view>待收货</view>
               <view data-index="daiping" bindtap='orderInfo'>
                 <text class="ico-moon icon-beEvaluated" data-index="daiping"></text>
-                <view class="{{dai.daiping?'countStatusOrder':''}}">{{ dai.daiping?dai.daiping:'' }}</view>待评价</view>
+                <view class="{{dai.daiping?'countStatusOrder':''}}">{{ dai.daiping?dai.daiping:'' }}</view>已完成</view>
             </view>
           </view>
           <!--列表  -->
@@ -61,7 +61,7 @@
             </view>
             <view wx:elif="{{ item == 'myIntegral' }}" catchtap="userCenterIntegral" data-router="/userCenter/pages/myIntegral/myIntegral" data-open-verify-phone="{{ data.customFeature.appendComponentAttr['myIntegral']['openVerifyPhone'] }}" style="margin-top: {{ data.customFeature.appendComponentAttr['myIntegral']['margin-top'] }}">
               <label class="ico-moon icon-integral"></label>
-              <text>积分</text>
+              <text>QTC</text>
               <label class="ico-moon icon-rightarrow"></label>
             </view>
             <view wx:elif="{{ item == 'balance' }}" catchtap="userCenterTurnToPage" data-router="/eCommerce/pages/balance/balance" data-open-verify-phone="{{ data.customFeature.appendComponentAttr['balance']['openVerifyPhone'] }}" style="margin-top: {{ data.customFeature.appendComponentAttr['balance']['margin-top'] }}">
@@ -99,7 +99,9 @@
         </view>
       </view>
     </view>
+    <image src='/images/qtc.png' mode="widthFix" style='width:100%;'></image>
   </template>
+
   <view class="ele-container">
     <template is="zcUserCenter" data="{{data:user_center, userInfo: userInfo, dai: dai}}"></template>
   </view>

@@ -102,6 +102,11 @@ var pageData = {
         'userInfo.nickname': app.globalData.userInfo.nickName
       });
     }
+    
+  },
+
+  onShow: function () {
+    var that = this;
     // 查询订单情况  
     wx.request({
       url: app.globalData.host + '/order/condition',
@@ -113,10 +118,6 @@ var pageData = {
         that.setData({ 'dai.daifa': data.daifa, ' dai.daifu': data.daifu, 'dai.daishou': data.daishou, 'dai.daiping': data.daiping })
       }
     })
-  },
-
-  onShow: function () {
-
   },
   
   onUnload: function () {
@@ -225,8 +226,8 @@ var pageData = {
         // 存储openid
         if (res.data.code == 200) {
           app.showModal({
-            title: '积分提示',
-            content: '您的积分为 ' + res.data.other.integral
+            title: 'QTC提示',
+            content: '您的QTC为 ' + res.data.other.integral
           })
         }
       }

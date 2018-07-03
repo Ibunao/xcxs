@@ -13,11 +13,16 @@ App({
       this.globalData.openid = wx.getStorageSync('xcx_openid')
     }
     if (wx.getStorageSync('xcx_cart_datas')){
-      // 给购物车增加小红标志
-      wx.setTabBarBadge({
-        index: 1,
-        text: ''+wx.getStorageSync('xcx_cart_datas').length
-      })
+      var text = wx.getStorageSync('xcx_cart_datas').length
+      if(text != 0){
+        text = ''+text
+        // 给购物车增加小红标志
+        wx.setTabBarBadge({
+          index: 1,
+          text: text
+        })
+      }
+      
     }
     
   },

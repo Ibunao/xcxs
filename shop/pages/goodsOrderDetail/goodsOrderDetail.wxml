@@ -21,6 +21,14 @@ module.exports.substr = substr;
         <text>¥{{ goods.price }}</text>
       </view>
     </view>
+  
+  <view wx:if="{{goodsItems.ship_status != 0}}" style='font-size:24rpx;'>
+    <text style='fontSize:30px;'>物流单号：{{goodsItems.ship_no}}</text>
+    <view>
+      <text>物流公司：{{goodsItems.ship_type}}</text>
+    </view>
+  </view>
   <text style='font-size:30rpx; margin-top:25rpx;'>支付金额： {{goodsItems.pay_price}}</text>
+  <button type="primary" class='dai-buttun' data-ship = "{{goodsItems.ship_status}}" data-status="{{goodsItems.status}}" bindtap='dai_button' disabled="{{goodsItems.ship_status == 3 || goodsItems.ship_status == 5}}" data-orderid="{{goodsItems.order_id}}" plain="true">{{goodsItems.button}}</button>
   </view>
 </view>

@@ -35,7 +35,7 @@ Page({
     original_price: '',
     totalPayment: '',// 支付金额
     orderid:'',// 订单id
-    type:'',// 如果购物车过来则为cart
+    'type':'',// 如果购物车过来则为cart
   },
   onLoad: function (options) {
     // 提交的商品信息
@@ -67,11 +67,11 @@ Page({
       price += parseFloat(item.price)*parseInt(item.num)
     }
     // 满减邮费
-    if(price >= 80){
+    // if(price >= 80){
       that.setData({ express_fee:0})
-    }else{
-      that.setData({ express_fee: 5 })
-    }
+    // }else{
+    //   that.setData({ express_fee: 5 })
+    // }
     // 商品金额
     that.setData({ original_price:price})
     // 支付金额
@@ -364,10 +364,10 @@ Page({
         deduction = 0;// 积分折扣金额
       if (haveIntegrals <= totalPrice) {
         useIntegrals = haveIntegrals;
-        deduction = useIntegrals;
+        deduction = useIntegrals/10;
         totalPrice = totalPrice - deduction
       } else {
-        useIntegrals = Math.ceil(totalPrice);
+        useIntegrals = Math.ceil(totalPrice*10);
         deduction = totalPrice;
         totalPrice = totalPrice - deduction
       }

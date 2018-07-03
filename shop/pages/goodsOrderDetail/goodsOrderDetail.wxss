@@ -1,4 +1,14 @@
-
+button{
+  font-size:15px;
+  line-height:70rpx;
+  border-radius:5px;
+  -webkit-tap-highlight-color:transparent;
+  overflow:hidden;
+  color:#000000;
+  background-color:#F8F8F8;
+  float:right;
+  height:70rpx;
+}
 .shoppingCart-goods-list {
   background-color: #fff;
   margin-bottom: 0.625rem;
