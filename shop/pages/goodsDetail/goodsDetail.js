@@ -171,6 +171,13 @@ Page({
       });
       return;
     }
+    if (this.data.selectModelInfo.buyCount == 0){
+      app.showModal({
+        title: '该商品无货',
+        content: '该商品无货'
+      });
+      return;
+    }
     var that = this;
     var cartData = {
       id: this.data.goodsId,
@@ -234,6 +241,13 @@ Page({
       app.showModal({
         title: '请选择规格',
         content: '请选择规格'
+      });
+      return;
+    }
+    if (this.data.selectModelInfo.buyCount == 0) {
+      app.showModal({
+        title: '该商品无货',
+        content: '该商品无货'
       });
       return;
     }
@@ -367,7 +381,7 @@ Page({
         // 所有的规格
         model = this.data.goodsInfo.model,
         text = '';
-
+    console.log(dataset);
     for(var item of model){
       if(item.value == modelIndex){
         for (var i in item.subModelName){
@@ -386,7 +400,7 @@ Page({
     text = text.substr(0, text.length - 3);  
     data['selectModelInfo.models'] = selectModels;
     data['selectModelInfo.models_text'] = text;
-
+    
     this.setData(data);
     // 如果规格都选上了，更新价格可库存
     // console.log(Object.getOwnPropertyNames(selectModels).length)
@@ -415,6 +429,8 @@ Page({
         data['selectModelInfo.price'] = modelItems[i].price;
         data['selectModelInfo.modelId'] = modelItems[i].id;
         data['selectModelInfo.imgurl'] = app.globalData.imgHost + modelItems[i].image;
+        data['selectModelInfo.buyCount'] = modelItems[i].store!=0 ? 1 : 0;
+        console.log(data['selectModelInfo.buyCount'], modelItems[i].store)
       }
     }
     this.setData(data);
