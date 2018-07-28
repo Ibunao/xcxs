@@ -9,7 +9,7 @@
   <view class="collect-benefit-area">
     <view class="tip-item">
       <view>
-        恭喜获得QTC: {{integral}}
+        确认收货后可获得QTC: {{integral}}
       </view>
     </view>
   </view>
