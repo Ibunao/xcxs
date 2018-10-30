@@ -81,8 +81,22 @@ Page({
           },
           'fail': function (res) {
             console.log(res);
+            // 请求取消支付接口  
+            console.log('取消支付')
+            wx.request({
+              url: 'https://wxapp.octmami.com/groupon/cancelPay',
+              data: {
+                order_id: order_id,
+              },
+              header: {
+                'content-type': 'application/json' // 默认值
+              },
+              success: function (res) {
+                console.log(res)
+              }
+            })
             wx.navigateTo({
-              url: '/index/index?id=1'
+              url: '/index/index?page=/login.html'
             })
           }
         })

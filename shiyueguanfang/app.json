@@ -1,7 +1,14 @@
 {
   "pages": [
     "index/index",
-    "pages/pay/pay"
+    "pages/groupbuyingfiles/groupbuying/groupbuying",
+    "pages/pay/pay",
+    "pages/pay1/pay",
+    "orderview/orderview",
+    "pages/groupbuyingfiles/groupbuyingnext/groupbuyingnext",
+    "pages/groupbuyingfiles/groupbuyingdetail/groupbuyingdetail",
+    "pages/groupbuyingfiles/comments/comments",
+    "pages/groupbuyingfiles/authorizationpage/authorizationpage"
   ],
   "window": {
     "backgroundTextStyle": "light",

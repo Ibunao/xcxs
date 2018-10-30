@@ -1,0 +1,20 @@
+/* pages/groupbuyingfiles/comments/comments.wxss */
+.all-bg{
+  width: 100%;
+  height: 100%;
+  font-size: 24rpx;
+  color: gray;
+  padding: 0px 10px 0px 10px;
+   background: rgb(243, 240, 240);
+}
+.comments-item-bg-title{
+  display: flex;
+  justify-content: space-between;
+}
+.comments-item-bg-star{
+  display: flex;
+}
+.comment-bg-content-star-icon{
+  width: 15px;
+  height: 15px;
+}

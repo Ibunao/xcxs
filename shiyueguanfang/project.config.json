@@ -4,16 +4,16 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.98",
+	"libVersion": "2.2.3",
 	"appid": "wx18e30810f610d766",
-	"projectname": "shiyueshangcheng",
+	"projectname": "shiyueguanfang",
 	"isGameTourist": false,
 	"condition": {
 		"search": {

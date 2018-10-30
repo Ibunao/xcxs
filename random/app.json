@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "pages/myList/myList",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "backgroundColor": "red",
+    "navigationBarBackgroundColor": "#232323",
+    "navigationBarTitleText": "单车变摩托"
+  }
+}

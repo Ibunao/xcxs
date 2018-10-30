@@ -1,0 +1,51 @@
+/* pages/myList/myList.wxss */
+page{
+  background-color: rgb(30, 30, 30);
+}
+
+.my-container{
+  background-color:rgb(30, 30, 30);
+  padding: 10rpx;
+  font-family: "Times New Roman", Times, serif;
+  transition:opacity .3s;
+}
+.my-footer{
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  height: 8rpx;
+  background-color: #3b3a3a;
+}
+.text-color1{
+  color: #FFF;
+  margin-left: 8rpx;
+  margin-right: 60rpx;
+}
+.text-color2{
+  color: rgb(201, 198, 198);
+}
+.text-size1{
+  font-size: 30rpx;
+}
+.text-size2{
+  font-size: 30rpx;
+}
+.circle-row{
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+.text-circle{
+  margin: 6rpx;
+  display: inline-block;
+  width: 66rpx;
+  height: 66rpx;
+  border-radius: 66rpx;
+  line-height: 66rpx;
+  text-align: center;
+}
+.circle-red{
+  /* background-color:#CC3838; */
+  background-color:#D60C13;
+}
+.circle-blue{
+  background-color:#2E89EE;
+}

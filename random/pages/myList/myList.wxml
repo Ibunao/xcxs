@@ -1,0 +1,16 @@
+<view class='my-container'>
+  <text class='text-color1 text-size1'>第2018126期</text>
+  <text class='text-color2 text-size2'>2018-10-28</text>
+  <view class='circle-row'>
+    <text class='text-circle circle-red text-color1'>01</text>
+    <text class='text-circle circle-red text-color1'>02</text>
+    <text class='text-circle circle-red text-color1'>03</text>
+    <text class='text-circle circle-red text-color1'>04</text>
+    <text class='text-circle circle-red text-color1'>05</text>
+    <text class='text-circle circle-red text-color1'>33</text>
+    <text class='text-circle circle-blue text-color1'>12</text>
+  </view>
+</view>
+<view class='my-table'>
+</view>
+<view class='my-footer'></view>

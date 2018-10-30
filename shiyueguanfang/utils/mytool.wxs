@@ -1,0 +1,51 @@
+var filter = {
+  isHasString: function (array, str) {
+
+    // console.log("array == " + array +"  str ===  "+str);
+    var isHas = false;
+    for (var i = 0; i < array.length; i++) {
+      if (str == array[i]) {
+
+        isHas = true;
+        break;
+      }
+    }
+    return isHas;
+  },
+
+  calculateTime: function (rest_time){
+    var day = Math.floor(rest_time / (24 * 3600));
+    var hour = Math.floor((rest_time % (24 * 3600)) / 3600);
+    return "剩余"+day+"天"+hour+"小时";
+  },
+
+
+  userIsLogin:function(){
+    var uif = readDataFromLocal(USER_INFO);
+    if (uif) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  readDataFromLocal: function(key) {
+    try {
+      var value = wx.getStorageSync(key)
+      if (value) {
+          return value;
+       }
+  } catch (e) {
+        console.log('读取数据错误');
+      }
+  },
+  
+
+}
+
+
+
+module.exports = {
+  isHasString: filter.isHasString,
+  calculateTime: filter.calculateTime,
+  userIsLogin: filter.userIsLogin
+}

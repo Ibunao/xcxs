@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "十月拼团",
+  "usingComponents": {
+    "list-com": "../../mycustom/ListTypeGroupBuying/ListTypeGroupBuying"
+  }
+
+
+}

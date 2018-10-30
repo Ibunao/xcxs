@@ -1,0 +1,25 @@
+/* pages/groupbuyingfiles/groupbuyingnext/groupbuyingnext.wxss */
+
+page{
+  width: 100%;
+  height: 100%;
+  background:rgb(243, 240, 240);
+}
+.banner{
+  width: 100%;
+  height: 100px;
+  
+}
+.slide-image{
+  width: 100%;
+
+}
+.groupbuying-content{
+  width: 100%;
+  height: 100%;
+  padding: 0px 10px 10px 10px;
+  box-sizing: border-box;
+}
+
+
+

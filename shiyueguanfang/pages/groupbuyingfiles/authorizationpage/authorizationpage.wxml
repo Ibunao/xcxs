@@ -1,0 +1,5 @@
+<!--pages/groupbuyingfiles/authorizationpage/authorizationpage.wxml-->
+
+<text class='text'>小程序需要获取您的授权</text>
+
+<button  class='button' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>

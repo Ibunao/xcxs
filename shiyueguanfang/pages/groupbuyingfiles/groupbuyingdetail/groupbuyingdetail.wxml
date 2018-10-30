@@ -1,0 +1,210 @@
+<!--pages/groupbuyingfiles/groupbuyingdetail/groupbuyingdetail.wxml-->
+<wxs module="filter" src="../../../utils/mytool.wxs"></wxs>
+
+<view class='all-content-bg'>
+  <view>
+    <view class='title-image-bg'>
+
+      <swiper class='banner' style="height:{{bannerHeight}}px;" bindchange='pageChange'>
+        <block wx:for="{{banners}}">
+          <swiper-item>
+            <image src="{{item}}" mode='widthFix' data-data='{{item}}' class="slide-image" bindtap='bannersClick' />
+          </swiper-item>
+        </block>
+      </swiper>
+
+      <text class='current-page'>{{pageinfo}}</text>
+    </view>
+    <!-- 拼团倒计时等信息 -->
+    <view class='pin-bg'>
+      <view class='pin-left'>
+        <image class='pin-icon' mode='widthFix' src='../../../image/icn_pin.png'></image>
+        <view class='price-bg'>
+          <view class='mk-price'>{{normalPrice}}</view>
+          <view class='pin-price'>{{couponPrice}}</view>
+        </view>
+      </view>
+      <view class='pin-right'>
+        <text class='coupon-time-msg'>{{coupon_time_msg}}</text>
+        <view class='count-down-bg'>
+          <text class='time'>{{hour}}</text>
+          <text class='point'>:</text>
+          <text class='time'>{{minute}}</text>
+          <text class='point'>:</text>
+          <text class='time'>{{second}}</text>
+        </view>
+      </view>
+    </view>
+    <!-- 商品名称 -->
+    <view class='product-name-bg'>
+      <view class='product-coupon'>{{groupMembers}}</view>
+      <view class='product-name'>{{productName}}</view>
+    </view>
+
+    <!-- 选择规格参数和弹出界面 -->
+    <view wx:if="{{sepcArray.length>0}}" class='spec-bg'>
+      <view class='spec-title-bg' bindtap='choiceSpec'>
+        <view class='spec-choice-info'>
+          <text class='sepc spec-title'>{{specTitle}}</text>
+          <text class='sepc spec-value'>{{specValue}}</text>
+        </view>
+        <image class='spec-more-icon' src='../../../image/右箭头.png' mode='widthFix'></image>
+      </view>
+
+      <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+
+      <view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+
+        <view class='spec-shadow-bg'>
+          <view class='spec-show-title-bg'>
+            <image class='spec-show-image' src='{{spevShowImage}}'></image>
+            <view class='spec-show-info'>
+              <text class='spec-show-price'>{{modalSpecPrice}}</text>
+              <text class='spec-show-specinfo'>{{modalSpecValue}}</text>
+            </view>
+            <image class='spec-show-close' bindtap='hideModal' src='../../../image/close.png'></image>
+          </view>
+
+          <scroll-view class='spec-show-content' scroll-y>
+
+
+            <block wx:for="{{sepcArray}}">
+              <view class='spec-show-content-itemtitle'>{{item.spec_name}}</view>
+              <view class='spec-show-content-itembg'>
+                <block wx:for="{{item.spec_value}}" wx:for-index="subindex" wx:for-item="subItem">
+                  <text class="{{subItem.isChecked?'spec-show-content-item-selected':'spec-show-content-item-normal'}} " bindtap='itemCheck' data-item='{{subItem}}' data-index='{{index}}' data-subIndex='{{subindex}}'>{{subItem.spec_value_name}}</text>
+                </block>
+              </view>
+
+            </block>
+            <view class='spec-show-content-numberbg'>
+              <text>数量</text>
+              <view class='shopcar-add'>
+                <image class='number-icon' src='../../../image/购买数量减少.png' mode='widthFix'></image>
+                <text class='number-num'>{{quantity}}</text>
+                <image class='number-icon' src='../../../image/购买数量增加.png' mode='widthFix'></image>
+              </view>
+            </view>
+
+          </scroll-view>
+          <view class='spec-show-enter-bg'>
+            <button class='spec-show-enter'>确定</button>
+          </view>
+
+        </view>
+
+
+      </view>
+    </view>
+    <!-- 促销信息 -->
+    <view class='promotion-title-bg' wx:if="{{promotion.length>0}}">
+      <text class='promotion-title'>促销</text>
+      <view class='sale-bg'>
+        <text class="sale sale1" wx:if="{{promotion!=null&&filter.isHasString(promotion,'freeship')}}">包邮</text>
+        <text class="sale sale2" wx:if="{{promotion!=null&&filter.isHasString(promotion,'subtract')}}">满减</text>
+        <text class="sale sale3" wx:if="{{promotion!=null&&filter.isHasString(promotion,'gifts')}}">满赠</text>
+      </view>
+    </view>
+
+
+    <!-- 可参团列表 -->
+    <view class='groupon-info' wx:if="{{grouponInfo.length>0}}">
+      <view class='groupon-info-title'>正在进行的拼团，可直接参与</view>
+      <view class='groupon-info-list'>
+        <block wx:for="{{grouponInfo}}">
+          <view class='groupon-info-list-item'>
+            <view class='groupon-info-list-item-left'>
+              <image class='groupon-info-list-item-left-header' src='{{item.img}}'></image>
+              <text>{{item.name}}</text>
+            </view>
+            <view class='groupon-info-list-item-right'>
+              <view class='groupon-info-list-item-right-left'>
+                <view>
+                  <text>还差</text>
+                  <text class='custom-red-color'>{{item.need}}人</text>
+                  <text>拼成</text>
+                </view>
+                <view>
+                  <text class='groupon-info-list-item-time'>剩余23:45:52</text>
+                  <!-- grouponInfoRemainingTime -->
+                </view>
+              </view>
+              <button class='groupon-info-list-item-button' bindtap='goGoupon' data-data='{{item}}'  hover-class='groupon-price-button-hover' >去拼单</button>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
+
+
+    <!-- 开团流程说明 -->
+    <view class='groupon-process'>
+      <view class='groupon-process-title'>
+        <text>拼团流程</text>
+        <view class='groupon-process-title-right'>
+          <text class='groupon-process-title-right-text'>详细说明</text>
+          <image class='groupon-process-title-right-icon' src='../../../image/右箭头.png' mode='widthFix'></image>
+        </view>
+
+      </view>
+      <view class='groupon-process-flow-bg'>
+        <image mode='widthFix' class='groupon-process-image' src='../../../image/groupon_process.png'></image>
+      </view>
+
+
+      <view class='customer-servie' bindtap='callPhone' >
+        <image class='customer-servie-icon' src='../../../image/mic_red.png'></image>
+        <text class='customer-servie-text'>联系客服 9:00-18:00</text>
+      </view>
+
+    </view>
+
+
+
+    <!-- 用户评论 -->
+      <view wx:if="{{has_comment}}" class='comment-bg'>
+        <view class='comment-bg-title'>
+          <view class='padding-left-10 gainsboro-color'>商品评价</view>
+          <view class='comment-bg-title-info'>
+
+            <view class='comment-bg-title-info-left'>
+              <text style='width:40px height:16px color:black'>好评度</text>
+              <text style='width:70px height:16px' class='comment-percent'>{{commentPercent}}</text>
+              <text class='comment-count gainsboro-color'>{{commentCount}}</text>
+            </view>
+
+            <image class='groupon-process-title-right-icon comment-bg-title-info-icon' src='../../../image/右箭头.png' mode='widthFix' bindtap='goComments'></image>
+          </view>
+
+        </view>
+        <view class='comment-bg-content'>
+          <view class='comment-bg-content-info'>
+            <text style='height:20px'>{{commentAuthor}}</text>
+            <text style='height:20px'>{{commentTime}}</text>
+          </view>
+
+          <view class='comment-bg-content-star'>
+            <block wx:for="{{commentStar}}" wx:key="key">
+              <image class='comment-bg-content-star-icon' mode='widthFix' src='../../../image/commentStar.png'></image>
+            </block>
+          </view>
+
+          <text class='comment-bg-content-text'>{{commentText}}</text>
+        </view>
+
+
+      </view>
+
+
+
+
+
+    <view class='bottom-view-bg'>
+      <button class='normal-price-button' bindtap='normalBuy' hover-class='normal-price-button-hover'>{{normalPrice}}</button>
+      <button class='groupon-price-button' bindtap='grouponBuy' hover-class='groupon-price-button-hover'>{{grouponPrice}}</button>
+    </view>
+
+
+  </view>
+</view>

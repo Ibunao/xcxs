@@ -1,0 +1,19 @@
+<!--pages/mycustom/ListTypeCroupBuying/ListTypeCroupBuying.wxml-->
+<view class='all-item-bg'>
+
+  <block wx:for='{{listArray}}'>
+    <view class="item-bg" bindtap='clickItem' data-detail='{{item}}'>
+      <image class='image' mode='widthFix' src='{{item.image}}'></image>
+      <view class='productInfo'>
+        <text class='productName'>{{item.goods_name}}</text>
+        <text class='marketPrice'>¥{{item.oldprice}}</text>
+        <text class='groupPrice'>¥{{item.price}}</text>
+      </view>
+
+      <view class='groupbuying-info'>{{item.group_members}}人团 | 已有{{item.success}}人拼团</view>
+
+    </view>
+  </block>
+
+
+</view>

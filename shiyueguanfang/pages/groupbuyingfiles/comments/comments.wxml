@@ -1,0 +1,23 @@
+<!--pages/groupbuyingfiles/comments/comments.wxml-->
+<view class='all-bg'>
+  <block wx:for="{{commentArray}}">
+    <view class='comments-item-bg'>
+      <view class='comments-item-bg-title'>
+        <text>{{item.auth}}</text>
+        <text>{{item.time}}</text>
+      </view>
+      <view class='comments-item-bg-star'>
+        <text>评分:</text>
+        <view class=''>
+            <block wx:for="{{commentStar}}" wx:key="key">
+              <image class='comment-bg-content-star-icon' mode='widthFix' src='../../../image/commentStar.png'></image>
+            </block>
+          </view>
+      </view>
+      <view class='comments-item-bg-content'>
+        <text>{{item.content}}</text>
+      </view>
+    </view>
+  
+  </block>
+</view>
