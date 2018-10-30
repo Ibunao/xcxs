@@ -1,8 +1,9 @@
+<block wx:for="{{items}}" wx:key>
 <view class='my-container'>
-  <text class='text-color1 text-size1'>第2018126期</text>
-  <text class='text-color2 text-size2'>2018-10-28</text>
+  <text class='text-color1 text-size1'>{{item.qishu}}</text>
+  <text class='text-color2 text-size2'>{{item.riqi}}</text>
   <view class='circle-row'>
-    <text class='text-circle circle-red text-color1'>01</text>
+    <text class='text-circle circle-red text-color1'>{{item.one}}</text>
     <text class='text-circle circle-red text-color1'>02</text>
     <text class='text-circle circle-red text-color1'>03</text>
     <text class='text-circle circle-red text-color1'>04</text>
@@ -10,7 +11,19 @@
     <text class='text-circle circle-red text-color1'>33</text>
     <text class='text-circle circle-blue text-color1'>12</text>
   </view>
-</view>
-<view class='my-table'>
+  <image data-index="{{index}}" class='my-image' src="{{item.open && imgSwitchIndex == index ?'/images/xiala.png':'/images/xiayibu.png'}}" mode="aspectFit" bindtap='xiala'></image>
 </view>
 <view class='my-footer'></view>
+<view class='my-table'>
+  <view>
+    <view class='table-title-left'>
+      <text>本期销售</text>
+      <text>1111111111</text><text>元</text>
+    </view>
+    <view class='table-title-right'>
+      <text>奖池滚存</text>
+      <text>1111111111</text><text>元</text>
+    </view>
+  </view>
+</view>
+</block>

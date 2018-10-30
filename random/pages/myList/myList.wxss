@@ -6,8 +6,10 @@ page{
 .my-container{
   background-color:rgb(30, 30, 30);
   padding: 10rpx;
+  padding-left: 30rpx;
   font-family: "Times New Roman", Times, serif;
   transition:opacity .3s;
+  position: relative;
 }
 .my-footer{
   margin-left: 10rpx;
@@ -48,4 +50,35 @@ page{
 }
 .circle-blue{
   background-color:#2E89EE;
+}
+.my-image{
+  position: absolute;
+  right: 30rpx;
+  bottom: 30rpx;
+  width: 88rpx;
+  height: 88rpx;
+}
+.my-table{
+  border: #3b3a3a 3rpx solid;
+  background-color: #232323;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  text-align: center;
+}
+.my-table::after{
+  display: block;
+  height: 0;
+  clear: both;
+  content: ''
+}
+.table-title-left{
+  float: left;
+  color: #FFF;
+  width: 50%;
+  border-top: 
+}
+.table-title-right{
+  float: right;
+  color: #FFF;
+  width: 50%;
 }
