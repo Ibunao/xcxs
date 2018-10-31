@@ -1,6 +1,6 @@
 <view class="main-title">
-  <!-- <font>福彩 双色球</font> -->
-  <font>测试 测试的</font>
+   <font>福彩 双色球</font> 
+  <!-- <font>测试 测试的</font> -->
 </view>
 <view class='last-info'>
   <text class='text-color2 text-size1'>第2018127期开奖号码</text>
@@ -14,9 +14,10 @@
     <text class='text-circle circle-blue text-color1'>12</text>
   </view>
   <image class='my-image' src="/images/xiayibu.png" mode="aspectFit" bindtap='liebiao'></image>
-  <text class='text-color4 text-size1 float-left' bindtap='shuoming'>中奖说明</text>
+  <text class='text-color4 text-size1 float-left' style='margin-left:30rpx;' bindtap='shuoming'>中奖说明</text>
   <text class='text-color2 text-size1 float-right'>下期开奖时间2018-11-1</text>
 </view>
+<form bindsubmit="formSubmit" report-submit="true">
 <view class='last-info' style='padding-bottom:30rpx;margin-top:30rpx;'>
   <text class='text-color2 text-size1'>生成自己的幸运码</text>
   <view class='circle-row' style='margin-bottom:20rpx;'>
@@ -28,6 +29,9 @@
     <input maxlength="2" type="number" data-index="six" class='text-circle circle-red text-color1' value="{{six}}" bindinput="bindKeyInput"></input>
     <input maxlength="2" type="number" data-index="seven" class='text-circle circle-blue text-color1' value="{{seven}}" bindinput="bindKeyInput"></input>
   </view>
-  <text class='text-color4 text-size1 float-left' style='margin-top:30rpx;' bindtap='caozuoshuoming'>操作说明</text>
-  <button class="mini-btn float-right" plain="true" type="default" size="mini" style='color:red;border-color:red;margin-right:88rpx;' bindtap='generate'>生成</button>
+  <text class='text-color4 text-size1 float-left' style='margin-top:30rpx;margin-left:30rpx;' bindtap='caozuoshuoming'>操作说明</text>
+
+  <button class="mini-btn float-right" plain="true" type="default" size="mini" open-type="{{create?'share':''}}" data-event='generate' style='color:red;border-color:red;margin-right:66rpx;' formType="submit" bindtap='generate'>{{create?"分享":"生成"}}</button>
+    <button hidden="{{!create}}" class="mini-btn float-right" plain="true" type="default" size="mini" data-event="renew" style='color:red;border-color:red;margin-right:66rpx;' bindtap='generate'>重来</button>
 </view>
+</form>

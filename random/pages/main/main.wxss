@@ -29,7 +29,7 @@ page{
 .last-info{
   background-color:#3b3a3a;
   padding: 10rpx;
-  padding-left: 30rpx;
+  /* padding-left: 30rpx; */
   font-family: "Times New Roman", Times, serif;
   position: relative;
   text-align: center;
@@ -66,12 +66,12 @@ page{
 }
 .circle-red{
   /* background-color:#CC3838; */
-  /* background-color:#D60C13; */
-  background-color:rgb(30, 30, 30);
+   background-color:#D60C13; 
+  /* background-color:rgb(30, 30, 30); */
 }
 .circle-blue{
-  /* background-color:#2E89EE; */
-  background-color:rgb(30, 30, 30);
+   background-color:#2E89EE; 
+  /* background-color:rgb(30, 30, 30); */
 }
 .float-left{
   float: left;
