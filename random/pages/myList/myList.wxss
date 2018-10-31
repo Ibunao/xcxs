@@ -25,11 +25,20 @@ page{
 .text-color2{
   color: rgb(201, 198, 198);
 }
+.text-color3{
+  color: #D60C13;
+}
 .text-size1{
   font-size: 30rpx;
 }
 .text-size2{
   font-size: 30rpx;
+}
+.text-margin-rigth{
+  margin-right: 6rpx;
+}
+.text-border-right{
+  border-right: #3b3a3a 3rpx solid;
 }
 .circle-row{
   margin-top: 10rpx;
@@ -44,12 +53,52 @@ page{
   line-height: 66rpx;
   text-align: center;
 }
+.my-table .text-inline-block .text-circle-small{
+  padding: 0rpx;
+  margin: 1rpx;
+  margin-bottom: 5rpx;
+  display: inline-block;
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 10rpx;
+}
+.my-table .text-inline-block .table-cell-rows{
+  width: 49%;
+}
+.my-table .text-inline-block .table-cell-rows-left{
+  width: 50%;
+  height: 88rpx;
+  line-height: 80rpx;
+  border-right: #3b3a3a 3rpx solid;
+  display: block;
+  float: left;
+}
+.my-table .text-inline-block .table-cell-rows-left text{
+  width: 100%;
+  border: #3b3a3a 0rpx solid;
+}
+.my-table .text-inline-block .table-cell-rows-right{
+  height: 80rpx;
+  line-height: 80rpx;
+  border-right: #3b3a3a 3rpx solid;
+  display: block;
+  float: left;
+}
+.my-table .text-inline-block .table-cell-rows-right text{
+  width: 100%;
+  border: #3b3a3a 0rpx solid;
+}
+.my-table .text-inline-block .table-cell-rows view{
+  width: 100%;
+}
 .circle-red{
   /* background-color:#CC3838; */
-  background-color:#D60C13;
+  /* background-color:#D60C13; */
+  background-color:rgb(30, 30, 30);
 }
 .circle-blue{
-  background-color:#2E89EE;
+  /* background-color:#2E89EE; */
+  background-color:rgb(30, 30, 30);
 }
 .my-image{
   position: absolute;
@@ -58,27 +107,71 @@ page{
   width: 88rpx;
   height: 88rpx;
 }
+
 .my-table{
   border: #3b3a3a 3rpx solid;
   background-color: #232323;
   margin-left: 10rpx;
   margin-right: 10rpx;
   text-align: center;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 30rpx;
+  transition: height 3s;
 }
-.my-table::after{
+.table-height-0{
+  height: 0rpx;
+}
+.my-table view{
+  padding: 8rpx;
+}
+.my-table text{
   display: block;
-  height: 0;
-  clear: both;
-  content: ''
+}
+.my-table .row{
+  padding: 1rpx;
+}
+.row text{
+  display: inline-block;
 }
 .table-title-left{
   float: left;
   color: #FFF;
-  width: 50%;
-  border-top: 
+  width: 48%;
+  border-right: #3b3a3a 3rpx solid;
+  
 }
+.table-row-border{
+  border-top: #3b3a3a 3rpx solid;
+}
+.my-table .text-inline-block {
+  padding-top: 0rpx;
+  padding-bottom: 0rpx;
+}
+.my-table .text-inline-block text{
+  display: inline-block;
+  padding-top: 2rpx;
+  padding-bottom: 2rpx;
+  width: 49%;
+}
+.my-table .text-inline-block view{
+  padding:0rpx;
+  display: inline-block;
+  padding-top: 2rpx;
+  padding-bottom: 2rpx;
+  width: 49%;
+}
+
 .table-title-right{
   float: right;
   color: #FFF;
-  width: 50%;
+  width: 46%;
+}
+.my-table .clear-padding{
+  padding: 0rpx ;
+}
+.clear-both::after{
+  display: block;
+  height: 0;
+  clear: both;
+  content: ''
 }

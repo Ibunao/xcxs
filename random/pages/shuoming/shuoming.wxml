@@ -1,0 +1,2 @@
+<!--pages/shuoming/shuoming.wxml-->
+<image mode="widthFix" src='/images/shuoming.jpg' style='width:100%;margin-top:30rpx;'></image>

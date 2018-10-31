@@ -1,13 +1,42 @@
 {
   "pages": [
+    "pages/main/main",
     "pages/myList/myList",
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/mine/mine",
+    "pages/shuoming/shuoming"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "backgroundColor": "red",
     "navigationBarBackgroundColor": "#232323",
     "navigationBarTitleText": "搏一搏 单车变摩托"
+  },
+  "tabBar": {
+    "color": "#8a8a8a",
+    "selectedColor": "#d81e06",
+    "backgroundColor": "#282C34",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/main/main",
+        "text": "千万",
+        "iconPath": "images/zonghe1.png",
+        "selectedIconPath": "images/zonghe.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "万万",
+        "iconPath": "images/zhongxin1.png",
+        "selectedIconPath": "images/zhongxin.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "亿万",
+        "iconPath": "images/wode1.png",
+        "selectedIconPath": "images/wode.png"
+      }
+    ]
   }
 }

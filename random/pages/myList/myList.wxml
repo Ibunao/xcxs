@@ -11,19 +11,183 @@
     <text class='text-circle circle-red text-color1'>33</text>
     <text class='text-circle circle-blue text-color1'>12</text>
   </view>
-  <image data-index="{{index}}" class='my-image' src="{{item.open && imgSwitchIndex == index ?'/images/xiala.png':'/images/xiayibu.png'}}" mode="aspectFit" bindtap='xiala'></image>
+  <image data-index="{{index}}" class='my-image' src="{{item.open ?'/images/xiala.png':'/images/gengduo.png'}}" mode="aspectFit" bindtap='xiala'></image>
 </view>
 <view class='my-footer'></view>
-<view class='my-table'>
-  <view>
+<block wx:if="{{item.open}}">
+<view class='my-table clear-both'>
+  <view class='clear-both clear-padding'>
     <view class='table-title-left'>
       <text>本期销售</text>
-      <text>1111111111</text><text>元</text>
+      <view class='row'>
+        <text class='text-color3 text-margin-rigth'>1111111111</text><text> 元</text>
+      </view>
     </view>
     <view class='table-title-right'>
       <text>奖池滚存</text>
-      <text>1111111111</text><text>元</text>
+      <view class='row'>
+        <text class='text-color3 text-margin-rigth'>1111111111</text><text> 元</text>
+      </view>
+    </view>
+  </view>
+  <view class='clear-both clear-padding table-row-border'>
+    <view class='table-title-left text-inline-block'>
+      <text class='text-border-right text-color2'>奖项</text>
+      <text class='text-color2'>条件</text>
+    </view>
+    <view class='table-title-right text-inline-block'>
+      <text class='text-border-right text-color2'>中奖注数</text>
+      <text class='text-color2'>单注奖金</text>
+    </view>
+  </view>
+  <view class='clear-both clear-padding table-row-border'>
+    <view class='table-title-left text-inline-block'>
+      <text class='text-border-right'>一等奖</text>
+      <view>
+        <text class='text-circle-small circle-red'></text>
+        <text class='text-circle-small circle-red'></text>
+        <text class='text-circle-small circle-red'></text>
+        <text class='text-circle-small circle-red'></text>
+        <text class='text-circle-small circle-red'></text>
+        <text class='text-circle-small circle-red'></text>
+        <text class='text-circle-small circle-blue'></text>
+      </view>
+    </view>
+    <view class='table-title-right text-inline-block'>
+      <view  class='text-border-right'>
+        <text>8</text>
+      </view>
+      <text >8888888</text>
+    </view>
+  </view>
+  <view class='clear-both clear-padding table-row-border'>
+    <view class='table-title-left text-inline-block'>
+      <text class='text-border-right'>二等奖</text>
+      <view>
+        <text class='text-circle-small circle-red'></text>
+        <text class='text-circle-small circle-red'></text>
+        <text class='text-circle-small circle-red'></text>
+        <text class='text-circle-small circle-red'></text>
+        <text class='text-circle-small circle-red'></text>
+        <text class='text-circle-small circle-red'></text>
+      </view>
+    </view>
+    <view class='table-title-right text-inline-block'>
+      <view  class='text-border-right'>
+        <text>18</text>
+      </view>
+      <text >88888</text>
+    </view>
+  </view>
+  <view class='clear-both clear-padding table-row-border'>
+    <view class='table-title-left text-inline-block'>
+      <text class='text-border-right'>三等奖</text>
+      <view>
+        <text class='text-circle-small circle-red'></text>
+        <text class='text-circle-small circle-red'></text>
+        <text class='text-circle-small circle-red'></text>
+        <text class='text-circle-small circle-red'></text>
+        <text class='text-circle-small circle-red'></text>
+        <text class='text-circle-small circle-blue'></text>
+      </view>
+    </view>
+    <view class='table-title-right text-inline-block'>
+      <view class='text-border-right'>
+        <text>18</text>
+      </view>
+      <text >88888</text>
+    </view>
+  </view>
+  <view class='clear-both clear-padding table-row-border'>
+    <view class='table-title-left text-inline-block'>
+      <view class='table-cell-rows-left'>
+        <text class='text-border-right'>四等奖</text>
+      </view>
+      <view class='table-cell-rows' style='float:left;'>
+        <view>
+          <text class='text-circle-small circle-red'></text>
+          <text class='text-circle-small circle-red'></text>
+          <text class='text-circle-small circle-red'></text>
+          <text class='text-circle-small circle-red'></text>
+          <text class='text-circle-small circle-red'></text>
+          <text class='text-circle-small circle-blue'></text>
+        </view>
+        <view>
+          <text class='text-circle-small circle-red'></text>
+          <text class='text-circle-small circle-red'></text>
+          <text class='text-circle-small circle-red'></text>
+          <text class='text-circle-small circle-red'></text>
+          <text class='text-circle-small circle-blue'></text>
+        </view>
+      </view>
+    </view>
+    <view class='table-title-right text-inline-block' style='height:88rpx; line-height:88rpx;'>
+      <view  class='text-border-right'>
+        <text>18</text>
+      </view>
+      <view >
+        88888
+      </view>
+    </view>
+  </view>
+  <view class='clear-both clear-padding table-row-border'>
+    <view class='table-title-left text-inline-block'>
+      <view class='table-cell-rows-left'>
+        <text class='text-border-right'>五等奖</text>
+      </view>
+      <view class='table-cell-rows' style='float:left;'>
+        <view>
+          <text class='text-circle-small circle-red'></text>
+          <text class='text-circle-small circle-red'></text>
+          <text class='text-circle-small circle-red'></text>
+          <text class='text-circle-small circle-red'></text>
+        </view>
+        <view>
+          <text class='text-circle-small circle-red'></text>
+          <text class='text-circle-small circle-red'></text>
+          <text class='text-circle-small circle-red'></text>
+          <text class='text-circle-small circle-blue'></text>
+        </view>
+      </view>
+    </view>
+    <view class='table-title-right text-inline-block' style='height:88rpx; line-height:88rpx;'>
+      <view  class='text-border-right'>
+        <text>18</text>
+      </view>
+      <view >
+        88888
+      </view>
+    </view>
+  </view>
+  <view class='clear-both clear-padding table-row-border'>
+    <view class='table-title-left text-inline-block'>
+      <view class='table-cell-rows-left' style='height:120rpx; line-height:120rpx;'>
+        <text class='text-border-right'>六等奖</text>
+      </view>
+      <view class='table-cell-rows' style='float:left;'>
+        <view>
+          <text class='text-circle-small circle-red'></text>
+          <text class='text-circle-small circle-red'></text>
+          <text class='text-circle-small circle-blue'></text>
+        </view>
+        <view>
+          <text class='text-circle-small circle-red'></text>
+          <text class='text-circle-small circle-blue'></text>
+        </view>
+        <view>
+          <text class='text-circle-small circle-blue'></text>
+        </view>
+      </view>
+    </view>
+    <view class='table-title-right text-inline-block'>
+      <view  class='text-border-right' style='height:120rpx; line-height:120rpx;'>
+        <text>18</text>
+      </view>
+      <view >
+        88888
+      </view>
     </view>
   </view>
 </view>
+</block>
 </block>

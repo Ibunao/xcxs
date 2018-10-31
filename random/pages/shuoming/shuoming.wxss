@@ -1,0 +1,4 @@
+/* pages/shuoming/shuoming.wxss */
+page{
+  background-color:#202020;
+}
