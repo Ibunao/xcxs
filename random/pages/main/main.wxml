@@ -31,7 +31,7 @@
   </view>
   <text class='text-color4 text-size1 float-left' style='margin-top:30rpx;margin-left:30rpx;' bindtap='caozuoshuoming'>操作说明</text>
 
-  <button class="mini-btn float-right" plain="true" type="default" size="mini" open-type="{{create?'share':''}}" data-event='generate' style='color:red;border-color:red;margin-right:66rpx;' formType="submit" bindtap='generate'>{{create?"分享":"生成"}}</button>
+  <button class="mini-btn float-right" plain="true" type="default" size="mini" open-type="{{create?'share':'getUserInfo'}}" data-event="{{create?'share':'generate'}}" style='color:red;border-color:red;margin-right:66rpx;' formType="submit" bindgetuserinfo="getUserInfo">{{create?"分享":"生成"}}</button>
     <button hidden="{{!create}}" class="mini-btn float-right" plain="true" type="default" size="mini" data-event="renew" style='color:red;border-color:red;margin-right:66rpx;' bindtap='generate'>重来</button>
 </view>
 </form>
