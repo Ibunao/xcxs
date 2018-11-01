@@ -1,21 +1,66 @@
-/**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+page{
+  background-color: rgb(30, 30, 30);
+  font-family: "Times New Roman", Times, serif;
 }
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
+.clear-both::after{
+  display: block;
+  height: 0;
+  clear: both;
+  content: ''
+}
+.my-container{
+  color:  rgb(201, 198, 198);
+  text-align: center;
+}
+.my-container view{
+  float: left;
+  width:44%;
+  font-size: 38rpx;
+  padding: 3%;
+}
+.my-container .select-tab{
+  color: white;
+  border-bottom: red 3rpx solid;
+  background: rgb(32, 32, 32);
+}
+.content-title{
+  position: relative;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+  background-color: #333333;
+  border: #336699 2rpx solid;
+  border-radius: 88rxp;
+}
+.content-title font{
+  color: white;
+  font-size: 30rpx;
+}
+.nothing{
+  color: #336699;
+  text-align: center;
+  margin-top: 38%;
+}
+.my-image{
+  position: absolute;
+  right: 30rpx;
+  bottom: 30rpx;
+  width: 66rpx;
+  height: 66rpx;
+}
+.people-balls{
+  color: wheat;
+  border-bottom: wheat 2rpx solid;
   margin: 20rpx;
-  border-radius: 50%;
 }
-
-.userinfo-nickname {
-  color: #aaa;
+.head-info{
+  width: 120rpx;
+  height: 120rpx;
+  float: left;
+  font-size: 25rpx;
+  text-align: center;
 }
-
-.usermotto {
-  margin-top: 200px;
+.head-image{
+  width: 88rpx;
+  height: 88rpx;
 }
