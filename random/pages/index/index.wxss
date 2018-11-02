@@ -52,6 +52,8 @@ page{
   color: wheat;
   border-bottom: wheat 2rpx solid;
   margin: 20rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
 }
 .head-info{
   width: 120rpx;
@@ -63,4 +65,24 @@ page{
 .head-image{
   width: 88rpx;
   height: 88rpx;
+}
+.head-image-border1{
+  border: wheat 3rpx dashed;
+}
+.circle-row{
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+.text-circle{
+  margin: 6rpx;
+  display: inline-block;
+  width: 66rpx;
+  height: 66rpx;
+  border-radius: 66rpx;
+  line-height: 66rpx;
+  text-align: center;
+}
+.text-color1{
+  color: #FFF;
+  margin-left: 8rpx;
 }

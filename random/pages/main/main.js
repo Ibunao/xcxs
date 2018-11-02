@@ -138,21 +138,31 @@ Page({
       // that.setData({ create: true })
     }, 30)
     if (pull) {
+      var userInfo = wx.getStorageSync('userInfo')
+      // 没用，没把私有属性去掉
+      var sendData = JSON.parse(JSON.stringify(data))
       wx.request({
         url: app.globalData.host + 'info/random',
-        data: data,
+        data: {
+          data:sendData,
+          openid:userInfo['openid']
+        },
         header: {
           'content-type': 'application/json' // 默认值
         },
         success(res) {
           if (res.data.code == 200) {
-            clearInterval(temp)
-            // setTimeout(function () {
-            //   clearInterval(temp)
-            // }, 900)
-            that.setData({ create: true })
+            if(runtime > 900){
+              clearInterval(temp)
+              that.setData(res.data.data)
+            }else{
+              setTimeout(function () {
+                clearInterval(temp)
+              }, 900-runtime)
+            }
             return true
           } else {
+            clearInterval(temp)
             wx.showToast({
               title: '发生错误，请联系客服',
               icon: 'none',
@@ -160,6 +170,16 @@ Page({
             })
             return false
           }
+        },
+        fail(){
+          console.log(temp)
+          clearInterval(temp)
+          wx.showToast({
+            title: '发生错误，请联系客服',
+            icon: 'none',
+            duration: 2000
+          })
+          return false
         }
       })
     }else{

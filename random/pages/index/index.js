@@ -14,6 +14,7 @@ Page({
           {
             img:'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoHZkDvnuY17Rksiatk1AX5htF7wZYAibcPyib1cibd7wLO2GYthwTsADIibzjia19Ou77oddS40UvLukYg/132',
             name:"1**0",
+            borderStyle: 1,
             balls:[
               "01",
               "01",
@@ -27,8 +28,9 @@ Page({
             open:false
           },
           {
-            img: '',
+            img: 'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoHZkDvnuY17Rksiatk1AX5htF7wZYAibcPyib1cibd7wLO2GYthwTsADIibzjia19Ou77oddS40UvLukYg/132',
             name: "100-20",
+            borderStyle: 2,
             balls: [
               "01",
               "01",
@@ -64,6 +66,24 @@ Page({
             open:false
           }
         ]
+      }
+    ],
+    helpList:[
+      {
+        img:'',
+        name:'100-20',
+        balls:[
+          "01",
+          "01",
+          "01",
+          "01",
+          "01",
+          "01",
+          "01",
+        ],
+        date: "2018-10-32 10:20:30",
+        qishu: "第 20185636 期",
+        msg:"老铁，帮我买"
       }
     ]
   },

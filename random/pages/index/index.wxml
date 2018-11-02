@@ -14,10 +14,21 @@
 <block wx:if="{{item.open}}" wx:for="{{item.items}}" wx:for-item="people" wx:key>
 <view class='people-balls clear-both'>
   <view class='head-info'>
-  <image class='head-image' src="{{people.img}}" mode="aspectFit" ></image>
+  <image class='head-image head-image-border{{people.borderStyle}}' src="{{people.img}}" mode="aspectFit" ></image>
   {{people.name}}
   </view>
-  
+  <view class='circle-row' style='height:100%;'>
+    <text class='text-circle circle-red text-color1'>{{people.balls[0]}}</text>
+    <text class='text-circle circle-red text-color1'>02</text>
+    <text class='text-circle circle-red text-color1'>03</text>
+    <text class='text-circle circle-red text-color1'>04</text>
+    <text class='text-circle circle-red text-color1'>05</text>
+    <text class='text-circle circle-red text-color1'>33</text>
+    <text class='text-circle circle-blue text-color1'>12</text>
+  </view>
+  <view style='float:right;'>
+    {{people.result}}
+  </view>
 </view>
 </block>
 </block>
@@ -28,8 +39,27 @@
 </view>
 </block>
 <block wx:if="{{tabIndex == 2}}">
-<view class='nothing'>
+<block wx:for="{{helpList}}" wx:for-item="people" wx:key>
+<view class='people-balls clear-both'>
+  <view class='head-info'>
+  <image class='head-image' src="{{people.img}}" mode="aspectFit" ></image>
+  {{people.name}}
+  </view>
+  <view class='circle-row' style='height:100%;'>
+    <text class='text-circle circle-red text-color1'>{{people.balls[0]}}</text>
+    <text class='text-circle circle-red text-color1'>02</text>
+    <text class='text-circle circle-red text-color1'>03</text>
+    <text class='text-circle circle-red text-color1'>04</text>
+    <text class='text-circle circle-red text-color1'>05</text>
+    <text class='text-circle circle-red text-color1'>33</text>
+    <text class='text-circle circle-blue text-color1'>12</text>
+  </view>
+  <view style='float:right;font-size:10rpx;'>
+    {{people.msg}} {{people.qishu}} <font style="font-size:3rpx;color:#666666">分享与{{people.date}}</font>
+  </view>
+</view>
+</block>
+<view class='nothing'  wx:if="{{len(helpList)}}">
 暂时还没有～
-快去分享吧
 </view>
 </block>
