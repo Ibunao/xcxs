@@ -145,7 +145,7 @@ Page({
         url: app.globalData.host + 'info/random',
         data: {
           data:sendData,
-          openid:userInfo['openid']
+          userInfo:userInfo
         },
         header: {
           'content-type': 'application/json' // 默认值
@@ -157,6 +157,7 @@ Page({
               that.setData(res.data.data)
             }else{
               setTimeout(function () {
+                that.setData(res.data.data)
                 clearInterval(temp)
               }, 900-runtime)
             }
@@ -348,9 +349,15 @@ Page({
    * 用户分享
    */
   onShareAppMessage: function (res) {
-    // 记录用户分享的号码，获取比拼组ID    
-
-
+    // 如果是点击分享按钮，带上号码的ID   
+    if (res.from == "button") {
+      var ballId = this.data.id;
+      return {
+        title: '来和我比运气',
+        path: '/pages/index?type=b&ballId='+ballId,
+        imageUrl: "https://www.bunao.win/images/my.jpg"
+      }
+    }
     return {
       title: '自定义转发标题',
       path: '/pages/main?id=123',

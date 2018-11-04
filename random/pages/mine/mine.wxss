@@ -1,4 +1,102 @@
-/* pages/mine/mine.wxss */
 page{
   background-color: rgb(30, 30, 30);
+  font-family: "Times New Roman", Times, serif;
+}
+.clear-both::after{
+  display: block;
+  height: 0;
+  clear: both;
+  content: ''
+}
+.my-container{
+  color:  rgb(201, 198, 198);
+  text-align: center;
+}
+.my-container view{
+  float: left;
+  width:44%;
+  font-size: 38rpx;
+  padding: 3%;
+}
+
+.content-title{
+  position: relative;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+  background-color: #333333;
+  border-bottom: #D60C13 2rpx solid;
+  border-top: #D60C13 2rpx solid;
+  border-radius: 88rxp;
+}
+.content-title font{
+  color: white;
+  font-size: 30rpx;
+}
+.nothing{
+  color: red;
+  text-align: center;
+  margin-top: 38%;
+}
+.my-image{
+  position: absolute;
+  right: 30rpx;
+  bottom: 30rpx;
+  width: 66rpx;
+  height: 66rpx;
+}
+.people-balls{
+  color: wheat;
+  border-bottom: wheat 2rpx solid;
+  margin: 20rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  position: relative;
+}
+.head-info{
+  width: 120rpx;
+  height: 120rpx;
+  float: left;
+  font-size: 25rpx;
+  text-align: center;
+}
+.head-image{
+  width: 88rpx;
+  height: 88rpx;
+}
+.head-image-border1{
+  border: wheat 3rpx dashed;
+}
+.circle-row{
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+.text-circle{
+  margin: 6rpx;
+  display: inline-block;
+  width: 66rpx;
+  height: 66rpx;
+  border-radius: 66rpx;
+  line-height: 66rpx;
+  text-align: center;
+}
+.text-color1{
+  color: #FFF;
+  margin-left: 8rpx;
+}
+.ball-result{
+  position: absolute;
+  right: 3rpx;
+  bottom: 45rpx;
+}
+.my-about{
+  height: 33rpx;
+  color: #8a8a8a;
+  font-size: 33rpx;
+  padding-left: 18rpx;
+}
+.my-about-img{
+  width: 33rpx;
+  height: 33rpx;
+  margin-right: 8rpx;
 }

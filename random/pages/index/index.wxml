@@ -54,8 +54,8 @@
     <text class='text-circle circle-red text-color1'>33</text>
     <text class='text-circle circle-blue text-color1'>12</text>
   </view>
-  <view style='float:right;font-size:10rpx;'>
-    {{people.msg}} {{people.qishu}} <font style="font-size:3rpx;color:#666666">分享与{{people.date}}</font>
+  <view style='float:right;font-size:26rpx;'>
+    {{people.msg}} {{people.qishu}} <font style="font-size:18rpx;color:#666666">分享与{{people.date}}</font>
   </view>
 </view>
 </block>

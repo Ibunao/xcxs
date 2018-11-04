@@ -101,6 +101,9 @@ Page({
       shareList: this.data.shareList
     })
   },
-  onLoad: function () {
+  onLoad: function (obj) {
+    console.log(obj)
+    // 根据分享类型的不同
+    
   },
 })
