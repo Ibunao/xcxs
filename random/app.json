@@ -11,7 +11,8 @@
     "backgroundTextStyle": "light",
     "backgroundColor": "red",
     "navigationBarBackgroundColor": "#232323",
-    "navigationBarTitleText": "搏一搏 单车变摩托"
+    "navigationBarTitleText": "搏一搏 单车变摩托",
+    "onReachBottomDistance":"100rpx"
   },
   "tabBar": {
     "color": "#8a8a8a",

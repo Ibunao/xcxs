@@ -1,8 +1,14 @@
 <!--index.wxml-->
 <view class="my-container clear-both">
-<view class="{{tabIndex == 1?'select-tab':''}}" data-index="1" bindtap='switchTab'>比一比</view>
-<view class="{{tabIndex == 2?'select-tab':''}}" data-index="2" bindtap='switchTab'>帮人买</view>
+<!-- <view class="{{tabIndex == 1?'select-tab':''}}" data-index="1" bindtap='switchTab'>比一比</view>
+<view class="{{tabIndex == 2?'select-tab':''}}" data-index="2" bindtap='switchTab'>帮人买</view> -->
 </view>
+
+<view class='my-about'>
+<image class='my-about-img' mode="aspectFit"  src='/images/about.png' ></image>
+朋友让你帮忙代买的号码  
+</view>
+
 <block wx:if="{{tabIndex == 1}}">
 <block wx:for="{{shareList}}" wx:key>
 <view class='content-title'>

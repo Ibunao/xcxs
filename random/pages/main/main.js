@@ -6,13 +6,27 @@ Page({
    * 页面的初始数据
    */
   data: {
-    one: "",
-    two: "",
-    three: "",
-    four: "",
-    five: "",
-    six: "",
-    seven: "",
+    lastBall: {
+      qishu:'2018125',
+      balls: [
+        "01",
+        "01",
+        "01",
+        "01",
+        "01",
+        "01",
+        "01",
+      ],
+    },
+    generate:{
+      one: "",
+      two: "",
+      three: "",
+      four: "",
+      five: "",
+      six: "",
+      seven: "",
+    },
     create: false,
   },
   liebiao: function(e) {
@@ -29,25 +43,25 @@ Page({
     var inputValue = e.detail.value;
     var key = e.target.dataset.index;
     if(key == 'one'){
-      this.setData({ one: inputValue })
+      this.setData({ "generate.one": inputValue })
     }
     if (key == 'two') {
-      this.setData({ two: inputValue })
+      this.setData({ "generate.two": inputValue })
     }
     if (key == 'three') {
-      this.setData({ three: inputValue })
+      this.setData({ "generate.three": inputValue })
     }
     if (key == 'four') {
-      this.setData({ four: inputValue })
+      this.setData({ "generate.four": inputValue })
     }
     if (key == 'five') {
-      this.setData({ five: inputValue })
+      this.setData({ "generate.five": inputValue })
     }
     if (key == 'six') {
-      this.setData({ six: inputValue })
+      this.setData({ "generate.six": inputValue })
     }
     if (key == 'seven') {
-      this.setData({ seven: inputValue })
+      this.setData({ "generate.seven": inputValue })
     }
     // 如果create=true 每次改动都将数据上传一下，用来保存用户更改过的数据(属于操作不当，可以先不搞)
   },
@@ -67,13 +81,15 @@ Page({
     // 如果是重新生成事件则清空值，用来重新生成 event="renew" 
     if(event == "renew"){
       that.setData({
-        one: "",
-        two: "",
-        three: "",
-        four: "",
-        five: "",
-        six: "",
-        seven: "",
+        generate:{
+          one: "",
+          two: "",
+          three: "",
+          four: "",
+          five: "",
+          six: "",
+          seven: "",
+        }
       })
     }
     // 分享的话就不用往后执行了 create=true event="share"
@@ -107,31 +123,31 @@ Page({
       red.sort(randomsort);
       blue.sort(randomsort);
       if (!data.one || oneRan) {
-        that.setData({ one: red[1] })
+        that.setData({ 'generate.one': red[1] })
         oneRan = true
       }
       if (!data.two || twoRan) {
-        that.setData({ two: red[2] })
+        that.setData({ 'generate.two': red[2] })
         twoRan = true
       }
       if (!data.three || threeRan) {
-        that.setData({ three: red[3] })
+        that.setData({ 'generate.three': red[3] })
         threeRan = true
       }
       if (!data.four || fourRan) {
-        that.setData({ four: red[4] })
+        that.setData({ 'generate.four': red[4] })
         fourRan = true
       }
       if (!data.five || fiveRan) {
-        that.setData({ five: red[5] })
+        that.setData({ 'generate.five': red[5] })
         fiveRan = true
       }
       if (!data.six || sixRan) {
-        that.setData({ six: red[6] })
+        that.setData({ 'generate.six': red[6] })
         sixRan = true
       }
       if (!data.seven || sevenRan) {
-        that.setData({ seven: blue[1] })
+        that.setData({ 'generate.seven': blue[1] })
         sevenRan = true
       }
       runtime += 30
@@ -157,10 +173,11 @@ Page({
               that.setData(res.data.data)
             }else{
               setTimeout(function () {
-                that.setData(res.data.data)
+                that.setData(res.data.data )
                 clearInterval(temp)
               }, 900-runtime)
             }
+            that.setData({create: true})
             return true
           } else {
             clearInterval(temp)
@@ -301,6 +318,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
+    wx.request({
+      url: app.globalData.host + 'info/last-ball',
+      data: {
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        if (res.data.code == 200) {
+          that.setData({lastBall:res.data.data})
+        }
+      },
+      fail() {
+        wx.showToast({
+          title: '发生错误，请联系客服',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
   },
 
   /**
@@ -349,18 +387,16 @@ Page({
    * 用户分享
    */
   onShareAppMessage: function (res) {
-    // 如果是点击分享按钮，带上号码的ID   
+    // 如果是点击分享按钮，带上比一比组id
     if (res.from == "button") {
-      var ballId = this.data.id;
       return {
-        title: '来和我比运气',
-        path: '/pages/index?type=b&ballId='+ballId,
-        imageUrl: "https://www.bunao.win/images/my.jpg"
+        title: '我刚生成了我的幸运码，你也快来试试吧',
+        path: '/pages/main/main',
       }
     }
     return {
-      title: '自定义转发标题',
-      path: '/pages/main?id=123',
+      title: '中奖就靠她了',
+      path: '/pages/main/mian',
       imageUrl: "https://www.bunao.win/images/my.jpg"
     }
   }

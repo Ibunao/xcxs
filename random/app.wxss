@@ -10,10 +10,10 @@
 } 
 .circle-red{
   /* background-color:#CC3838; */
-  background-color:#D60C13; 
-  /* background-color:rgb(30, 30, 30); */
+  /* background-color:#D60C13;  */
+  background-color:rgb(30, 30, 30);
 }
 .circle-blue{
-   background-color:#2E89EE; 
-  /* background-color:rgb(30, 30, 30); */
+   /* background-color:#2E89EE;  */
+  background-color:rgb(30, 30, 30);
 }

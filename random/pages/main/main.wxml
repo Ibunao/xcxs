@@ -3,15 +3,15 @@
   <!-- <font>测试 测试的</font> -->
 </view>
 <view class='last-info'>
-  <text class='text-color2 text-size1'>第2018127期开奖号码</text>
+  <text class='text-color2 text-size1'>第 {{lastBall.qishu}} 期开奖号码</text>
   <view class='circle-row'>
-    <text class='text-circle circle-red text-color1'>01</text>
-    <text class='text-circle circle-red text-color1'>02</text>
-    <text class='text-circle circle-red text-color1'>03</text>
-    <text class='text-circle circle-red text-color1'>04</text>
-    <text class='text-circle circle-red text-color1'>05</text>
-    <text class='text-circle circle-red text-color1'>33</text>
-    <text class='text-circle circle-blue text-color1'>12</text>
+    <text class='text-circle circle-red text-color1'>{{lastBall.balls[0]}}</text>
+    <text class='text-circle circle-red text-color1'>{{lastBall.balls[1]}}</text>
+    <text class='text-circle circle-red text-color1'>{{lastBall.balls[2]}}</text>
+    <text class='text-circle circle-red text-color1'>{{lastBall.balls[3]}}</text>
+    <text class='text-circle circle-red text-color1'>{{lastBall.balls[4]}}</text>
+    <text class='text-circle circle-red text-color1'>{{lastBall.balls[5]}}</text>
+    <text class='text-circle circle-blue text-color1'>{{lastBall.balls[6]}}</text>
   </view>
   <image class='my-image' src="/images/xiayibu.png" mode="aspectFit" bindtap='liebiao'></image>
   <text class='text-color4 text-size1 float-left' style='margin-left:30rpx;' bindtap='shuoming'>中奖说明</text>
@@ -21,13 +21,13 @@
 <view class='last-info' style='padding-bottom:30rpx;margin-top:30rpx;'>
   <text class='text-color2 text-size1'>生成自己的幸运码</text>
   <view class='circle-row' style='margin-bottom:20rpx;'>
-    <input maxlength="2" type="number" data-index="one" class='text-circle circle-red text-color1' value="{{one}}" bindinput="bindKeyInput"></input>
-    <input maxlength="2" type="number" data-index="two" class='text-circle circle-red text-color1' value="{{two}}" bindinput="bindKeyInput"></input>
-    <input maxlength="2" type="number" data-index="three" class='text-circle circle-red text-color1' value="{{three}}" bindinput="bindKeyInput"></input>
-    <input maxlength="2" type="number" data-index="four" class='text-circle circle-red text-color1' value="{{four}}" bindinput="bindKeyInput"></input>
-    <input maxlength="2" type="number" data-index="five" class='text-circle circle-red text-color1' value="{{five}}" bindinput="bindKeyInput"></input>
-    <input maxlength="2" type="number" data-index="six" class='text-circle circle-red text-color1' value="{{six}}" bindinput="bindKeyInput"></input>
-    <input maxlength="2" type="number" data-index="seven" class='text-circle circle-blue text-color1' value="{{seven}}" bindinput="bindKeyInput"></input>
+    <input maxlength="2" type="number" data-index="one" class='text-circle circle-red text-color1' value="{{generate.one}}" bindinput="bindKeyInput"></input>
+    <input maxlength="2" type="number" data-index="two" class='text-circle circle-red text-color1' value="{{generate.two}}" bindinput="bindKeyInput"></input>
+    <input maxlength="2" type="number" data-index="three" class='text-circle circle-red text-color1' value="{{generate.three}}" bindinput="bindKeyInput"></input>
+    <input maxlength="2" type="number" data-index="four" class='text-circle circle-red text-color1' value="{{generate.four}}" bindinput="bindKeyInput"></input>
+    <input maxlength="2" type="number" data-index="five" class='text-circle circle-red text-color1' value="{{generate.five}}" bindinput="bindKeyInput"></input>
+    <input maxlength="2" type="number" data-index="six" class='text-circle circle-red text-color1' value="{{generate.six}}" bindinput="bindKeyInput"></input>
+    <input maxlength="2" type="number" data-index="seven" class='text-circle circle-blue text-color1' value="{{generate.seven}}" bindinput="bindKeyInput"></input>
   </view>
 <button plain="true" type="default" size="mini" open-type="contact" style='float:left;height:50rpx;line-height:50rpx;'>
   <text class='text-color4 text-size1 float-left' style='' bindtap='caozuoshuoming'>联系我们</text>

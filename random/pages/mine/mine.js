@@ -1,4 +1,5 @@
 // pages/mine/mine.js
+var app = getApp()
 Page({
 
   /**
@@ -6,67 +7,6 @@ Page({
    */
   data: {
     randList: [
-      {
-        date: "2018-12-32",
-        qishu: "20180930",
-        jieguo: "未开奖",
-        items: [
-          {
-            img: 'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoHZkDvnuY17Rksiatk1AX5htF7wZYAibcPyib1cibd7wLO2GYthwTsADIibzjia19Ou77oddS40UvLukYg/132',
-            name: "1**0",
-            borderStyle: 1,
-            balls: [
-              "01",
-              "01",
-              "01",
-              "01",
-              "01",
-              "01",
-              "01",
-            ],
-            result: "",
-            open: false
-          },
-          {
-            img: 'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoHZkDvnuY17Rksiatk1AX5htF7wZYAibcPyib1cibd7wLO2GYthwTsADIibzjia19Ou77oddS40UvLukYg/132',
-            name: "100-20",
-            borderStyle: 2,
-            balls: [
-              "01",
-              "01",
-              "01",
-              "01",
-              "01",
-              "01",
-              "01",
-            ],
-            result: "",
-            open: false,
-          }
-        ]
-      },
-      {
-        date: "2018-12-32",
-        qishu: "20180930",
-        jieguo: "未开奖",
-        items: [
-          {
-            img: '',
-            name: "100-20",
-            balls: [
-              "01",
-              "01",
-              "01",
-              "01",
-              "01",
-              "01",
-              "01",
-            ],
-            result: "中10000元",
-            open: false
-          }
-        ]
-      }
     ],
   },
   /**
@@ -83,7 +23,33 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this
+    var userInfo = wx.getStorageSync('userInfo')
+    var openid = ''
+    if(userInfo){
+      openid = userInfo['openid']
+    }
+    wx.request({
+      url: app.globalData.host + 'info/my-list',
+      data: {
+        openid: openid,
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        if (res.data.code == 200) {
+          that.setData({ randList: res.data.data })
+        }
+      },
+      fail() {
+        wx.showToast({
+          title: '发生错误，请联系客服',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
   },
 
   /**
@@ -125,7 +91,35 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    var that = this
+    var userInfo = wx.getStorageSync('userInfo')
+    var openid = ''
+    if (userInfo) {
+      openid = userInfo['openid']
+    }
+    wx.request({
+      url: app.globalData.host + 'info/my-list',
+      data: {
+        openid: openid,
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        if (res.data.code == 200) {
+          // 和原来的数据进行拼接  
+          
+          that.setData({ randList: res.data.data })
+        }
+      },
+      fail() {
+        wx.showToast({
+          title: '发生错误，请联系客服',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
   },
 
   /**
@@ -135,16 +129,17 @@ Page({
     // 如果是点击分享按钮，带上号码的ID   
     if (res.from == "button") {
       var ballId = res.target.ballId;
+      console.log('/pages/index/index?type=m&ballId=' + ballId)
       return {
         title: '兄弟，帮我买这个号',
-        path: '/pages/index?type=m&ballId=' + ballId,
+        path: '/pages/index/index?type=m&ballId=' + ballId,
         imageUrl: "https://www.bunao.win/images/my.jpg"
       }
     }
 
     return {
-      title: '自定义转发标题',
-      path: '/pages/main?id=123',
+      title: '中奖就靠她了',
+      path: '/pages/main/main',
       imageUrl: "https://www.bunao.win/images/my.jpg"
     }
   }

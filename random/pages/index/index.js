@@ -4,7 +4,7 @@ const app = getApp()
 
 Page({
   data: {
-    tabIndex: 1,
+    tabIndex: 2,
     shareList:[
       {
         date: "2018-12-32",
@@ -101,9 +101,67 @@ Page({
       shareList: this.data.shareList
     })
   },
-  onLoad: function (obj) {
-    console.log(obj)
+  onLoad: function (query) {
+    console.log(query)
     // 根据分享类型的不同
+    if(query.type){
+      var userInfo = wx.getStorageSync('userInfo')
+      if(!userInfo){
+        wx.showModal({
+          title: '提示',
+          content: '首次使用需要生成一次自己的幸运码',
+          success(res) {
+            if (res.confirm) {
+              
+            } else if (res.cancel) {
+              
+            }
+            wx.switchTab({
+              url: '/pages/main/main'
+            })
+          }
+        })
+        return
+      }
+      var route = '';
+      if(query.type == 'm'){
+        route = 'info/bangmai';
+      }else{
+        route = 'info/bibi';
+      }
+      wx.request({
+        url: app.globalData.host + route,
+        data: {
+          ballId: query.ballId,
+          openid: userInfo['openid']
+        },
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success(res) {
+          if (res.data.code == 200) {
+
+          } else {
+            wx.showToast({
+              title: '发生错误，请联系客服',
+              icon: 'none',
+              duration: 2000
+            })
+          }
+        }
+      })
+      // wx.showModal({
+      //   title: '提示',
+      //   content: query.type,
+      //   success(res) {
+      //     if (res.confirm) {
+      //       console.log('用户点击确定')
+      //     } else if (res.cancel) {
+      //       console.log('用户点击取消')
+      //     }
+      //   }
+      // })
+    }
     
   },
 })
