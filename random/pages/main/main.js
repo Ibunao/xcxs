@@ -169,9 +169,11 @@ Page({
         success(res) {
           if (res.data.code == 200) {
             if(runtime > 900){
+              console.log('请求成功，结束摇号')
               clearInterval(temp)
               that.setData(res.data.data)
             }else{
+              console.log('请求成功，延时结束摇号')
               setTimeout(function () {
                 that.setData(res.data.data )
                 clearInterval(temp)
@@ -190,7 +192,7 @@ Page({
           }
         },
         fail(){
-          console.log(temp)
+          console.log('请求失败')
           clearInterval(temp)
           wx.showToast({
             title: '发生错误，请联系客服',
@@ -202,8 +204,9 @@ Page({
       })
     }else{
       setTimeout(function () {
+        console.log('假摇结束')
         clearInterval(temp)
-      }, 3000)
+      }, 900)
     }
   },
   // code 换取 openid
@@ -212,6 +215,8 @@ Page({
     var localUserInfo = wx.getStorageSync('userInfo')
     var formId = wx.getStorageSync('formId')
     if (localUserInfo){
+      // 如果已经获取过用户信息了  
+      console.log('本地有用户信息，开始获取随机码')
       that._generage(that)
       return true;
     }else{
@@ -225,8 +230,9 @@ Page({
             }
             userInfo['code'] = res.code
             // 先假摇一下
+            console.log('上传获取用户信息之前先摇起来')
             that._generage(that, false)
-            
+            console.log('发送请求获取openid')
             wx.request({
               url: app.globalData.host + 'info/code',
               data: userInfo,
@@ -234,7 +240,7 @@ Page({
                 'content-type': 'application/json' // 默认值
               },
               success(res) {
-                console.log('here')
+                console.log('上传用户信息成功')
                 if(res.data.code == 200){
                   wx.setStorageSync('userInfo', res.data.data.userInfo)
                   that._generage(that)
@@ -247,6 +253,15 @@ Page({
                   })
                   return false
                 }
+              },
+              fail(){
+                console.log('请求失败')
+                wx.showToast({
+                  title: '发生错误，请联系客服',
+                  icon: 'none',
+                  duration: 2000
+                })
+                return false
               }
             })
           } else {

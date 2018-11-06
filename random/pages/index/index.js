@@ -69,22 +69,22 @@ Page({
       }
     ],
     helpList:[
-      {
-        img:'',
-        name:'100-20',
-        balls:[
-          "01",
-          "01",
-          "01",
-          "01",
-          "01",
-          "01",
-          "01",
-        ],
-        date: "2018-10-32 10:20:30",
-        qishu: "第 20185636 期",
-        msg:"老铁，帮我买"
-      }
+      // {
+      //   img:'',
+      //   name:'100-20',
+      //   balls:[
+      //     "01",
+      //     "01",
+      //     "01",
+      //     "01",
+      //     "01",
+      //     "01",
+      //     "01",
+      //   ],
+      //   date: "2018-10-32 10:20:30",
+      //   qishu: "第 20185636 期",
+      //   msg:"老铁，帮我买"
+      // }
     ]
   },
   switchTab:function(e){
@@ -103,9 +103,10 @@ Page({
   },
   onLoad: function (query) {
     console.log(query)
+    var that = this
+    var userInfo = wx.getStorageSync('userInfo')
     // 根据分享类型的不同
     if(query.type){
-      var userInfo = wx.getStorageSync('userInfo')
       if(!userInfo){
         wx.showModal({
           title: '提示',
@@ -140,7 +141,7 @@ Page({
         },
         success(res) {
           if (res.data.code == 200) {
-
+            that.setData({ helpList: res.data.data })
           } else {
             wx.showToast({
               title: '发生错误，请联系客服',
@@ -161,6 +162,33 @@ Page({
       //     }
       //   }
       // })
+    }else{
+      var that = this
+      var openid = ''
+      if (userInfo) {
+        openid = userInfo['openid']
+      }
+      wx.request({
+        url: app.globalData.host + 'info/bangmai-list',
+        data: {
+          openid: openid,
+        },
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success(res) {
+          if (res.data.code == 200) {
+            that.setData({ helpList: res.data.data })
+          }
+        },
+        fail() {
+          wx.showToast({
+            title: '发生错误，请联系客服',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      })
     }
     
   },

@@ -53,15 +53,15 @@
   </view>
   <view class='circle-row' style='height:100%;'>
     <text class='text-circle circle-red text-color1'>{{people.balls[0]}}</text>
-    <text class='text-circle circle-red text-color1'>02</text>
-    <text class='text-circle circle-red text-color1'>03</text>
-    <text class='text-circle circle-red text-color1'>04</text>
-    <text class='text-circle circle-red text-color1'>05</text>
-    <text class='text-circle circle-red text-color1'>33</text>
-    <text class='text-circle circle-blue text-color1'>12</text>
+    <text class='text-circle circle-red text-color1'>{{people.balls[1]}}</text>
+    <text class='text-circle circle-red text-color1'>{{people.balls[2]}}</text>
+    <text class='text-circle circle-red text-color1'>{{people.balls[3]}}</text>
+    <text class='text-circle circle-red text-color1'>{{people.balls[4]}}</text>
+    <text class='text-circle circle-red text-color1'>{{people.balls[5]}}</text>
+    <text class='text-circle circle-blue text-color1'>{{people.balls[6]}}</text>
   </view>
   <view style='float:right;font-size:26rpx;'>
-    {{people.msg}} {{people.qishu}} <font style="font-size:18rpx;color:#666666">分享与{{people.date}}</font>
+    老铁，帮我买 第 {{people.qishu}} 期 <font style="font-size:18rpx;color:#666666">分享与{{people.date}}</font>
   </view>
 </view>
 </block>

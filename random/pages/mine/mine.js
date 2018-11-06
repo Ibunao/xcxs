@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    page:0,
     randList: [
     ],
   },
@@ -23,33 +24,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this
-    var userInfo = wx.getStorageSync('userInfo')
-    var openid = ''
-    if(userInfo){
-      openid = userInfo['openid']
-    }
-    wx.request({
-      url: app.globalData.host + 'info/my-list',
-      data: {
-        openid: openid,
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success(res) {
-        if (res.data.code == 200) {
-          that.setData({ randList: res.data.data })
-        }
-      },
-      fail() {
-        wx.showToast({
-          title: '发生错误，请联系客服',
-          icon: 'none',
-          duration: 2000
-        })
-      }
-    })
+    
   },
 
   /**
@@ -63,7 +38,41 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this
+    var userInfo = wx.getStorageSync('userInfo')
+    var openid = ''
+    var oldList = that.data.randList
+    var key = 0
+    if (userInfo) {
+      openid = userInfo['openid']
+    }
+    wx.request({
+      url: app.globalData.host + 'info/my-list',
+      data: {
+        openid: openid,
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        if (res.data.code == 200) {
+          for (key in oldList) {
+            if(oldList[key].open == true){
+              res.data.data[key].open = true
+            }
+          }
+          console.log(res.data.data)
+          that.setData({ randList: res.data.data })
+        }
+      },
+      fail() {
+        wx.showToast({
+          title: '发生错误，请联系客服',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
   },
 
   /**
@@ -92,8 +101,10 @@ Page({
    */
   onReachBottom: function () {
     var that = this
+    that.data.page++
     var userInfo = wx.getStorageSync('userInfo')
     var openid = ''
+    var randList = [];
     if (userInfo) {
       openid = userInfo['openid']
     }
@@ -101,6 +112,7 @@ Page({
       url: app.globalData.host + 'info/my-list',
       data: {
         openid: openid,
+        page: that.data.page
       },
       header: {
         'content-type': 'application/json' // 默认值
@@ -108,8 +120,8 @@ Page({
       success(res) {
         if (res.data.code == 200) {
           // 和原来的数据进行拼接  
-          
-          that.setData({ randList: res.data.data })
+          randList = that.data.randList.concat(res.data.data)
+          that.setData({ randList: randList })
         }
       },
       fail() {
@@ -128,7 +140,8 @@ Page({
   onShareAppMessage: function (res) {
     // 如果是点击分享按钮，带上号码的ID   
     if (res.from == "button") {
-      var ballId = res.target.ballId;
+      var ballId = res.target.dataset.ballid;
+      console.log(res)
       console.log('/pages/index/index?type=m&ballId=' + ballId)
       return {
         title: '兄弟，帮我买这个号',

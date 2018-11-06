@@ -6,7 +6,8 @@ App({
   onLaunch: function () {
   },
   globalData: {
-    host: "http://api.random.com/",
+    // host: "http://api.random.com/",
+    host: "https://api.wuxingxiangsheng.com/",
     userInfo: null
   }
 })
