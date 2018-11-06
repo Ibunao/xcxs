@@ -117,7 +117,7 @@ Page({
     if(!pull){
       that.data.first = true
     }
-    var data = that.data;
+    var data = that.data.generate;
     var runtime = 0;
     var temp = setInterval(function () {
       red.sort(randomsort);
@@ -156,7 +156,7 @@ Page({
     if (pull) {
       var userInfo = wx.getStorageSync('userInfo')
       // 没用，没把私有属性去掉
-      var sendData = JSON.parse(JSON.stringify(data))
+      var sendData = JSON.parse(JSON.stringify(that.data))
       wx.request({
         url: app.globalData.host + 'info/random',
         data: {

@@ -6,12 +6,12 @@
 <view class='content-title'>
   <font style="display:block">生成与 {{item.date}} </font>
   <font>匹配 {{item.qishu}} 期结果</font>
-  <font style="margin-left:88rpx;">{{item.jieguo}}</font>
+  <font style="margin-left:88rpx;">{{item.result}}</font>
   <image data-index="{{index}}" class='my-image' src="{{item.open ?'/images/xiala.png':'/images/gengduo.png'}}" mode="aspectFit" bindtap='xiala'></image>
 </view>
 <block wx:if="{{item.open}}" wx:for="{{item.items}}" wx:for-item="people" wx:key>
 <view class='people-balls clear-both'>
-  <view class='circle-row' style='height:100%; float:left;'>
+  <view class='circle-row' style='margin-left:25rpx;height:100%; float:left;'>
     <text class='text-circle circle-red text-color1'>{{people.balls[0]}}</text>
     <text class='text-circle circle-red text-color1'>{{people.balls[1]}}</text>
     <text class='text-circle circle-red text-color1'>{{people.balls[2]}}</text>
@@ -31,7 +31,7 @@
 </block>
 
 
-<view class='nothing' wx:if="{{len(shareList)}}">
+<view class='nothing' wx:if="{{!len(shareList)}}">
 暂时还没有～
 快去生成自己的幸运码吧
 </view>
