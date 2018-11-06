@@ -65,7 +65,7 @@
   </view>
 </view>
 </block>
-<view class='nothing'  wx:if="{{!len(helpList)}}">
+<view class='nothing'  wx:if="{{!helpList.length}}">
 暂时还没有～
 </view>
 </block>
