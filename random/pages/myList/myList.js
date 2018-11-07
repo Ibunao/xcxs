@@ -1,3 +1,4 @@
+var app = getApp()
 // pages/myList/myList.js
 Page({
   
@@ -5,32 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+      page:0,
       imgSwitchIndex: 0,
       items:[
-        {
-          qishu: '第2018126期',
-          riqi: '2018-10-28',
-          one: "01",
-          two: "02",
-          three: "03",
-          four: "04",
-          five: "05",
-          six: "06",
-          seven: "07",
-          open:false
-        },
-        {
-          qishu: '第2018126期',
-          riqi: '2018-10-28',
-          one: "01",
-          two: "02",
-          three: "03",
-          four: "04",
-          five: "05",
-          six: "06",
-          seven: "07",
-          open:false
-        }
       ]
   },
   /**
@@ -48,7 +26,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this
+    wx.request({
+      url: app.globalData.host + 'info/history-list',
+      data: {
+        page: 0,
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        if (res.data.code == 200) {
+          
+          that.setData({ items: res.data.data })
+        }
+      },
+      fail() {
+        wx.showToast({
+          title: '发生错误，请联系客服',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
   },
 
   /**
@@ -90,7 +90,32 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    var that = this
+    var items = []
+    that.data.page++
+    wx.request({
+      url: app.globalData.host + 'info/history-list',
+      data: {
+        page: that.data.page,
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        if (res.data.code == 200) {
+          // 和原来的数据进行拼接  
+          items = that.data.items.concat(res.data.data)
+          that.setData({ items: items })
+        }
+      },
+      fail() {
+        wx.showToast({
+          title: '发生错误，请联系客服',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
   },
 
   /**
