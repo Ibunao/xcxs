@@ -48,7 +48,7 @@
 <block wx:for="{{helpList}}" wx:for-item="people" wx:key>
 <view class='people-balls clear-both'>
   <view class='head-info'>
-  <image class='head-image' src="{{people.img}}" mode="aspectFit" ></image>
+  <image class='head-image head-image-border1' src="{{people.img}}" mode="aspectFit" ></image>
   {{people.name}}
   </view>
   <view class='circle-row' style='height:100%;'>
