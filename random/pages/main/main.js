@@ -410,9 +410,9 @@ Page({
       }
     }
     return {
-      title: '中奖就靠她了',
-      path: '/pages/main/mian',
-      imageUrl: "https://www.bunao.win/images/my.jpg"
+      title: '你有一笔存款待领取',
+      path: '/pages/main/main',
+      imageUrl: "https://api.wuxingxiangsheng.com/images/share.png"
     }
   }
 })

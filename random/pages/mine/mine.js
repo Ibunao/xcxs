@@ -144,16 +144,16 @@ Page({
       console.log(res)
       console.log('/pages/index/index?type=m&ballId=' + ballId)
       return {
-        title: '兄弟，帮我买这个号',
+        title: '兄弟，我觉的这个能中奖，今天帮我买',
         path: '/pages/index/index?type=m&ballId=' + ballId,
-        imageUrl: "https://www.bunao.win/images/my.jpg"
+        imageUrl: "https://api.wuxingxiangsheng.com/images/share.png"
       }
     }
 
     return {
-      title: '中奖就靠她了',
+      title: '你有一笔存款待领取',
       path: '/pages/main/main',
-      imageUrl: "https://www.bunao.win/images/my.jpg"
+      imageUrl: "https://api.wuxingxiangsheng.com/images/share.png"
     }
   }
 })

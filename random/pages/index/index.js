@@ -192,4 +192,15 @@ Page({
     }
     
   },
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function (res) {
+    
+    return {
+      title: '你有一笔存款待领取',
+      path: '/pages/main/main',
+      imageUrl: "https://api.wuxingxiangsheng.com/images/share.png"
+    }
+  }
 })
